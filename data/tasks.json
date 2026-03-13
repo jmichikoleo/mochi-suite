@@ -1,0 +1,32 @@
+[
+  {
+    "content": "mochi add reminders for today (march 11) \uac1c\uac15 \ud30c\ud2f0 at 17.00 ",
+    "due": null,
+    "done": false
+  },
+  {
+    "content": "add task to work on the lab's webpage",
+    "due": null,
+    "done": false
+  },
+  {
+    "content": "add task smart logistic management paper presentation",
+    "due": null,
+    "done": false
+  },
+  {
+    "content": "add task for march 19 paper summary for industrial data analytics class",
+    "due": null,
+    "done": false
+  },
+  {
+    "content": "mochi delete all tasks",
+    "due": null,
+    "done": false
+  },
+  {
+    "content": "remove task 1",
+    "due": null,
+    "done": false
+  }
+]
