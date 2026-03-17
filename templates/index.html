@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube → MP3 Converter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ffe4ec, #ffd6e0);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #fff0f5;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 105, 135, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            color: #ff4d88;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #aa6f82;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            outline: none;
+            background: #ffe4ec;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        input::placeholder {
+            color: #c48a9c;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: #ff4d88;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #e84375;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #c48a9c;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎧 Mochi MP3 Converter</h1>
+        <p>Convert YouTube videos into soft audio ✨</p>
+
+        <form method="POST">
+            <input type="text" name="url" placeholder="Paste YouTube link..." required>
+            <button type="submit">Convert to MP3</button>
+        </form>
+
+        <div class="footer">
+            ☁️ 
+        </div>
+    </div>
+</body>
+</html>
