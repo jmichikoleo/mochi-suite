@@ -1,0 +1,4 @@
+flask
+ppdfplumber
+openai
+python-dotenv

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="page-title">📊 Analysis Results</h2>
+
+{% for item in results %}
+<div class="slide-card">
+
+    <div class="slide-header">
+        Slide {{ item.slide }}
+    </div>
+
+    <div class="section">
+        <h3>📌 Summary</h3>
+        <ul>
+            {% for line in item.summary.split('\n') %}
+                {% if line.strip() %}
+                    <li>{{ line.replace('-', '').strip() }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="section">
+        <button class="toggle-btn" onclick="toggleExplanation('exp{{ loop.index }}', this)">
+            💡 Show Explanation
+        </button>
+
+        <div id="exp{{ loop.index }}" class="explanation-box">
+            <ul>
+                {% for line in item.explanation.split('\n') %}
+                    {% if line.strip() %}
+                        <li>{{ line.replace('-', '').strip() }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+{% endfor %}
+
+{% endblock %}
