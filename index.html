@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mochi Flashcards</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>🌸 Mochi Flashcards</h1>
+
+    <div class="dashboard">
+
+        <!-- LEFT PANEL -->
+        <aside class="left-panel">
+
+            <input type="file" id="fileInput">
+
+            <select id="deckSelect"></select>
+
+            <div class="deck-buttons">
+                <button id="renameDeckBtn" type="button">Rename</button>
+                <button id="deleteDeckBtn" type="button">Delete</button>
+            </div>
+
+            <div id="deckStats" class="deck-stats"></div>
+
+            <label>
+                <input type="checkbox" id="langToggle"> Flip Language
+            </label>
+
+            <label>
+                <input type="checkbox" id="spacedRepToggle"> Spaced Repetition
+            </label>
+
+            <!-- SEARCH -->
+            <input type="text" id="searchInput" placeholder="Search...">
+            <div id="searchResults"></div>
+
+            <!-- ADD CARD -->
+            <div class="add-card">
+                <h3>Add Card</h3>
+                <input id="newWord" placeholder="Front">
+                <input id="newMeaning" placeholder="Back">
+                <button id="addCardBtn" type="button">Add</button>
+            </div>
+
+            <!-- CHART -->
+            <canvas id="progressChart"></canvas>
+
+        </aside>
+
+        <!-- MAIN PANEL -->
+        <main class="main-panel">
+
+            <div class="flashcard">
+                <div id="word"></div>
+                <div id="meaning" style="display:none;"></div>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="card-buttons">
+                <button id="revealBtn" type="button">Show</button>
+                <button id="editCardBtn" type="button">Edit</button>
+                <button id="deleteCardBtn" type="button">Delete</button>
+            </div>
+
+            <!-- NAVIGATION -->
+            <div class="nav-buttons">
+                <button id="prevBtn" type="button">⬅</button>
+                <button id="nextBtn" type="button">➡</button>
+            </div>
+
+            <!-- DIFFICULTY -->
+            <div class="difficulty-buttons">
+                <button id="againBtn" type="button">Again</button>
+                <button id="hardBtn" type="button">Hard</button>
+                <button id="easyBtn" type="button">Easy</button>
+            </div>
+
+            <div class="progress" id="progress"></div>
+
+        </main>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
