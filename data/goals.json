@@ -1,0 +1,28 @@
+{
+  "goals": [
+    {
+      "id": "topik",
+      "title": "TOPIK II (Level 5-6)",
+      "target_date": "2026-05-17",
+      "category": "language",
+      "status": "active",
+      "daily_log": {
+        "2026-04-02": {
+          "grammar_points": 3,
+          "minutes": 45,
+          "words_learned": 15
+        }
+      },
+      "practice_tests": [],
+      "study_plan": {
+        "total_vocab_target": 1000,
+        "daily_vocab_target": 20,
+        "sections": [
+          "\uc77d\uae30 (Reading)",
+          "\ub4e3\uae30 (Listening)",
+          "\uc4f0\uae30 (Writing)"
+        ]
+      }
+    }
+  ]
+}

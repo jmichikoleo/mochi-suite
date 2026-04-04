@@ -1,0 +1,28 @@
+{
+  "bookmarks": [
+    {
+      "id": "3ce1de5a",
+      "url": "https://www.efset.org/",
+      "title": "English test with free certification | EF SET",
+      "description": "Test your English with the EF Standard English Test (EF SET), the first free, online standardized English test built to rigorous academic requirements, and as reliable as fee-based exams.",
+      "favicon": "https://www.efset.org/favicon.ico",
+      "image": "https://a.storyblok.com/f/79503/2856x1440/42a2bda166/ef-set-certificate.jpg",
+      "domain": "efset.org",
+      "folder": "General",
+      "tags": [
+        "english",
+        "english test"
+      ],
+      "note": "ef free english proficiency test",
+      "date": "2026-04-02",
+      "pinned": false
+    }
+  ],
+  "folders": [
+    "General",
+    "Research",
+    "Articles",
+    "Tools",
+    "Inspiration"
+  ]
+}

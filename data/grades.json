@@ -1,0 +1,75 @@
+{
+  "courses": [
+    {
+      "name": "Deep Learning",
+      "credits": 3,
+      "semester": "Spring 2026",
+      "campus": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "room": "\uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "class_days": [
+        1
+      ],
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "id": "73e3152f",
+      "assignments": []
+    },
+    {
+      "name": "Operations Modeling and Scheduling",
+      "credits": 3,
+      "semester": "Spring 2026",
+      "campus": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "room": "\uac00\uc628\uad00 617",
+      "class_days": [
+        2,
+        4
+      ],
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "id": "23429203",
+      "assignments": []
+    },
+    {
+      "name": "Smart Logistics Management",
+      "credits": 3,
+      "semester": "Spring 2026",
+      "campus": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "room": "",
+      "class_days": [
+        3
+      ],
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "id": "5238f4c7",
+      "assignments": []
+    },
+    {
+      "name": "Industrial Data Analytics",
+      "credits": 3,
+      "semester": "Spring 2026",
+      "campus": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "room": "",
+      "class_days": [
+        4
+      ],
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "id": "1d264b92",
+      "assignments": []
+    }
+  ],
+  "gpa_scale": {
+    "A+": 4.3,
+    "A": 4.0,
+    "A-": 3.7,
+    "B+": 3.3,
+    "B": 3.0,
+    "B-": 2.7,
+    "C+": 2.3,
+    "C": 2.0,
+    "C-": 1.7,
+    "D+": 1.3,
+    "D": 1.0,
+    "F": 0.0
+  }
+}

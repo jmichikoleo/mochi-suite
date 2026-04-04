@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mochi - Lab Research</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF0F3;--card:rgba(255,255,255,.75);--hover:#FFE8EE;--pk:#F8A4B8;--pk-d:#E87A95;--pk-l:#FFDBE5;--pk-p:#FFD1DC;--rose:#F9C5D1;--blush:#FFF0F5;--lav:#F0E6FF;--lav-d:#D4B8FF;--br:#6B4C5A;--br-l:#9C7A8A;--br-ll:#C9AEBB;--cr:#FFF5F7;--gn:#B8E6CC;--gn-d:#7CC9A0;--yl:#FFE4C4;--rd:#FFB3B3;--bl:#D4E5FF;--sh:0 2px 16px rgba(248,164,184,.15);--r:20px;--rs:14px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Quicksand',-apple-system,sans-serif;background:linear-gradient(135deg,#FFF0F3,#FFE8F5 50%,#F5E6FF);background-attachment:fixed;color:var(--br);line-height:1.6;min-height:100vh}
+.app{max-width:1200px;margin:0 auto;padding:16px}
+.gnav{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,.6);backdrop-filter:blur(12px);border-radius:12px;margin-bottom:12px;justify-content:center;border:1px solid rgba(248,164,184,.1)}
+.gnav a{padding:8px 18px;border-radius:10px;font-size:12px;font-weight:600;text-decoration:none;color:var(--br-l);transition:.2s;font-family:inherit;display:flex;align-items:center;gap:4px}
+.gnav a:hover{background:rgba(248,164,184,.1);color:var(--br)}
+.gnav a.active{background:linear-gradient(135deg,var(--pk),var(--rose));color:#fff;box-shadow:0 3px 12px rgba(248,164,184,.4)}
+.hdr{text-align:center;padding:16px 0 8px}
+.hdr h1{font-size:24px;font-weight:700}
+.hdr .sub{font-size:12px;color:var(--br-l)}
+.tb{display:flex;gap:3px;background:rgba(255,255,255,.5);backdrop-filter:blur(12px);border-radius:14px;padding:4px;margin:12px 0 16px;position:sticky;top:8px;z-index:50;box-shadow:var(--sh);border:1px solid rgba(248,164,184,.12);overflow-x:auto}
+.tb button{flex:1;padding:8px;border:none;background:0;border-radius:10px;font-size:11px;font-weight:600;cursor:pointer;color:var(--br-l);transition:.25s;font-family:inherit;white-space:nowrap}
+.tb button.a{background:linear-gradient(135deg,var(--pk),var(--rose));color:#fff;box-shadow:0 3px 12px rgba(248,164,184,.4)}
+.tp{display:none;animation:fi .3s ease}.tp.a{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.cd{background:var(--card);backdrop-filter:blur(12px);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:1px solid rgba(248,164,184,.12);margin-bottom:14px}
+.ct{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--pk-d);display:flex;align-items:center;gap:6px}
+.bp{background:linear-gradient(135deg,var(--pk),var(--rose));border:none;padding:7px 18px;border-radius:11px;color:#fff;font-weight:600;cursor:pointer;font-family:inherit;font-size:12px;box-shadow:0 2px 8px rgba(248,164,184,.3);transition:.2s}
+.bp:hover{transform:translateY(-1px)}
+.bp.sm{padding:4px 12px;font-size:11px;border-radius:8px}
+.bg{background:0;border:2px dashed var(--pk-p);padding:9px;border-radius:var(--rs);color:var(--br-l);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;width:100%;transition:.2s;margin-top:6px}
+.bg:hover{border-color:var(--pk);color:var(--pk-d);background:var(--blush)}
+.bd{background:var(--rd);color:#C62828;border:none;padding:3px 8px;border-radius:6px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:600}
+.mo{display:none;position:fixed;inset:0;background:rgba(107,76,90,.25);backdrop-filter:blur(4px);z-index:100;align-items:center;justify-content:center}
+.mo.a{display:flex}
+.ml{background:#fff;border-radius:var(--r);padding:22px;width:92%;max-width:440px;box-shadow:0 12px 48px rgba(248,164,184,.3)}
+.ml h3{margin-bottom:12px;color:var(--pk-d);font-size:15px}
+.ml .f{margin-bottom:8px}
+.ml label{font-size:11px;color:var(--br-l);display:block;margin-bottom:2px;font-weight:500}
+.ml input,.ml select,.ml textarea{width:100%;padding:8px 10px;border:1px solid var(--pk-p);border-radius:8px;font-size:12px;font-family:inherit}
+.ml input:focus,.ml textarea:focus{outline:none;border-color:var(--pk)}
+.ml .ac{display:flex;gap:6px;margin-top:12px}
+.ml .ac>*{flex:1;text-align:center}
+.ld{text-align:center;padding:30px;color:var(--br-l);font-size:12px}
+
+.paper-card{display:flex;gap:12px;padding:14px;border-radius:var(--rs);background:linear-gradient(135deg,var(--blush),#FFF8FA);border:1px solid rgba(248,164,184,.08);margin-bottom:8px;align-items:flex-start}
+.paper-card .info{flex:1;min-width:0}
+.paper-card h4{font-size:13px;font-weight:600;margin-bottom:3px}
+.paper-card .meta{font-size:10px;color:var(--br-l);margin-bottom:4px}
+.paper-card .abs{font-size:11px;color:var(--br-l);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.paper-card .tags{margin-top:4px;display:flex;gap:3px;flex-wrap:wrap}
+.paper-card .tags span{font-size:8px;background:var(--pk-l);padding:1px 6px;border-radius:4px;color:var(--pk-d);font-weight:600}
+.status-btn{font-size:9px;padding:3px 10px;border-radius:6px;border:none;font-weight:600;cursor:pointer;font-family:inherit;min-width:55px}
+.status-btn.unread{background:var(--br-ll);color:#fff}
+.status-btn.reading{background:var(--yl);color:#C97A2E}
+.status-btn.done{background:var(--gn);color:#3D7A55}
+
+.note-card{padding:12px;border-radius:var(--rs);background:var(--blush);margin-bottom:6px;border:1px solid rgba(248,164,184,.08)}
+.note-card h4{font-size:13px;font-weight:600;margin-bottom:4px}
+.note-card .content{font-size:12px;line-height:1.5;white-space:pre-wrap}
+.note-card .note-meta{font-size:10px;color:var(--br-l);margin-top:4px}
+
+.conn-item{display:flex;align-items:center;gap:8px;padding:8px;background:linear-gradient(135deg,var(--lav),var(--blush));border-radius:8px;margin-bottom:4px;font-size:11px}
+
+.proj-filter{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:10px}
+.proj-btn{padding:4px 10px;border:none;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;background:var(--blush);color:var(--br)}
+.proj-btn.a{background:var(--pk-l);color:var(--pk-d)}
+</style>
+</head>
+<body>
+<div class="app">
+<nav class="gnav">
+<a href="/"><span>&#127969;</span> Home</a>
+<a href="/lab" class="active"><span>&#128300;</span> Lab</a>
+<a href="/uni"><span>&#127891;</span> Uni</a>
+<a href="/chat"><span>&#128172;</span> Mochi AI</a>
+</nav>
+<div style="position:relative;margin-bottom:8px"><input id="globalSearch" placeholder="🔍 Search everything..." style="width:100%;padding:10px 14px;border:1px solid rgba(248,164,184,.2);border-radius:14px;font-size:12px;font-family:inherit;background:rgba(255,255,255,.6);backdrop-filter:blur(8px)" oninput="doGlobalSearch(this.value)" onfocus="this.parentElement.querySelector('#searchResults').style.display='block'"><div id="searchResults" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:400px;overflow-y:auto;background:#fff;border-radius:14px;box-shadow:0 8px 32px rgba(248,164,184,.3);z-index:60;margin-top:4px;padding:8px"></div></div>
+<div class="hdr"><h1>&#128300; Lab Research</h1><div class="sub">Paper library, notes & connections</div></div>
+
+<div class="tb">
+<button class="a" data-t="library">&#128218; Library</button>
+<button data-t="labtasks">&#9989; Tasks</button>
+<button data-t="notes">&#128221; Notes</button>
+<button data-t="connections">&#128279; Connections</button>
+<button data-t="meeting">&#128203; Meeting Prep</button>
+</div>
+
+<div id="p-library" class="tp a"></div>
+<div id="p-labtasks" class="tp"></div>
+<div id="p-notes" class="tp"></div>
+<div id="p-connections" class="tp"></div>
+<div id="p-meeting" class="tp"></div>
+</div>
+
+<!-- Modals -->
+<div class="mo" id="mPaper"><div class="ml"><h3>&#128218; Add Paper</h3>
+<div class="f"><label>URL (arXiv, DOI, etc.)</label><input id="lpUrl" placeholder="https://arxiv.org/abs/..."></div>
+<div class="f"><label>Project</label><select id="lpProj"></select></div>
+<div class="f"><label>Tags (comma separated)</label><input id="lpTags" placeholder="llm, routing, moe"></div>
+<div class="ac"><button class="bg" onclick="cm('mPaper')">Cancel</button><button class="bp" onclick="addPaper()">Add</button></div></div></div>
+
+<div class="mo" id="mLabTask"><div class="ml"><h3>&#9989; Add Lab Task</h3>
+<div class="f"><label>Task</label><input id="ltTitle" placeholder="Run experiment on..."></div>
+<div class="f"><label>Deadline</label><input type="date" id="ltDeadline"></div>
+<div class="f"><label>Energy</label><select id="ltEnergy"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
+<div class="f"><label>Impact (1-10)</label><input type="number" id="ltImpact" min="1" max="10" value="7"></div>
+<div class="f"><label>Link (optional)</label><input id="ltLink" placeholder="https://..."></div>
+<div class="f"><label>Notes</label><input id="ltNotes" placeholder="Details..."></div>
+<div class="ac"><button class="bg" onclick="cm('mLabTask')">Cancel</button><button class="bp" onclick="addLabTask()">Add (also creates task)</button></div></div></div>
+
+<div class="mo" id="mNote"><div class="ml"><h3>&#128221; New Note</h3>
+<div class="f"><label>Title</label><input id="lnTitle" placeholder="Key insight about..."></div>
+<div class="f"><label>Content</label><textarea id="lnContent" rows="5" placeholder="Write your note..."></textarea></div>
+<div class="f"><label>Tags</label><input id="lnTags" placeholder="attention, transformer"></div>
+<div class="ac"><button class="bg" onclick="cm('mNote')">Cancel</button><button class="bp" onclick="addNote()">Save</button></div></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+let curProj='All';
+
+document.querySelectorAll('.tb button').forEach(b=>{b.addEventListener('click',()=>{
+document.querySelectorAll('.tb button').forEach(x=>x.classList.remove('a'));
+document.querySelectorAll('.tp').forEach(x=>x.classList.remove('a'));
+b.classList.add('a');$('p-'+b.dataset.t).classList.add('a');
+})});
+
+function om(id){$(id).classList.add('a')}
+function cm(id){$(id).classList.remove('a')}
+
+async function loadAll(){
+$('p-library').innerHTML=await rLibrary();
+$('p-labtasks').innerHTML=await rLabTasks();
+$('p-notes').innerHTML=await rNotes();
+$('p-connections').innerHTML=await rConnections();
+$('p-meeting').innerHTML=await rMeeting();}
+
+// ─── Lab Tasks (connected to Home tasks) ───
+async function rLabTasks(){
+const r=await fetch('/api/tasks');const td=await r.json();
+const allTasks=td.tasks||[];
+const labTasks=allTasks.filter(t=>t.category==='lab'||t.category==='research');
+
+let h='<div class="cd"><div class="ct">&#9989; Lab Tasks</div>';
+h+='<button class="bp" onclick="om(\'mLabTask\')" style="margin-bottom:12px">+ Add Lab Task</button>';
+
+if(!labTasks.length){h+='<p style="font-size:11px;color:var(--br-l)">No lab tasks yet. Add one and it auto-syncs to your Home page!</p>';}
+
+const todo=labTasks.filter(t=>t.status!=='done');
+const done=labTasks.filter(t=>t.status==='done');
+
+todo.sort((a,b)=>{if(!a.deadline)return 1;if(!b.deadline)return -1;return a.deadline.localeCompare(b.deadline);});
+
+if(todo.length){
+h+='<div style="font-size:12px;font-weight:600;color:var(--pk-d);margin-bottom:6px">To Do</div>';
+todo.forEach(t=>{
+const origIdx=allTasks.indexOf(t);
+const dl=t.deadline;let dlStr='';
+if(dl){const today=new Date().toISOString().split('T')[0];const diff=Math.ceil((new Date(dl)-new Date(today))/(86400000));
+dlStr=diff<0?`<span style="color:var(--rd)">${Math.abs(diff)}d overdue</span>`:diff===0?'<span style="color:var(--rd)">today</span>':diff===1?'tomorrow':diff+'d left';}
+h+=`<div style="display:flex;align-items:center;gap:8px;padding:10px;background:var(--blush);border-radius:var(--rs);margin-bottom:4px;cursor:pointer" onclick="toggleLabTask(${origIdx})">`;
+h+=`<div style="width:18px;height:18px;border:2px solid var(--pk);border-radius:50%;flex-shrink:0"></div>`;
+h+=`<div style="flex:1"><div style="font-size:12px;font-weight:600">${t.title}</div>`;
+h+=`<div style="font-size:10px;color:var(--br-l)">${dlStr?dlStr:''} ${t.notes?'&middot; '+t.notes:''}</div>`;
+if(t.link||t.file_path){h+=`<div style="display:flex;gap:4px;margin-top:3px">`;
+if(t.link)h+=`<a href="${t.link}" target="_blank" onclick="event.stopPropagation()" style="font-size:9px;padding:2px 8px;background:var(--bl);border-radius:5px;color:#4A7CC9;text-decoration:none;font-weight:600">🔗 Link</a>`;
+if(t.file_path)h+=`<a href="/files/uploads/${t.file_path.split('/').pop()}" target="_blank" onclick="event.stopPropagation()" style="font-size:9px;padding:2px 8px;background:var(--lav);border-radius:5px;color:var(--lav-d);text-decoration:none;font-weight:600">📄 File</a>`;
+h+=`</div>`;}
+h+=`</div>`;
+h+=`<span style="font-size:9px;padding:2px 6px;border-radius:6px;background:var(--lav);color:var(--lav-d);font-weight:600">${t.energy}</span></div>`;});}
+
+if(done.length){
+h+='<div style="font-size:12px;font-weight:600;color:var(--gn-d);margin:10px 0 6px">Completed</div>';
+done.forEach(t=>{
+const origIdx=allTasks.indexOf(t);
+h+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:linear-gradient(135deg,var(--gn),#D4F5E0);border-radius:var(--rs);margin-bottom:3px;cursor:pointer">`;
+h+=`<div style="width:18px;height:18px;border:2px solid var(--gn-d);border-radius:50%;background:var(--gn-d);display:flex;align-items:center;justify-content:center;flex-shrink:0" onclick="toggleLabTask(${origIdx})"><span style="color:#fff;font-size:10px">&#10003;</span></div>`;
+h+=`<div style="flex:1;min-width:0"><div style="font-size:12px;text-decoration:line-through;color:var(--gn-d)">${t.title}</div>`;
+if(t.file_path)h+=`<a href="/files/uploads/${t.file_path.split('/').pop()}" target="_blank" onclick="event.stopPropagation()" style="font-size:9px;padding:2px 8px;background:var(--lav);border-radius:5px;color:var(--lav-d);text-decoration:none;font-weight:600;display:inline-block;margin-top:2px">📄 Submitted</a>`;
+if(t.link)h+=`<a href="${t.link}" target="_blank" onclick="event.stopPropagation()" style="font-size:9px;padding:2px 8px;background:var(--bl);border-radius:5px;color:#4A7CC9;text-decoration:none;font-weight:600;display:inline-block;margin-top:2px;margin-left:3px">🔗 Link</a>`;
+h+=`</div>`;
+if(!t.file_path){h+=`<label style="font-size:9px;padding:3px 10px;background:linear-gradient(135deg,var(--pk),var(--rose));border-radius:6px;color:#fff;font-weight:600;cursor:pointer;white-space:nowrap">📎 Upload<input type="file" accept=".pdf,.doc,.docx,.pptx,.zip,.py,.ipynb" style="display:none" onchange="uploadForLabTask(${origIdx},this)"></label>`;}
+h+=`</div>`;});}
+
+return h+'</div>';}
+
+async function addLabTask(){
+const title=$('ltTitle').value;if(!title)return;
+const link=$('ltLink').value;
+
+await fetch('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+title:'[Lab] '+title,
+deadline:$('ltDeadline').value||'',
+category:'lab',
+energy:$('ltEnergy').value,
+impact:parseInt($('ltImpact').value)||7,
+status:'pending',
+notes:$('ltNotes').value,
+link:link,
+})});
+$('ltTitle').value='';$('ltNotes').value='';$('ltLink').value='';
+cm('mLabTask');loadAll();}
+
+async function uploadForLabTask(idx,input){
+if(!input.files||!input.files.length)return;
+const formData=new FormData();
+formData.append('file',input.files[0]);
+try{const ur=await fetch('/api/upload',{method:'POST',body:formData});
+const ud=await ur.json();
+if(ud.path){await fetch(`/api/tasks/${idx}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({file_path:ud.path})});
+loadAll();}}catch(e){}}
+
+async function toggleLabTask(idx){
+const r=await fetch('/api/tasks');const d=await r.json();
+const t=d.tasks[idx];if(!t)return;
+const newStatus=t.status==='done'?'pending':'done';
+await fetch(`/api/tasks/${idx}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:newStatus})});
+loadAll();}
+
+// ─── Library ───
+async function rLibrary(){
+const r=await fetch('/api/lab/papers');const d=await r.json();
+let h='<div class="cd"><div class="ct">&#128218; Paper Library</div>';
+h+='<div style="display:flex;gap:6px;margin-bottom:10px"><button class="bp" onclick="openPaperModal()">+ Add Paper</button>';
+h+='<input id="labSearch" placeholder="Search papers..." style="flex:1;padding:6px 10px;border:1px solid var(--pk-p);border-radius:8px;font-size:11px;font-family:inherit" onkeyup="searchPapers(this.value)"></div>';
+// Project filter
+h+='<div class="proj-filter">';
+h+=`<button class="proj-btn ${curProj==='All'?'a':''}" onclick="curProj='All';loadAll()">All</button>`;
+(d.projects||[]).forEach(p=>{h+=`<button class="proj-btn ${curProj===p?'a':''}" onclick="curProj='${p}';loadAll()">${p}</button>`});
+h+='</div>';
+h+=`<div style="font-size:11px;color:var(--br-l);margin-bottom:8px">${d.papers.length} papers</div>`;
+let papers=d.papers;
+if(curProj!=='All')papers=papers.filter(p=>p.project===curProj);
+papers.forEach(p=>{
+const pdfLink=p.pdf_url||p.pdf_path||(p.url&&p.url.includes('/pdf/')?p.url:'');
+const absLink=p.url&&!p.url.includes('/pdf/')?p.url:(p.url?p.url.replace('/pdf/','/abs/'):'');
+h+=`<div class="paper-card"><div class="info">`;
+h+=`<h4>${p.title||'Untitled paper'}</h4>`;
+h+=`<div class="meta">${(p.authors||[]).join(', ')}${p.year?' &middot; '+p.year:''}${p.project?' &middot; '+p.project:''}</div>`;
+if(p.abstract)h+=`<div class="abs">${p.abstract}</div>`;
+if(p.tags&&p.tags.length)h+=`<div class="tags">${p.tags.map(t=>'<span>'+t+'</span>').join('')}</div>`;
+h+=`<div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap">`;
+if(pdfLink)h+=`<a href="${pdfLink}" target="_blank" style="font-size:10px;padding:3px 10px;background:linear-gradient(135deg,var(--pk),var(--rose));border-radius:6px;color:#fff;text-decoration:none;font-weight:600">Read PDF</a>`;
+if(absLink)h+=`<a href="${absLink}" target="_blank" style="font-size:10px;padding:3px 10px;background:var(--bl);border-radius:6px;color:#4A7CC9;text-decoration:none;font-weight:600">Abstract</a>`;
+if(p.notes&&p.notes.length)h+=`<span style="font-size:9px;color:var(--br-l);padding-top:3px">${p.notes.length} notes</span>`;
+h+=`</div></div>`;
+h+=`<div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">`;
+h+=`<button class="status-btn ${p.status}" onclick="cycleStatus('${p.id}','${p.status}')">${p.status}</button>`;
+h+=`<button class="bd" onclick="delPaper('${p.id}')">x</button></div></div>`;});
+return h+'</div>';}
+
+async function rNotes(){
+const r=await fetch('/api/lab/notes');const d=await r.json();
+let h='<div class="cd"><div class="ct">&#128221; Research Notes</div>';
+h+='<button class="bp" onclick="om(\'mNote\')" style="margin-bottom:10px">+ New Note</button>';
+if(!d.notes.length)h+='<p style="font-size:11px;color:var(--br-l)">No notes yet. Start capturing insights!</p>';
+d.notes.forEach(n=>{
+h+=`<div class="note-card"><h4>${n.title}</h4><div class="content">${n.content.slice(0,200)}${n.content.length>200?'...':''}</div>`;
+if(n.tags&&n.tags.length)h+=`<div style="margin-top:4px">${n.tags.map(t=>'<span style="font-size:8px;background:var(--lav);padding:1px 6px;border-radius:4px;color:var(--lav-d);font-weight:600">'+t+'</span>').join(' ')}</div>`;
+h+=`<div class="note-meta">${n.created} <button class="bd" onclick="delNote('${n.id}')" style="margin-left:8px">x</button></div></div>`;});
+return h+'</div>';}
+
+async function rConnections(){
+const r=await fetch('/api/lab/connections');const d=await r.json();
+let h='<div class="cd"><div class="ct">&#128279; Research Connections</div>';
+if(!d.related||!d.related.length)h+='<p style="font-size:11px;color:var(--br-l)">Add more papers to see connections!</p>';
+(d.related||[]).forEach(c=>{
+const icon=c.type==='tag'?'&#127991;':'&#128100;';
+h+=`<div class="conn-item"><span>${icon}</span><b>${c.label}</b><span style="color:var(--br-l)">${c.papers.length} papers</span></div>`;
+c.papers.forEach(p=>{h+=`<div style="padding:2px 0 2px 24px;font-size:10px;color:var(--br-l)">- ${p.title}</div>`});});
+// Note connections
+const nr=await fetch('/api/lab/notes/connections');const nd=await nr.json();
+if(nd.connections&&nd.connections.length){
+h+='<div style="margin-top:12px"><div style="font-size:12px;font-weight:600;color:var(--pk-d);margin-bottom:6px">Note-Paper Links</div>';
+nd.connections.forEach(c=>{h+=`<div class="conn-item">&#128221; ${c.note_title} &#8594; &#128218; ${c.paper_title}</div>`});
+h+='</div>';}
+return h+'</div>';}
+
+async function rMeeting(){
+const r=await fetch('/api/lab/meeting-prep');const d=await r.json();
+let h='<div class="cd"><div class="ct">&#128203; Lab Meeting Prep</div>';
+h+=`<div style="font-size:13px;margin-bottom:10px">${d.summary}</div>`;
+if(d.read_details&&d.read_details.length){
+h+='<div style="font-size:12px;font-weight:600;margin-bottom:6px">Papers Read This Week</div>';
+d.read_details.forEach(p=>{
+h+=`<div style="padding:8px;background:var(--blush);border-radius:8px;margin-bottom:4px">`;
+h+=`<div style="font-size:12px;font-weight:600">${p.title}</div>`;
+h+=`<div style="font-size:10px;color:var(--br-l)">${(p.authors||[]).join(', ')}</div>`;
+if(p.notes&&p.notes.length)h+=`<div style="font-size:10px;margin-top:4px">${p.notes.length} notes attached</div>`;
+h+='</div>';});}
+else h+='<p style="font-size:11px;color:var(--br-l)">No papers read this week. Start reading!</p>';
+return h+'</div>';}
+
+function openPaperModal(){
+fetch('/api/lab/papers').then(r=>r.json()).then(d=>{
+const sel=$('lpProj');sel.innerHTML='';
+(d.projects||['General']).forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;sel.appendChild(o)});
+});om('mPaper');}
+
+async function addPaper(){const url=$('lpUrl').value;if(!url)return;
+const btn=document.querySelector('#mPaper .bp');
+if(btn){btn.textContent='Adding... (fetching metadata)';btn.disabled=true;}
+const tags=$('lpTags').value?$('lpTags').value.split(',').map(t=>t.trim()).filter(Boolean):[];
+try{await fetch('/api/lab/papers',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,project:$('lpProj').value,tags})});
+}catch(e){}
+if(btn){btn.textContent='Add';btn.disabled=false;}
+$('lpUrl').value='';$('lpTags').value='';cm('mPaper');loadAll();}
+
+async function delPaper(id){await fetch(`/api/lab/papers/${id}`,{method:'DELETE'});loadAll();}
+
+async function cycleStatus(id,cur){
+const next={unread:'reading',reading:'done',done:'unread'}[cur]||'unread';
+await fetch(`/api/lab/papers/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:next})});loadAll();}
+
+async function searchPapers(q){
+const r=await fetch(`/api/lab/papers?q=${encodeURIComponent(q)}`);const d=await r.json();
+// Re-render with filtered results
+$('p-library').innerHTML=await rLibrary();}
+
+async function addNote(){const t=$('lnTitle').value;if(!t)return;
+const tags=$('lnTags').value?$('lnTags').value.split(',').map(t=>t.trim()).filter(Boolean):[];
+await fetch('/api/lab/notes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,content:$('lnContent').value,tags})});
+$('lnTitle').value='';$('lnContent').value='';cm('mNote');loadAll();}
+
+async function delNote(id){await fetch(`/api/lab/notes/${id}`,{method:'DELETE'});loadAll();}
+
+loadAll();
+</script>
+<style>.fab{position:fixed;bottom:20px;right:20px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#F8A4B8,#F9C5D1);color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 16px rgba(248,164,184,.5);z-index:90;transition:.3s;font-family:inherit}.fab:hover{transform:scale(1.1)}.fab-input{position:fixed;bottom:80px;right:20px;width:300px;background:#fff;border-radius:20px;padding:14px;box-shadow:0 8px 32px rgba(248,164,184,.3);z-index:91;display:none;border:1px solid rgba(248,164,184,.15)}.fab-input.open{display:block}.fab-input input{width:100%;padding:10px;border:1px solid #FFD1DC;border-radius:10px;font-size:13px;font-family:inherit}.fab-input input:focus{outline:none;border-color:#F8A4B8}.fab-input .hint{font-size:9px;color:#9C7A8A;margin-top:6px}.fab-result{margin-top:6px;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:500;display:none}</style>
+<button class="fab" onclick="toggleCapture()">+</button>
+<div class="fab-input" id="fabInput"><input id="fabText" placeholder="Quick capture..." onkeydown="if(event.key==='Enter')doCapture()"><div class="hint">"todo ..." → task | "spent 4500" → expense | else → brain dump</div><div class="fab-result" id="fabResult"></div></div>
+<script>
+function toggleCapture(){const f=document.getElementById('fabInput');f.classList.toggle('open');if(f.classList.contains('open'))document.getElementById('fabText').focus();}
+async function doCapture(){const inp=document.getElementById('fabText');const text=inp.value.trim();if(!text)return;const res=document.getElementById('fabResult');try{const r=await fetch('/api/capture',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});const d=await r.json();const labels={task:'✅ Task',expense:'💰 Expense',reminder:'🔔 Reminder',brain_dump:'🧠 Captured'};res.style.display='block';res.style.background='#FFDBE5';res.textContent=labels[d.type]||'📝 Saved';inp.value='';setTimeout(()=>{res.style.display='none';document.getElementById('fabInput').classList.remove('open');loadAll();},1500);}catch(e){}}
+document.addEventListener('click',e=>{const fab=document.querySelector('.fab');const inp=document.getElementById('fabInput');if(inp&&inp.classList.contains('open')&&!inp.contains(e.target)&&e.target!==fab)inp.classList.remove('open');
+const sr=document.getElementById('searchResults');const si=document.getElementById('globalSearch');if(sr&&sr.style.display==='block'&&!sr.contains(e.target)&&e.target!==si)sr.style.display='none';});
+let searchTimer=null;function doGlobalSearch(q){clearTimeout(searchTimer);const div=document.getElementById('searchResults');if(!q||q.length<2){div.innerHTML='';div.style.display='none';return;}div.style.display='block';searchTimer=setTimeout(async()=>{try{const r=await fetch(`/api/search?q=${encodeURIComponent(q)}`);const d=await r.json();if(!d.results.length){div.innerHTML='<div style="padding:12px;font-size:11px;color:#9C7A8A">No results</div>';return;}let h=`<div style="padding:4px 8px;font-size:10px;color:#9C7A8A">${d.total} results</div>`;d.results.slice(0,15).forEach(r=>{h+=`<div style="display:flex;align-items:flex-start;gap:8px;padding:8px;border-bottom:1px solid rgba(248,164,184,.06);cursor:pointer" onclick="${r.url?`window.open('${r.url}','_blank')`:''}">${r.icon||'📌'} <div style="flex:1"><div style="font-size:12px;font-weight:600">${r.title}</div><div style="font-size:9px;color:#9C7A8A">${r.source}</div></div></div>`;});div.innerHTML=h;}catch(e){}},300);}
+</script>
+</body>
+</html>

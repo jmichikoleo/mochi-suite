@@ -1,0 +1,40 @@
+{
+  "papers": [
+    {
+      "id": "8b385e53",
+      "title": "Efficient and Interpretable Multi-Agent LLM Routing via Ant Colony Optimization",
+      "authors": [
+        "Xudong Wang",
+        "Chaoning Zhang",
+        "Jiaquan Zhang",
+        "Chenghao Li",
+        "Qigan Sun",
+        "Sung-Ho Bae",
+        "Peng Wang",
+        "Ning Xie",
+        "Jie Zou",
+        "Yang Yang",
+        "Hengtao Shen"
+      ],
+      "abstract": "Large Language Model (LLM)-driven Multi-Agent Systems (MAS) have demonstrated strong capability in complex reasoning and tool use, and heterogeneous agent pools further broaden the quality--cost trade-off space. Despite these advances, real-world deployment is often constrained by high inference cost, latency, and limited transparency, which hinders scalable and efficient routing. Existing routing strategies typically rely on expensive LLM-based selectors or static policies, and offer limited co",
+      "url": "https://arxiv.org/pdf/2603.12933",
+      "pdf_path": null,
+      "year": "2026",
+      "tags": [
+        "LLM",
+        ". Routing",
+        "MultiAgent"
+      ],
+      "project": "General",
+      "status": "unread",
+      "added_date": "2026-04-03",
+      "notes": [],
+      "highlights": [],
+      "rating": 0,
+      "pdf_url": "https://arxiv.org/pdf/2603.12933"
+    }
+  ],
+  "projects": [
+    "General"
+  ]
+}

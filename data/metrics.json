@@ -1,0 +1,24 @@
+{
+  "entries": [
+    {
+      "sleep_hours": 4,
+      "focus_score": 6,
+      "weight_kg": 59.8,
+      "kcal": 1200,
+      "steps": 8007,
+      "water_ml": 700,
+      "coffee_cups": 2,
+      "spending": {
+        "total": 85000
+      },
+      "date": "2026-04-02"
+    },
+    {
+      "date": "2026-04-03",
+      "pomodoros": 1
+    }
+  ],
+  "budgets": {
+    "food": 500000
+  }
+}

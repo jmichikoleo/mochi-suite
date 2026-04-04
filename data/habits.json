@@ -1,0 +1,24 @@
+{
+  "habits": [
+    {
+      "name": "Read 30min",
+      "frequency": "daily",
+      "history": {}
+    },
+    {
+      "name": "Journaling",
+      "frequency": "daily",
+      "history": {}
+    },
+    {
+      "name": "Drink 2L Water",
+      "frequency": "daily",
+      "history": {}
+    },
+    {
+      "name": "Work Out",
+      "frequency": "weekly",
+      "history": {}
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "entries": {
+    "2026-04-02": [
+      {
+        "meal": "lunch",
+        "food_name": "150g rice + \uae40 + \uace0\uae30\ud1f4\uae40 + \ucef5\ub204\ub4e4 ",
+        "kcal_estimate": 600,
+        "time": "12:10"
+      },
+      {
+        "meal": "dinner",
+        "food_name": "\uc0bc\uac01\uae40\ubc25",
+        "kcal_estimate": 200,
+        "time": "18:40"
+      }
+    ],
+    "2026-04-03": [
+      {
+        "meal": "lunch",
+        "food_name": "150g rice + \ub2ed\uac00\uc2b4\uc0b4 + \uae40 + cup noodle ",
+        "kcal_estimate": 500,
+        "time": "11:45"
+      }
+    ]
+  }
+}

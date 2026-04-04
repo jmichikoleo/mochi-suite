@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mochi's Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF0F3;--card:rgba(255,255,255,.75);--hover:#FFE8EE;--pk:#F8A4B8;--pk-d:#E87A95;--pk-l:#FFDBE5;--pk-p:#FFD1DC;--rose:#F9C5D1;--blush:#FFF0F5;--lav:#F0E6FF;--lav-d:#D4B8FF;--br:#6B4C5A;--br-l:#9C7A8A;--br-ll:#C9AEBB;--cr:#FFF5F7;--gn:#B8E6CC;--gn-d:#7CC9A0;--yl:#FFE4C4;--yl-d:#FFB87A;--rd:#FFB3B3;--rd-d:#E57373;--bl:#D4E5FF;--bl-d:#A0C4FF;--sh:0 2px 16px rgba(248,164,184,.15);--sh-h:0 6px 24px rgba(248,164,184,.25);--r:20px;--rs:14px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Quicksand',-apple-system,sans-serif;background:linear-gradient(135deg,#FFF0F3,#FFE8F5 50%,#F5E6FF);background-attachment:fixed;color:var(--br);line-height:1.6;min-height:100vh}
+.app{max-width:1200px;margin:0 auto;padding:16px}
+.hdr{text-align:center;padding:20px 0 8px}
+.hdr h1{font-size:26px;font-weight:700}
+.hdr .dt{font-size:13px;color:var(--br-l);margin-top:3px;font-weight:500}
+.tb{display:flex;gap:3px;background:rgba(255,255,255,.5);backdrop-filter:blur(12px);border-radius:14px;padding:4px;margin:12px 0 16px;position:sticky;top:8px;z-index:50;box-shadow:var(--sh);border:1px solid rgba(248,164,184,.12);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tb button{flex:1;min-width:0;padding:8px 4px;border:none;background:0;border-radius:10px;font-size:11px;font-weight:600;cursor:pointer;color:var(--br-l);transition:.25s;font-family:inherit;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:3px}
+.tb button:hover{background:rgba(248,164,184,.1);color:var(--br)}
+.tb button.a{background:linear-gradient(135deg,var(--pk),var(--rose));color:#fff;box-shadow:0 3px 12px rgba(248,164,184,.4)}
+.tp{display:none;animation:fi .3s ease}.tp.a{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.cd{background:var(--card);backdrop-filter:blur(12px);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:1px solid rgba(248,164,184,.12);margin-bottom:14px}
+.ct{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--pk-d);display:flex;align-items:center;gap:6px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:768px){.g2{grid-template-columns:1fr}}
+.bp{background:linear-gradient(135deg,var(--pk),var(--rose));border:none;padding:7px 18px;border-radius:11px;color:#fff;font-weight:600;cursor:pointer;font-family:inherit;font-size:12px;box-shadow:0 2px 8px rgba(248,164,184,.3);transition:.2s}
+.bp:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(248,164,184,.45)}
+.bp.sm{padding:4px 12px;font-size:11px;border-radius:8px}
+.bg{background:0;border:2px dashed var(--pk-p);padding:9px;border-radius:var(--rs);color:var(--br-l);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;width:100%;transition:.2s;margin-top:6px}
+.bg:hover{border-color:var(--pk);color:var(--pk-d);background:var(--blush)}
+.bd{background:var(--rd);color:#C62828;border:none;padding:3px 8px;border-radius:6px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:600}
+
+/* Focus */
+.ef{background:linear-gradient(135deg,var(--pk-l),var(--blush));padding:11px 14px;border-radius:var(--rs);margin-bottom:12px;font-style:italic;font-size:12px;border:1px solid rgba(248,164,184,.2)}
+.fb{margin-bottom:10px;padding:12px;border-radius:var(--rs);border-left:4px solid var(--pk)}
+.fb.m{border-left-color:var(--yl-d);background:linear-gradient(135deg,#FFF8EE,#FFF0F5)}
+.fb.af{border-left-color:var(--bl-d);background:linear-gradient(135deg,#F0F4FF,#FFF0F8)}
+.fb.ev{border-left-color:var(--lav-d);background:linear-gradient(135deg,#F5F0FF,#FFF0F5)}
+.fb h4{font-size:12px;font-weight:600;margin-bottom:4px}
+.fb ul{list-style:none;padding:0}
+.fb li{font-size:11px;padding:1px 0}
+.fb .nt{font-size:10px;color:var(--br-l);font-style:italic;margin-top:4px}
+.ft{background:linear-gradient(135deg,var(--pk-p),var(--lav));padding:10px 14px;border-radius:var(--rs);font-size:11px;font-weight:600}
+.sc{background:linear-gradient(135deg,#FFF5F8,var(--lav));padding:14px;border-radius:var(--rs);margin-bottom:12px;border:1px solid rgba(212,184,255,.15)}
+.sc .si{font-size:12px;padding:4px 0;color:var(--br)}
+.sc .ss{font-size:28px;font-weight:700;color:var(--pk-d)}
+
+/* Metrics */
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(85px,1fr));gap:8px;margin-bottom:12px}
+.mb{background:linear-gradient(135deg,var(--blush),var(--pk-l));padding:12px 8px;border-radius:var(--rs);text-align:center;border:1px solid rgba(248,164,184,.15)}
+.mb .v{font-size:18px;font-weight:700}
+.mb .l{font-size:9px;color:var(--br-l);text-transform:uppercase;letter-spacing:.4px;margin-top:1px}
+.mb .s{font-size:10px;color:var(--br-l);margin-top:1px}
+.tu{color:var(--gn-d)}.td{color:var(--rd-d)}.ts{color:var(--br-ll)}
+.mf{padding:12px;background:linear-gradient(135deg,var(--blush),#FFF5F8);border-radius:var(--rs);border:1px dashed rgba(248,164,184,.3)}
+.mf h4{font-size:11px;margin-bottom:8px;color:var(--pk-d)}
+.mf .fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(75px,1fr));gap:6px}
+.mf label{font-size:9px;color:var(--br-l);display:block;margin-bottom:2px}
+.mf input{width:100%;padding:6px;border:1px solid var(--pk-p);border-radius:7px;font-size:11px;font-family:inherit;background:#fff}
+.mf input:focus{outline:none;border-color:var(--pk);box-shadow:0 0 0 2px rgba(248,164,184,.15)}
+.wellness{text-align:center;padding:14px;background:linear-gradient(135deg,var(--pk-l),var(--lav));border-radius:var(--rs);margin-bottom:12px}
+.wellness .ws{font-size:32px;font-weight:700;color:var(--pk-d)}
+.wellness .wr{font-size:13px;font-weight:600}
+
+/* Tasks */
+.ti{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--rs);margin-bottom:4px;cursor:pointer;transition:background .15s}
+.ti:hover{background:var(--hover)}
+.ti.dn{opacity:.7;background:linear-gradient(135deg,var(--gn),#D4F5E0)}.ti.dn .tt{text-decoration:line-through;color:var(--gn-d)}
+.tc{width:18px;height:18px;border:2px solid var(--pk);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s}
+.tc.ck{background:linear-gradient(135deg,var(--pk),var(--rose));border-color:var(--pk)}
+.tc.ck::after{content:"\2713";color:#fff;font-size:10px}
+.tt{font-size:12px;flex:1;font-weight:500}
+.tm{font-size:9px;color:var(--br-ll);font-weight:500}
+.tq{font-size:8px;padding:2px 7px;border-radius:8px;font-weight:600;white-space:nowrap}
+.tq.dn{background:linear-gradient(135deg,#FFD0D0,#FFB8B8);color:#C62828}
+.tq.sc{background:linear-gradient(135deg,#D4E5FF,#C0D8FF);color:#4A7CC9}
+.tq.dl{background:linear-gradient(135deg,#FFE4C4,#FFD4A8);color:#C97A2E}
+.tq.dr{background:linear-gradient(135deg,#F0E8EE,#E5DCE3);color:#8A7585}
+.tdl{opacity:0;background:0;border:0;cursor:pointer;font-size:12px;padding:2px;transition:opacity .2s}
+.ti:hover .tdl{opacity:.6}
+.ri{display:flex;gap:6px;align-items:center;padding:8px 12px;background:linear-gradient(135deg,var(--yl),#FFE8D0);border-radius:8px;margin-bottom:4px;font-size:11px;border:1px solid rgba(255,184,122,.2)}
+.ri .rt{font-weight:700;min-width:45px;color:#C97A2E}
+
+/* Schedule timeline */
+.sb{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;margin-bottom:4px;font-size:11px;border-left:3px solid var(--pk)}
+.sb.class{border-left-color:var(--bl-d);background:#F0F4FF}
+.sb.meeting{border-left-color:var(--yl-d);background:#FFF8EE}
+.sb.personal{border-left-color:var(--lav-d);background:#F5F0FF}
+.sb.work{border-left-color:var(--gn-d);background:#F0FFF5}
+.sb .st{font-weight:700;color:var(--br-l);min-width:90px}
+
+/* Calendar */
+.cal{margin-bottom:14px}
+.cal-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.cal-hdr h4{font-size:13px;font-weight:600}
+.cal-nav{background:0;border:1px solid var(--pk-p);border-radius:8px;padding:4px 10px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:600;color:var(--br-l)}
+.cal-nav:hover{background:var(--blush)}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-dh{text-align:center;font-size:9px;color:var(--br-ll);font-weight:600;padding:4px}
+.cal-d{text-align:center;padding:6px 2px;border-radius:8px;font-size:11px;cursor:default;min-height:32px}
+.cal-d.today{background:var(--pk-l);font-weight:700;color:var(--pk-d)}
+.cal-d.busy{background:linear-gradient(135deg,var(--pk-l),var(--lav));font-weight:600}
+.cal-d.has-items::after{content:"";display:block;width:4px;height:4px;background:var(--pk);border-radius:50%;margin:2px auto 0}
+.cal-d.empty{color:var(--br-ll)}
+
+/* Habits */
+.hi{display:flex;align-items:center;gap:10px;padding:10px;border-radius:var(--rs);margin-bottom:5px;background:linear-gradient(135deg,var(--blush),#FFF8FA);border:1px solid rgba(248,164,184,.1)}
+.ht{width:38px;height:22px;border-radius:11px;border:none;background:var(--br-ll);position:relative;cursor:pointer;transition:.3s;flex-shrink:0}
+.ht.on{background:linear-gradient(135deg,var(--pk),var(--rose));box-shadow:0 2px 8px rgba(248,164,184,.4)}
+.ht::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;left:3px;transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.ht.on::after{transform:translateX(16px)}
+.hn{font-size:12px;font-weight:600}
+.hs{font-size:10px;color:var(--br-l)}
+.hk{font-size:11px;font-weight:700;color:var(--pk-d);min-width:35px;text-align:center}
+.ha{opacity:0;transition:opacity .2s}.hi:hover .ha{opacity:1}
+.ii{font-size:11px;padding:7px 10px;background:linear-gradient(135deg,var(--pk-l),var(--lav));border-radius:8px;margin-bottom:4px}
+
+/* Papers */
+.pc{padding:14px;border-radius:var(--rs);background:linear-gradient(135deg,var(--blush),#FFF8FB);margin-bottom:10px;border:1px solid rgba(248,164,184,.12)}
+.pc h4{font-size:12px;margin-bottom:3px;line-height:1.4;font-weight:600}
+.pc .pm{font-size:10px;color:var(--br-l);margin-bottom:5px}
+.pc .pa{font-size:11px;line-height:1.5;margin-bottom:8px}
+.pc .pl{display:flex;gap:5px;flex-wrap:wrap}
+.pc .pl a{font-size:10px;padding:3px 10px;background:linear-gradient(135deg,var(--bl),#C8DEFF);border-radius:7px;color:#4A6FA5;text-decoration:none;font-weight:600}
+.mr{font-size:10px;padding:3px 10px;background:linear-gradient(135deg,var(--gn),#A0DBBA);border:none;border-radius:7px;color:#3D7A55;font-weight:600;cursor:pointer;font-family:inherit}
+.mr.rd{background:var(--br-ll);color:#fff;pointer-events:none}
+
+/* Paper summary */
+.ps{padding:14px;border-radius:var(--rs);background:linear-gradient(135deg,#FFF8EE,var(--blush));margin-bottom:10px;border:1px solid rgba(248,164,184,.1)}
+.ps h4{font-size:13px;font-weight:600;margin-bottom:6px}
+.ps .psl{font-size:11px;margin-bottom:3px}
+.ps .psl b{color:var(--pk-d)}
+.ps .pst{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.ps .pst span{font-size:9px;background:var(--pk-l);padding:2px 8px;border-radius:6px;color:var(--pk-d);font-weight:600}
+
+/* Substack */
+.ssc{padding:16px;background:linear-gradient(135deg,#FFF5F8,var(--lav));border-radius:var(--rs);border:1px solid rgba(212,184,255,.15)}
+.ssc h4{font-size:14px;margin-bottom:3px;font-weight:700}
+.ssc .so{font-size:11px;color:var(--br-l);margin-bottom:6px}
+.ssc .ex{font-size:12px;line-height:1.5;margin-bottom:10px;font-style:italic;color:var(--br-l)}
+
+/* Media */
+.mc{display:flex;gap:12px;padding:12px;border-radius:var(--rs);background:linear-gradient(135deg,var(--blush),#FFF8FA);margin-bottom:8px;border:1px solid rgba(248,164,184,.1);align-items:flex-start}
+.mc img{width:100px;height:70px;object-fit:cover;border-radius:8px;flex-shrink:0;background:var(--pk-l)}
+.mc .mi{flex:1;min-width:0}
+.mc .mi h5{font-size:12px;font-weight:600;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mc .mi .ma{font-size:10px;color:var(--br-l)}
+.mc .mi .mn{font-size:10px;color:var(--br-ll);margin-top:2px}
+.mc .stars{font-size:14px;color:var(--pk)}
+.type-badge{font-size:9px;padding:2px 8px;border-radius:6px;font-weight:600;text-transform:uppercase}
+.type-badge.youtube{background:#FFD0D0;color:#C62828}
+.type-badge.substack{background:#FFE4C4;color:#C97A2E}
+.type-badge.goodreads{background:#D4E5FF;color:#4A7CC9}
+.type-badge.journal{background:var(--gn);color:#3D7A55}
+.type-badge.netflix{background:#2D2D2D;color:#E50914}
+.type-badge.other{background:#E5DCE3;color:#8A7585}
+
+/* Journal */
+.mood-pick{display:flex;gap:8px;margin-bottom:12px;justify-content:center}
+.mood-btn{width:42px;height:42px;border-radius:50%;border:2px solid var(--pk-p);background:#fff;font-size:20px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center}
+.mood-btn:hover{transform:scale(1.1);border-color:var(--pk)}
+.mood-btn.sel{border-color:var(--pk);background:var(--pk-l);transform:scale(1.15);box-shadow:0 3px 12px rgba(248,164,184,.3)}
+.jta{width:100%;min-height:120px;padding:12px;border:1px solid var(--pk-p);border-radius:var(--rs);font-family:inherit;font-size:13px;resize:vertical;background:#fff;line-height:1.6}
+.jta:focus{outline:none;border-color:var(--pk);box-shadow:0 0 0 3px rgba(248,164,184,.15)}
+.je{padding:10px;border-radius:var(--rs);background:linear-gradient(135deg,var(--blush),#FFF8FA);margin-bottom:6px;border:1px solid rgba(248,164,184,.08)}
+.je .jd{font-size:10px;color:var(--br-l);font-weight:500}
+.je .jm{font-size:16px;margin-right:6px}
+.je .jt{font-size:12px;margin-top:4px}
+.mood-trend{display:flex;gap:4px;align-items:flex-end;margin-bottom:12px;padding:10px;background:var(--blush);border-radius:var(--rs)}
+.mood-bar{flex:1;text-align:center}
+.mood-bar .bar{width:100%;border-radius:4px;background:linear-gradient(var(--pk),var(--rose));margin:0 auto}
+.mood-bar .dd{font-size:8px;color:var(--br-ll);margin-top:2px}
+
+/* Food */
+.fi{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;margin-bottom:4px;background:linear-gradient(135deg,var(--blush),#FFF8FA)}
+.fi .fm{font-size:9px;background:var(--yl);padding:2px 8px;border-radius:6px;font-weight:600;color:#C97A2E;min-width:60px;text-align:center;text-transform:capitalize}
+.fi .fn{font-size:12px;flex:1;font-weight:500}
+.fi .fk{font-size:11px;color:var(--br-l);font-weight:600}
+.kcal-bar{height:8px;border-radius:4px;background:var(--pk-l);margin:8px 0;overflow:hidden}
+.kcal-bar .fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--pk),var(--rose));transition:width .3s}
+
+/* Stocks */
+.stk{padding:14px;border-radius:var(--rs);background:linear-gradient(135deg,var(--blush),#FFF8FA);margin-bottom:10px;border:1px solid rgba(248,164,184,.12)}
+.stk h4{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.stk .price{font-size:22px;font-weight:700}
+.stk .chg{font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px}
+.stk .chg.up{background:var(--gn);color:#3D7A55}
+.stk .chg.down{background:var(--rd);color:#C62828}
+.stk .sig{font-size:10px;padding:3px 8px;border-radius:6px;background:var(--cr);color:var(--br-l);margin:2px;display:inline-block}
+
+/* News */
+.nt{display:flex;gap:3px;margin-bottom:10px;background:var(--blush);padding:3px;border-radius:8px}
+.ntb{flex:1;padding:6px;border:none;background:0;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;color:var(--br-l);transition:.2s;font-family:inherit}
+.ntb.a{background:#fff;color:var(--pk-d);box-shadow:0 2px 6px rgba(248,164,184,.2)}
+.np{display:none}.np.a{display:block}
+.ni{padding:8px 0;border-bottom:1px solid var(--pk-l)}
+.ni:last-child{border-bottom:none}
+.ni h5{font-size:11px;font-weight:600;margin-bottom:2px}
+.ni .ns{font-size:9px;color:var(--br-ll)}
+.ni .nd{font-size:11px;color:var(--br-l);margin-top:2px;line-height:1.4}
+.ni a{color:var(--pk-d);text-decoration:none;font-size:10px;font-weight:600}
+
+/* Day picker */
+.day-btn{width:34px;height:34px;border-radius:50%;border:2px solid var(--pk-p);background:#fff;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--br-l);transition:.2s}
+.day-btn:hover{border-color:var(--pk);color:var(--br)}
+.day-btn.sel{background:linear-gradient(135deg,var(--pk),var(--rose));color:#fff;border-color:var(--pk)}
+
+/* Modal */
+.mo{display:none;position:fixed;inset:0;background:rgba(107,76,90,.25);backdrop-filter:blur(4px);z-index:100;align-items:center;justify-content:center}
+.mo.a{display:flex}
+.ml{background:#fff;border-radius:var(--r);padding:22px;width:92%;max-width:400px;box-shadow:0 12px 48px rgba(248,164,184,.3);border:1px solid rgba(248,164,184,.15)}
+.ml h3{margin-bottom:12px;color:var(--pk-d);font-size:15px}
+.ml .f{margin-bottom:8px}
+.ml label{font-size:11px;color:var(--br-l);display:block;margin-bottom:2px;font-weight:500}
+.ml input,.ml select,.ml textarea{width:100%;padding:8px 10px;border:1px solid var(--pk-p);border-radius:8px;font-size:12px;font-family:inherit}
+.ml input:focus,.ml select:focus,.ml textarea:focus{outline:none;border-color:var(--pk);box-shadow:0 0 0 2px rgba(248,164,184,.15)}
+.ml .ac{display:flex;gap:6px;margin-top:12px}
+.ml .ac>*{flex:1;text-align:center}
+.ld{text-align:center;padding:40px;color:var(--br-l);font-weight:500;font-size:13px}
+.ld::before{content:"";display:inline-block;width:20px;height:20px;border:3px solid var(--pk-l);border-top-color:var(--pk);border-radius:50%;animation:sp .8s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:0}::-webkit-scrollbar-thumb{background:var(--pk-p);border-radius:2px}
+.fab{position:fixed;bottom:20px;right:20px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--pk),var(--rose));color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 16px rgba(248,164,184,.5);z-index:90;transition:.3s;font-family:inherit}
+.fab:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(248,164,184,.6)}
+.fab-input{position:fixed;bottom:80px;right:20px;width:300px;background:#fff;border-radius:var(--r);padding:14px;box-shadow:0 8px 32px rgba(248,164,184,.3);z-index:91;display:none;border:1px solid rgba(248,164,184,.15)}
+.fab-input.open{display:block}
+.fab-input input{width:100%;padding:10px;border:1px solid var(--pk-p);border-radius:10px;font-size:13px;font-family:inherit}
+.fab-input input:focus{outline:none;border-color:var(--pk)}
+.fab-input .hint{font-size:9px;color:var(--br-l);margin-top:6px;line-height:1.4}
+.fab-result{margin-top:6px;padding:6px 10px;border-radius:8px;font-size:11px;font-weight:500;display:none}
+.badge-shelf{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.badge{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;transition:.2s;cursor:default}
+.badge.unlocked{background:linear-gradient(135deg,var(--yl),#FFE8D0);box-shadow:0 2px 8px rgba(255,184,122,.3)}
+.badge.locked{background:var(--blush);opacity:.3;filter:grayscale(1)}
+.gnav{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,.6);backdrop-filter:blur(12px);border-radius:12px;margin-bottom:12px;justify-content:center;border:1px solid rgba(248,164,184,.1)}
+.gnav a{padding:8px 18px;border-radius:10px;font-size:12px;font-weight:600;text-decoration:none;color:var(--br-l);transition:.2s;font-family:inherit;display:flex;align-items:center;gap:4px}
+.gnav a:hover{background:rgba(248,164,184,.1);color:var(--br)}
+.gnav a.active{background:linear-gradient(135deg,var(--pk),var(--rose));color:#fff;box-shadow:0 3px 12px rgba(248,164,184,.4)}
+</style>
+</head>
+<body>
+<div class="app">
+<nav class="gnav">
+<a href="/" class="active"><span>&#127969;</span> Home</a>
+<a href="/lab"><span>&#128300;</span> Lab</a>
+<a href="/uni"><span>&#127891;</span> Uni</a>
+<a href="/chat"><span>&#128172;</span> Mochi AI</a>
+</nav>
+<div style="position:relative;margin-bottom:8px">
+<input id="globalSearch" placeholder="🔍 Search everything..." style="width:100%;padding:10px 14px;border:1px solid rgba(248,164,184,.2);border-radius:14px;font-size:12px;font-family:inherit;background:rgba(255,255,255,.6);backdrop-filter:blur(8px)" oninput="doGlobalSearch(this.value)" onfocus="this.parentElement.querySelector('#searchResults').style.display='block'" >
+<div id="searchResults" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:400px;overflow-y:auto;background:#fff;border-radius:14px;box-shadow:0 8px 32px rgba(248,164,184,.3);border:1px solid rgba(248,164,184,.15);z-index:60;margin-top:4px;padding:8px"></div>
+</div>
+<div class="hdr"><h1>&#127841; Mochi's Assistant</h1><div class="dt" id="dt">Loading...</div></div>
+<div class="tb" id="tb">
+<button class="a" data-t="focus"><span>&#127774;</span> Focus</button>
+<button data-t="tasks"><span>&#9989;</span> Tasks</button>
+<button data-t="habits"><span>&#127793;</span> Habits</button>
+<button data-t="metrics"><span>&#128200;</span> Metrics</button>
+<button data-t="papers"><span>&#128218;</span> Papers</button>
+<button data-t="media"><span>&#127916;</span> Media</button>
+<button data-t="journal"><span>&#128221;</span> Journal</button>
+<button data-t="reads"><span>&#128240;</span> Reads</button>
+<button data-t="links"><span>&#128278;</span> Links</button>
+<button data-t="expenses"><span>&#128176;</span> Expenses</button>
+<button data-t="wishlist"><span>&#127873;</span> Wishlist</button>
+<button data-t="recipes"><span>&#127858;</span> Recipes</button>
+<button data-t="goals"><span>&#127919;</span> Goals</button>
+<button data-t="news"><span>&#127758;</span> News</button>
+</div>
+<div id="p-focus" class="tp a"></div>
+<div id="p-tasks" class="tp"></div>
+<div id="p-habits" class="tp"></div>
+<div id="p-metrics" class="tp"></div>
+<div id="p-papers" class="tp"></div>
+<div id="p-media" class="tp"></div>
+<div id="p-journal" class="tp"></div>
+<div id="p-reads" class="tp"></div>
+<div id="p-links" class="tp"></div>
+<div id="p-expenses" class="tp"></div>
+<div id="p-wishlist" class="tp"></div>
+<div id="p-recipes" class="tp"></div>
+<div id="p-goals" class="tp"></div>
+<div id="p-news" class="tp"></div>
+</div>
+
+<!-- Modals -->
+<div class="mo" id="mTask"><div class="ml"><h3>&#10024; Add Task</h3>
+<div class="f"><label>Title</label><input id="tT" placeholder="What needs to be done?"></div>
+<div class="f"><label>Deadline</label><input type="date" id="tD"></div>
+<div class="f"><label>Category</label><select id="tC"><option value="work">Work</option><option value="personal">Personal</option><option value="health">Health</option><option value="learning">Learning</option></select></div>
+<div class="f"><label>Energy</label><select id="tE"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
+<div class="f"><label>Impact (1-10)</label><input type="number" id="tI" min="1" max="10" value="5"></div>
+<div class="ac"><button class="bg" onclick="cm('mTask')">Cancel</button><button class="bp" onclick="addTask()">Add</button></div></div></div>
+
+<div class="mo" id="mRem"><div class="ml"><h3>&#128276; Add Reminder</h3>
+<div class="f"><label>Text</label><input id="rT" placeholder="Don't forget to..."></div>
+<div class="f"><label>Date</label><input type="date" id="rD"></div>
+<div class="f"><label>Time</label><input type="time" id="rTm"></div>
+<div class="ac"><button class="bg" onclick="cm('mRem')">Cancel</button><button class="bp" onclick="addRem()">Add</button></div></div></div>
+
+<div class="mo" id="mHab"><div class="ml"><h3>&#127793; Add Habit</h3>
+<div class="f"><label>Name</label><input id="hN" placeholder="e.g. Read 30min"></div>
+<div class="f"><label>Frequency</label><select id="hF"><option value="daily">Daily</option><option value="weekdays">Weekdays</option><option value="weekly">Weekly</option></select></div>
+<div class="ac"><button class="bg" onclick="cm('mHab')">Cancel</button><button class="bp" onclick="addHab()">Add</button></div></div></div>
+
+<div class="mo" id="mSch"><div class="ml"><h3>&#128197; Add Schedule</h3>
+<div class="f"><label>Title</label><input id="sT" placeholder="CS 101 Lecture"></div>
+<div class="f"><label>Start time</label><input type="time" id="sS"></div>
+<div class="f"><label>End time</label><input type="time" id="sE"></div>
+<div class="f"><label>Type</label><select id="sTp"><option value="class">Class</option><option value="meeting">Meeting</option><option value="work">Work</option><option value="personal">Personal</option></select></div>
+<div class="f"><label>Location / Campus</label><select id="sLoc"><option value="">No location</option><option value="국립부경대학교">국립부경대학교</option><option value="부산대학교">부산대학교</option><option value="Lab">Lab</option><option value="Online">Online</option></select></div>
+<div class="f"><label>Schedule mode</label>
+<div style="display:flex;gap:4px;margin-bottom:8px">
+<button class="bp sm" id="schMode1" onclick="setSchMode('single')" style="flex:1">Single date</button>
+<button class="bp sm" id="schMode2" onclick="setSchMode('weekly')" style="flex:1;background:var(--blush);color:var(--br)">Weekly repeat</button>
+</div>
+</div>
+<div id="schSingle"><div class="f"><label>Date</label><input type="date" id="sD"></div></div>
+<div id="schWeekly" style="display:none">
+<div class="f"><label>Repeat on</label>
+<div style="display:flex;gap:4px;flex-wrap:wrap" id="dayPicks">
+<button type="button" class="day-btn" data-day="0" onclick="togDay(this)">Su</button>
+<button type="button" class="day-btn" data-day="1" onclick="togDay(this)">Mo</button>
+<button type="button" class="day-btn" data-day="2" onclick="togDay(this)">Tu</button>
+<button type="button" class="day-btn" data-day="3" onclick="togDay(this)">We</button>
+<button type="button" class="day-btn" data-day="4" onclick="togDay(this)">Th</button>
+<button type="button" class="day-btn" data-day="5" onclick="togDay(this)">Fr</button>
+<button type="button" class="day-btn" data-day="6" onclick="togDay(this)">Sa</button>
+</div></div>
+<div class="f"><label>From</label><input type="date" id="sFrom"></div>
+<div class="f"><label>Until</label><input type="date" id="sUntil"></div>
+</div>
+<div class="ac"><button class="bg" onclick="cm('mSch')">Cancel</button><button class="bp" onclick="addSch()">Add</button></div></div></div>
+
+<div class="mo" id="mFood"><div class="ml"><h3>&#127858; Add Food</h3>
+<div class="f"><label>Meal</label><select id="fM"><option value="breakfast">Breakfast</option><option value="lunch">Lunch</option><option value="dinner">Dinner</option><option value="snack">Snack</option></select></div>
+<div class="f"><label>Food</label><input id="fN" placeholder="Nasi goreng"></div>
+<div class="f"><label>Kcal (estimate)</label><input type="number" id="fK" placeholder="450"></div>
+<div class="f"><label>Time</label><input type="time" id="fTm"></div>
+<div class="ac"><button class="bg" onclick="cm('mFood')">Cancel</button><button class="bp" onclick="addFood()">Add</button></div></div></div>
+
+<div class="mo" id="mMedia"><div class="ml"><h3>&#127916; Add Media</h3>
+<div class="f"><label>Paste link</label><input id="mL" placeholder="YouTube, Substack, Goodreads, journal URL..."><div id="metaPrev" style="margin-top:6px"></div></div>
+<div class="f"><label>Notes</label><input id="mN" placeholder="My thoughts..."></div>
+<div class="f"><label>Rating (1-5)</label><input type="number" id="mR" min="1" max="5" value="4"></div>
+<div class="ac"><button class="bg" onclick="cm('mMedia')">Cancel</button><button class="bp" onclick="fetchAndAddMedia()">Add</button></div></div></div>
+
+<div class="mo" id="mPaper"><div class="ml"><h3>&#128218; Summarize Paper</h3>
+<div class="f"><label>Paper URL (arXiv, etc.)</label><input id="pU" placeholder="https://arxiv.org/abs/..."></div>
+<div id="sumStatus" style="font-size:11px;color:var(--br-l);margin-top:6px"></div>
+<div class="ac"><button class="bg" onclick="cm('mPaper')">Cancel</button><button class="bp" id="sumBtn" onclick="summarizePaper()">Summarize</button></div></div></div>
+
+<div class="mo" id="mBkm"><div class="ml"><h3>&#128278; Save Link</h3>
+<div class="f"><label>URL</label><input id="bU" placeholder="https://..."></div>
+<div class="f"><label>Folder</label><select id="bF"></select></div>
+<div class="f"><label>Tags (comma separated)</label><input id="bTg" placeholder="ai, research, tools"></div>
+<div class="f"><label>Note</label><input id="bN" placeholder="Why this is useful..."></div>
+<div class="ac"><button class="bg" onclick="cm('mBkm')">Cancel</button><button class="bp" onclick="addBookmark()">Save</button></div></div></div>
+
+<div class="mo" id="mFolder"><div class="ml"><h3>&#128193; New Folder</h3>
+<div class="f"><label>Folder name</label><input id="fName" placeholder="e.g. Research Papers"></div>
+<div class="ac"><button class="bg" onclick="cm('mFolder')">Cancel</button><button class="bp" onclick="addFolder()">Create</button></div></div></div>
+
+<div class="mo" id="mTBR"><div class="ml"><h3>&#128214; Add to TBR</h3>
+<div class="f"><label>Title</label><input id="tbrTitle" placeholder="How to be disgustingly educated"></div>
+<div class="f"><label>URL</label><input id="tbrUrl" placeholder="https://substack.com/..."></div>
+<div class="f"><label>Type</label><select id="tbrType"><option value="article">Article</option><option value="substack">Substack</option><option value="blog">Blog Post</option><option value="thread">Thread</option></select></div>
+<div class="f"><label>Est. read time (min)</label><input type="number" id="tbrTime" value="10"></div>
+<div class="ac"><button class="bg" onclick="cm('mTBR')">Cancel</button><button class="bp" onclick="addTBR()">Add</button></div></div></div>
+
+<div class="mo" id="mStudy"><div class="ml"><h3>&#128218; Log Study Session</h3>
+<div class="f"><label>Subject/Course</label><input id="stSubj" placeholder="Machine Learning"></div>
+<div class="f"><label>Duration (minutes)</label><input type="number" id="stDur" placeholder="60"></div>
+<div class="f"><label>Topic</label><input id="stTopic" placeholder="Transformer architectures"></div>
+<div class="f"><label>Notes</label><input id="stNotes" placeholder="Key takeaways..."></div>
+<div class="ac"><button class="bg" onclick="cm('mStudy')">Cancel</button><button class="bp" onclick="addStudy()">Log</button></div></div></div>
+
+<div class="mo" id="mRead"><div class="ml"><h3>&#128214; Add to Reading Queue</h3>
+<div class="f"><label>Title</label><input id="rqTitle" placeholder="Paper/article title"></div>
+<div class="f"><label>URL</label><input id="rqUrl" placeholder="https://..."></div>
+<div class="f"><label>Type</label><select id="rqType"><option value="paper">Paper</option><option value="article">Article</option><option value="book">Book</option></select></div>
+<div class="f"><label>Est. read time (min)</label><input type="number" id="rqTime" placeholder="30"></div>
+<div class="ac"><button class="bg" onclick="cm('mRead')">Cancel</button><button class="bp" onclick="addReading()">Add</button></div></div></div>
+
+
+<div class="mo" id="mPeriod"><div class="ml"><h3>&#127769; Log Period</h3>
+<div class="f"><label>Start date</label><input type="date" id="prStart"></div>
+<div class="f"><label>End date (optional)</label><input type="date" id="prEnd"></div>
+<div class="f"><label>Symptoms</label>
+<div style="display:flex;gap:4px;flex-wrap:wrap" id="symPicks">
+<button type="button" class="day-btn" data-sym="cramps" onclick="this.classList.toggle('sel')">Cramps</button>
+<button type="button" class="day-btn" data-sym="fatigue" onclick="this.classList.toggle('sel')">Fatigue</button>
+<button type="button" class="day-btn" data-sym="headache" onclick="this.classList.toggle('sel')">Headache</button>
+<button type="button" class="day-btn" data-sym="bloating" onclick="this.classList.toggle('sel')">Bloating</button>
+<button type="button" class="day-btn" data-sym="mood swings" onclick="this.classList.toggle('sel')">Mood</button>
+</div></div>
+<div class="f"><label>Notes</label><input id="prNotes" placeholder="Any notes..."></div>
+<div class="ac"><button class="bg" onclick="cm('mPeriod')">Cancel</button><button class="bp" onclick="logPeriod()">Log</button></div></div></div>
+
+<div class="mo" id="mSchEdit"><div class="ml"><h3>&#9998; Edit Schedule</h3>
+<div class="f"><label>Title</label><input id="seT"></div>
+<div class="f"><label>Date</label><input type="date" id="seD"></div>
+<div class="f"><label>Start</label><input type="time" id="seS"></div>
+<div class="f"><label>End</label><input type="time" id="seE"></div>
+<div class="f"><label>Type</label><select id="seTp"><option value="class">Class</option><option value="meeting">Meeting</option><option value="work">Work</option><option value="personal">Personal</option></select></div>
+<div class="f"><label>Location</label><select id="seLoc"><option value="">None</option><option value="국립부경대학교">국립부경대학교</option><option value="부산대학교">부산대학교</option><option value="Lab">Lab</option><option value="Online">Online</option></select></div>
+<div class="ac"><button class="bg" onclick="cm('mSchEdit')">Cancel</button><button class="bp" onclick="saveSch()">Save</button></div></div></div>
+
+<div class="mo" id="mTopikDeck"><div class="ml"><h3>&#127183; New TOPIK Deck</h3>
+<div class="f"><label>Deck name</label><input id="tkDeckName" placeholder="TOPIK - 읽기 고급 어휘"></div>
+<div class="ac"><button class="bg" onclick="cm('mTopikDeck')">Cancel</button><button class="bp" onclick="createTopikDeck()">Create</button></div></div></div>
+
+<div class="mo" id="mTopikCard"><div class="ml"><h3>&#127183; Add Card</h3>
+<div class="f"><label>Front (한국어)</label><input id="tkCardQ" placeholder="한국어 단어"></div>
+<div class="f"><label>Back (meaning + example)</label><textarea id="tkCardA" rows="3" placeholder="English meaning&#10;예: 한국어 예문" style="width:100%;padding:8px;border:1px solid var(--pk-p);border-radius:8px;font-size:12px;font-family:inherit"></textarea></div>
+<div class="ac"><button class="bg" onclick="cm('mTopikCard')">Cancel</button><button class="bp" onclick="addTopikCard()">Add</button></div></div></div>
+
+<div class="mo" id="mTopikEdit"><div class="ml"><h3>&#9998; Edit Card</h3>
+<div class="f"><label>Front (한국어)</label><input id="tkEditQ"></div>
+<div class="f"><label>Back (meaning + example)</label><textarea id="tkEditA" rows="3" style="width:100%;padding:8px;border:1px solid var(--pk-p);border-radius:8px;font-size:12px;font-family:inherit"></textarea></div>
+<div class="ac"><button class="bg" onclick="cm('mTopikEdit')">Cancel</button><button class="bp" onclick="saveTopikEdit()">Save</button></div></div></div>
+
+<div class="mo" id="mExpense"><div class="ml"><h3>&#128176; Add Expense</h3>
+<div class="f"><label>Amount (원)</label><input type="number" id="expAmt" placeholder="4500"></div>
+<div class="f"><label>Category</label><select id="expCat"><option value="food">Food</option><option value="transport">Transport</option><option value="coffee">Coffee</option><option value="shopping">Shopping</option><option value="entertainment">Entertainment</option><option value="groceries">Groceries</option><option value="other">Other</option></select></div>
+<div class="f"><label>What</label><input id="expDesc" placeholder="아메리카노"></div>
+<div class="f"><label>Date</label><input type="date" id="expDate"></div>
+<div class="ac"><button class="bg" onclick="cm('mExpense')">Cancel</button><button class="bp" onclick="addExpense()">Add</button></div></div></div>
+
+<div class="mo" id="mWatch"><div class="ml"><h3>&#127916; Add to Media</h3>
+<div class="f"><label>Title</label><input id="wTitle" placeholder="XO, Kitty Season 3"></div>
+<div class="f"><label>Type</label><select id="wType"><option value="kdrama">K-Drama</option><option value="anime">Anime</option><option value="movie">Movie</option><option value="tvshow">TV Show</option><option value="variety">Variety</option></select></div>
+<div class="f"><label>Status</label><select id="wStatus"><option value="watching">Watching</option><option value="plan_to_watch">Plan to Watch</option><option value="completed">Completed</option></select></div>
+<div class="f"><label>Total episodes</label><input type="number" id="wEpTotal" placeholder="16"></div>
+<div class="f"><label>Episodes watched</label><input type="number" id="wEpWatched" placeholder="0"></div>
+<div class="f"><label>Rating (1-5)</label><input type="number" id="wRating" min="0" max="5" placeholder="0"></div>
+<div class="f"><label>URL (Netflix/MDL)</label><input id="wUrl" placeholder="https://..."></div>
+<div class="f"><label>Notes</label><input id="wNotes" placeholder="MOON MINHO!!!"></div>
+<div class="ac"><button class="bg" onclick="cm('mWatch')">Cancel</button><button class="bp" onclick="addWatch()">Add</button></div></div></div>
+
+<div class="mo" id="mWish"><div class="ml"><h3>&#127873; Add to Wish List</h3>
+<div class="f"><label>Item name</label><input id="wiTitle" placeholder="Kindle Paperwhite"></div>
+<div class="f"><label>Price (원)</label><input type="number" id="wiPrice" placeholder="150000"></div>
+<div class="f"><label>Link</label><input id="wiUrl" placeholder="https://..."></div>
+<div class="f"><label>Priority</label><select id="wiPri"><option value="want">Want</option><option value="need">Need</option><option value="someday">Someday</option></select></div>
+<div class="f"><label>Notes</label><input id="wiNotes" placeholder="Saw on sale..."></div>
+<div class="ac"><button class="bg" onclick="cm('mWish')">Cancel</button><button class="bp" onclick="addWish()">Add</button></div></div></div>
+
+<div class="mo" id="mRecipe"><div class="ml"><h3>&#127858; Add Recipe</h3>
+<div class="f"><label>Recipe name</label><input id="rcTitle" placeholder="김치찌개"></div>
+<div class="f"><label>Ingredients</label><textarea id="rcIngr" rows="2" placeholder="One per line: 김치, 두부, 돼지고기..." style="width:100%;padding:8px;border:1px solid var(--pk-p);border-radius:8px;font-size:12px;font-family:inherit"></textarea></div>
+<div class="f"><label>Instructions</label><textarea id="rcInstr" rows="3" placeholder="How to make it..." style="width:100%;padding:8px;border:1px solid var(--pk-p);border-radius:8px;font-size:12px;font-family:inherit"></textarea></div>
+<div class="f"><label>Kcal (estimate)</label><input type="number" id="rcKcal" placeholder="400"></div>
+<div class="f"><label>Prep time</label><input id="rcTime" placeholder="30min"></div>
+<div class="f"><label>Tags</label><input id="rcTags" placeholder="korean, easy, dinner"></div>
+<div class="ac"><button class="bg" onclick="cm('mRecipe')">Cancel</button><button class="bp" onclick="addRecipe()">Add</button></div></div></div>
+
+<script>
+let D={},calY,calM,selMood=3,mediaMeta=null;
+const $=id=>document.getElementById(id);
+const today=new Date().toISOString().split('T')[0];
+
+// Tabs
+document.querySelectorAll('.tb button').forEach(b=>{b.addEventListener('click',()=>{
+document.querySelectorAll('.tb button').forEach(x=>x.classList.remove('a'));
+document.querySelectorAll('.tp').forEach(x=>x.classList.remove('a'));
+b.classList.add('a');$('p-'+b.dataset.t).classList.add('a');
+})});
+
+function om(id){$(id).classList.add('a')}
+function cm(id){$(id).classList.remove('a')}
+
+async function load(){
+document.querySelectorAll('.tp').forEach(p=>{p.innerHTML='<div class="ld">Loading...</div>'});
+try{
+// Fast load — local data only (instant)
+const r=await fetch('/api/briefing');D=await r.json();
+const d=new Date(D.date+'T00:00:00');
+$('dt').textContent=d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+calY=d.getFullYear();calM=d.getMonth()+1;
+renderAll();
+
+// Lazy load — external data (papers, news, substack, weather) in background
+fetch('/api/external').then(r=>r.json()).then(ext=>{
+  D.papers=ext.papers;D.substack=ext.substack;D.news=ext.news;D.weather=ext.weather;
+  // Re-render only the tabs that use external data
+  $('p-papers').innerHTML=rPapers();
+  $('p-reads').innerHTML=rReads();
+  $('p-news').innerHTML=rNews();
+  // Update weather in focus if it loaded
+  if(ext.weather&&ext.weather.has_data){$('p-focus').innerHTML=rFocus();}
+}).catch(()=>{});
+}catch(e){$('p-focus').innerHTML='<div class="cd">Failed to load. Is the server running?</div>';}}
+
+function renderAll(){
+$('p-focus').innerHTML=rFocus();
+$('p-tasks').innerHTML=rTasks();
+$('p-habits').innerHTML=rHabits();
+$('p-metrics').innerHTML=rMetrics();
+$('p-papers').innerHTML=rPapers();
+$('p-media').innerHTML=rMedia();
+$('p-journal').innerHTML=rJournal();
+$('p-reads').innerHTML=rReads();
+$('p-links').innerHTML=rLinks();
+$('p-expenses').innerHTML=rExpenses();
+$('p-wishlist').innerHTML=rWishlist();
+$('p-recipes').innerHTML=rRecipes();
+$('p-goals').innerHTML=rGoals();
+$('p-news').innerHTML=rNews();
+}
+
+// ─── Focus ───
+function rFocus(){
+const f=D.focus,sc=D.summary_card,sr=D.sleep_rec,cy=D.cycle,w=D.weather;
+let h='';
+
+// Weather reminders (top of page)
+if(w&&w.has_data){
+const c=w.current;
+h+=`<div class="cd" style="padding:14px;background:linear-gradient(135deg,var(--bl),var(--blush))">`;
+h+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">`;
+h+=`<span style="font-size:28px">${c.temp<=5?'🥶':c.temp<=15?'🧥':c.temp>=30?'🥵':'☀️'}</span>`;
+h+=`<div><div style="font-size:18px;font-weight:700">${c.temp}°C</div>`;
+h+=`<div style="font-size:10px;color:var(--br-l)">${w.city} &middot; ${c.description} &middot; Feels ${c.feels_like}°C &middot; Wind ${c.wind_speed}km/h</div></div></div>`;
+if(w.forecast&&w.forecast.length){
+h+='<div style="display:flex;gap:8px;margin-bottom:6px">';
+w.forecast.forEach(f=>{h+=`<div style="text-align:center;font-size:10px;flex:1;padding:4px;background:rgba(255,255,255,.4);border-radius:6px"><div style="font-weight:600">${f.time}</div><div>${f.temp}°C</div><div style="color:var(--br-l)">${f.condition}</div></div>`});
+h+='</div>';}
+if(w.reminders&&w.reminders.length){w.reminders.forEach(r=>{
+h+=`<div style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:rgba(255,255,255,.5);border-radius:8px;margin-bottom:4px;font-size:12px;font-weight:500"><span style="font-size:16px">${r.icon}</span>${r.text}</div>`;});}
+h+='</div>';}
+
+// Sleep Health Alert
+if(D.metrics&&D.metrics.has_data){
+const sl=D.metrics.sleep;
+if(sl&&sl.latest&&sl.latest<5){
+h+=`<div class="cd" style="padding:12px;background:linear-gradient(135deg,var(--rd),#FFD0D0);border-left:4px solid #C62828">`;
+h+=`<div style="display:flex;align-items:center;gap:8px"><span style="font-size:20px">&#9888;</span>`;
+h+=`<div><b style="font-size:12px;color:#C62828">Sleep Alert: ${sl.latest}h last night</b>`;
+h+=`<div style="font-size:10px;color:#C62828">This is seriously low. Your focus, mood, and health are affected. Please prioritize sleep tonight.</div></div></div></div>`;}
+else if(sl&&sl.latest&&sl.latest<6.5){
+h+=`<div class="cd" style="padding:10px;background:linear-gradient(135deg,var(--yl),#FFE8D0);border-left:4px solid #C97A2E">`;
+h+=`<div style="font-size:11px"><span style="font-size:14px">&#128164;</span> <b>Low sleep: ${sl.latest}h.</b> Try to get to bed earlier tonight.</div></div>`;}
+const wa=D.metrics.water;
+if(wa&&wa.has_data&&wa.latest&&wa.latest<1000){
+h+=`<div class="cd" style="padding:10px;background:linear-gradient(135deg,var(--bl),#E8F0FF);border-left:4px solid var(--bl-d)">`;
+h+=`<div style="font-size:11px"><span style="font-size:14px">&#128167;</span> <b>Low water: ${wa.latest}ml yesterday.</b> Aim for 2000ml today!</div></div>`;}}
+
+// Smart Nudges
+const nudgesList=D.nudges||[];
+if(nudgesList.length){
+h+='<div class="cd" style="padding:14px"><div class="ct">&#128140; Mochi Says</div>';
+nudgesList.forEach(n=>{h+=`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;border-bottom:1px solid rgba(248,164,184,.08)"><span style="font-size:16px">${n.icon||'💡'}</span><span>${n.text}</span></div>`});
+h+='</div>';}
+
+// Achievement Badges (new unlocks)
+const newBadges=D.new_badges||[];
+if(newBadges.length){
+const badgeInfo={"streak_3":{e:"🌱",n:"Getting Started"},"streak_7":{e:"🔥",n:"On Fire"},"streak_14":{e:"⚡",n:"Unstoppable"},"streak_30":{e:"👑",n:"Legendary"},"papers_1":{e:"📄",n:"First Paper"},"papers_5":{e:"📚",n:"Bookworm"},"topik_50":{e:"🇰🇷",n:"한국어 초보"},"topik_100":{e:"🇰🇷",n:"한국어 중급"},"hydration_3":{e:"💧",n:"Hydration Hero"},"steps_10k":{e:"🏃",n:"Step Master"},"journal_3":{e:"✍️",n:"Reflector"},"journal_14":{e:"📔",n:"Journaling Queen"},"tasks_10":{e:"✅",n:"Productive"},"first_expense":{e:"💰",n:"Money Tracker"},"first_watch":{e:"📺",n:"Binge Watcher"},"first_recipe":{e:"👩‍🍳",n:"Home Chef"},"sleep_7":{e:"😴",n:"Well Rested"}};
+h+='<div class="cd" style="padding:12px;background:linear-gradient(135deg,var(--yl),#FFE8D0);text-align:center">';
+h+='<div style="font-size:13px;font-weight:600;margin-bottom:6px">🏆 New Badges Unlocked!</div>';
+h+='<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">';
+newBadges.forEach(b=>{const info=badgeInfo[b]||{e:"⭐",n:b};
+h+=`<div style="text-align:center"><div class="badge unlocked">${info.e}</div><div style="font-size:9px;font-weight:600">${info.n}</div></div>`;});
+h+='</div></div>';}
+
+// Trophy shelf link
+h+='<div style="text-align:right;margin-bottom:4px"><button style="background:0;border:0;font-size:10px;color:var(--br-l);cursor:pointer;font-family:inherit" onclick="showTrophies()">🏆 View all badges</button></div>';
+
+// Pomodoro Timer
+h+=`<div class="cd"><div class="ct">&#127813; Pomodoro Timer</div>
+<div style="display:flex;align-items:center;gap:16px;justify-content:center">
+<div style="text-align:center">
+<div id="pomDisplay" style="font-size:36px;font-weight:700;color:var(--pk-d);font-variant-numeric:tabular-nums">25:00</div>
+<div id="pomPhaseLabel" style="font-size:11px;color:var(--br-l)">Work</div>
+</div>
+<div style="display:flex;gap:6px">
+<button class="bp sm" id="pomStartBtn" onclick="pomToggle()">Start</button>
+<button class="bp sm" style="background:var(--blush);color:var(--br)" onclick="pomReset()">Reset</button>
+<button class="bp sm" style="background:var(--lav-d)" onclick="pomSkip()">Skip</button>
+</div>
+<div style="text-align:center;min-width:50px">
+<div style="font-size:22px;font-weight:700;color:var(--gn-d)" id="pomCount">${pomCount}</div>
+<div style="font-size:9px;color:var(--br-l)">sessions</div>
+</div>
+</div></div>`;
+
+// Summary card
+if(sc&&sc.has_data){
+h+='<div class="sc"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
+if(sc.overall_score!==null)h+=`<div class="ss">${sc.overall_score}</div>`;
+h+='<div style="font-size:13px;font-weight:600;color:var(--pk-d)">Yesterday\'s Recap</div></div>';
+sc.insights.forEach(i=>{h+=`<div class="si">&#8226; ${i}</div>`});
+h+='</div>';}
+
+// Cycle phase badge
+if(cy&&cy.phase&&cy.phase.has_data&&cy.phase.phase){
+const p=cy.phase;
+h+=`<div class="cd" style="padding:14px;background:linear-gradient(135deg,${p.color||'var(--pk-l)'},var(--blush))">`;
+h+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:20px">${p.emoji||''}</span><b style="font-size:13px">${p.label}</b><span style="font-size:11px;color:var(--br-l)">Day ${p.day_of_cycle} &middot; ${p.energy} energy</span></div>`;
+h+=`<div style="font-size:11px;color:var(--br)">Best for: ${(p.best_for||[]).join(', ')}</div>`;
+if(p.days_until_next>0)h+=`<div style="font-size:10px;color:var(--br-l);margin-top:4px">Next period in ~${p.days_until_next} days</div>`;
+h+='</div>';}
+
+// Deadline countdown
+const deadlines=(D.tasks&&D.tasks.prioritized_tasks||[]).filter(t=>t.days_left!==null&&t.status!=='done').sort((a,b)=>a.days_left-b.days_left).slice(0,4);
+if(deadlines.length){
+h+='<div class="cd"><div class="ct">&#9203; Upcoming Deadlines</div><div style="display:flex;gap:8px;flex-wrap:wrap">';
+deadlines.forEach(t=>{
+const d=t.days_left;const col=d<0?'var(--rd)':d<=2?'var(--rd)':d<=7?'var(--yl)':'var(--gn)';
+h+=`<div style="flex:1;min-width:100px;padding:12px;border-radius:var(--rs);background:${col};text-align:center">`;
+h+=`<div style="font-size:22px;font-weight:700">${d<0?'!':d}</div>`;
+h+=`<div style="font-size:9px;font-weight:600">${d<0?'OVERDUE':d===0?'TODAY':d===1?'TOMORROW':'days left'}</div>`;
+h+=`<div style="font-size:10px;margin-top:4px;font-weight:500">${t.title.length>20?t.title.slice(0,20)+'...':t.title}</div></div>`;});
+h+='</div></div>';}
+
+// Sleep recommendation
+if(sr){
+h+='<div class="cd"><div class="ct">&#128164; Sleep Optimizer</div>';
+h+=`<div style="display:flex;gap:12px;align-items:center">`;
+h+=`<div style="text-align:center;min-width:70px"><div style="font-size:20px;font-weight:700;color:var(--lav-d)">${sr.suggested_bedtime}</div><div style="font-size:9px;color:var(--br-l)">bedtime</div></div>`;
+if(sr.first_event)h+=`<div style="font-size:11px;color:var(--br-l)">First event: ${sr.first_event}</div>`;
+if(sr.sleep_debt>0)h+=`<div style="font-size:11px;color:var(--br-l)">Sleep debt: ${sr.sleep_debt}h</div>`;
+h+=`</div><div style="font-size:11px;color:var(--br-l);margin-top:6px">${sr.recovery_tip}</div></div>`;}
+
+// Focus plan
+if(!f)return h+'<div class="cd">Add tasks and metrics for focus suggestions!</div>';
+h+='<div class="cd"><div class="ct">&#127774; Today\'s Focus Plan</div>';
+h+=`<div class="ef">${f.energy_forecast}</div>`;
+
+const blocks=f.time_blocks||[f.morning,f.afternoon,f.evening].filter(Boolean);
+blocks.forEach(b=>{
+if(b.is_scheduled){
+h+=`<div class="fb" style="border-left-color:var(--pk-d);background:linear-gradient(135deg,var(--pk-l),#FFF0F5)">`;
+h+=`<h4>&#128205; ${b.label}</h4>`;
+h+=`<div class="nt">${b.note||''}</div></div>`;
+}else{
+const dur=b.duration||0;
+const cls=dur>=120?'m':dur>=60?'af':'ev';
+h+=`<div class="fb ${cls}"><h4>&#9201; ${b.label}</h4><ul>`;
+(b.tasks||[]).forEach(t=>{h+=`<li>&#128204; ${t}</li>`});
+(b.habits||[]).forEach(x=>{h+=`<li>&#127793; ${x}</li>`});
+(b.schedules||[]).forEach(s=>{h+=`<li>&#128197; ${s}</li>`});
+h+=`</ul>${b.note?'<div class="nt">'+b.note+'</div>':''}</div>`;
+}});
+h+=`<div class="ft">&#128161; ${f.tip}</div></div>`;
+
+// Weekly review button
+h+='<div class="cd"><div class="ct">&#128202; Reviews & Digest</div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="bp" onclick="showWeeklyReview()">Weekly Review</button><button class="bp" style="background:var(--lav-d)" onclick="showMonthlyReport()">Monthly Report</button><button class="bp" style="background:var(--gn)" onclick="sendDigest()">📧 Send Digest Email</button></div><div id="weeklyReviewDiv"></div></div>';
+return h;}
+
+// ─── Tasks ───
+function rTasks(){
+const td=D.tasks||{prioritized_tasks:[],reminders:[],summary:{total:0,do_now:0,overdue:0}};
+let h='';
+// Calendar
+h+=rCal();
+// Schedules
+h+='<div class="cd"><div class="ct">&#128197; Schedules</div>';
+if(D.schedules_today&&D.schedules_today.length){
+D.schedules_today.forEach(s=>{
+const loc=s.location?`<span style="font-size:9px;padding:1px 6px;border-radius:4px;background:var(--lav);color:var(--lav-d);font-weight:600;margin-left:4px">${s.location}</span>`:'';
+h+=`<div class="sb ${s.type||''}"><span class="st">${s.time_start}-${s.time_end}</span>${s.title}${loc}<div style="margin-left:auto;display:flex;gap:3px"><button style="background:0;border:0;cursor:pointer;font-size:11px;opacity:.5" onclick="event.stopPropagation();editSch('${s.id}','${(s.title||'').replace(/'/g,"\\'")}','${s.time_start||''}','${s.time_end||''}','${s.type||'class'}','${(s.location||'').replace(/'/g,"\\'")}','${s.date||''}')">&#9998;</button><button class="bd" onclick="delSch('${s.id}')">x</button></div></div>`;});}
+else h+='<div style="font-size:11px;color:var(--br-l)">No schedules today</div>';
+// Commute warnings
+if(D.commute_warnings&&D.commute_warnings.length){
+D.commute_warnings.filter(w=>w.type==='tight_commute').forEach(w=>{
+h+=`<div style="display:flex;align-items:center;gap:6px;padding:8px 12px;background:linear-gradient(135deg,var(--rd),#FFD0D0);border-radius:8px;margin-top:4px;font-size:11px;font-weight:500">&#9888; ${w.message}</div>`;});
+D.commute_warnings.filter(w=>w.type==='commute_ok').forEach(w=>{
+h+=`<div style="display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--blush);border-radius:8px;margin-top:3px;font-size:10px;color:var(--br-l)">&#128663; ${w.message}</div>`;});}
+h+='<button class="bg" onclick="om(\'mSch\')">+ Add schedule</button></div>';
+// Tasks
+h+='<div class="cd"><div class="ct">&#9989; Tasks</div>';
+const s=td.summary;
+h+=`<div style="font-size:11px;color:var(--br-l);margin-bottom:8px">`;
+if(s.overdue>0)h+=`<b style="color:var(--rd-d)">${s.overdue} overdue!</b> &middot; `;
+h+=`${s.total} tasks &middot; ${s.do_now} urgent</div>`;
+if(td.reminders&&td.reminders.length){td.reminders.forEach((r,i)=>{
+h+=`<div class="ri"><span class="rt">${r.time?r.time.slice(11,16):''}</span>${r.text}<button class="bd" style="margin-left:auto" onclick="event.stopPropagation();delRem(${i})">x</button></div>`});}
+const qC={'DO NOW':'dn','SCHEDULE':'sc','DELEGATE':'dl','DROP/DEFER':'dr'};
+td.prioritized_tasks.forEach((t,i)=>{const dn=t.status==='done';let dl='';
+if(t.days_left!==null){if(t.days_left<0)dl=Math.abs(t.days_left)+'d overdue';else if(t.days_left===0)dl='today';else if(t.days_left===1)dl='tmrw';else dl=t.days_left+'d';}
+h+=`<div class="ti ${dn?'dn':''}" onclick="togTask(${i})"><div class="tc ${dn?'ck':''}"></div><span class="tt">${t.title}</span>${dl?'<span class="tm">'+dl+'</span>':''}<span class="tq ${qC[t.quadrant]||''}">${t.quadrant}</span>${dn?'':'<button class="tdl" onclick="event.stopPropagation();delTask('+i+')">&#128465;</button>'}</div>`;});
+h+='<div style="display:flex;gap:6px;margin-top:8px"><button class="bg" style="flex:1" onclick="om(\'mTask\')">+ Task</button><button class="bg" style="flex:1" onclick="om(\'mRem\')">+ Reminder</button></div></div>';
+return h;}
+
+// Calendar
+let calData={};
+function rCal(){
+let h='<div class="cd cal"><div class="cal-hdr"><button class="cal-nav" onclick="navCal(-1)">&lt;</button><h4 id="calTitle"></h4><button class="cal-nav" onclick="navCal(1)">&gt;</button></div>';
+h+='<div class="cal-g" id="calGrid"></div>';
+h+='<div id="calPreview" style="margin-top:8px"></div></div>';
+setTimeout(()=>loadCal(),100);
+return h;}
+
+async function loadCal(){
+const r=await fetch(`/api/calendar?year=${calY}&month=${calM}`);calData=await r.json();
+const t=$('calTitle');if(t)t.textContent=new Date(calY,calM-1).toLocaleDateString('en-US',{month:'long',year:'numeric'});
+const g=$('calGrid');if(!g)return;
+const days=['Su','Mo','Tu','We','Th','Fr','Sa'];
+let gh=days.map(d=>`<div class="cal-dh">${d}</div>`).join('');
+let startDay=(calData.first_weekday+1)%7;
+for(let i=0;i<startDay;i++)gh+='<div class="cal-d empty"></div>';
+const todayD=new Date();const isThisMonth=calY===todayD.getFullYear()&&calM===todayD.getMonth()+1;
+for(let day=1;day<=calData.num_days;day++){
+const isToday=isThisMonth&&day===todayD.getDate();
+const hasItems=calData.days[day];
+const busy=hasItems&&(hasItems.tasks+hasItems.schedules)>2;
+let cls='cal-d';if(isToday)cls+=' today';if(busy)cls+=' busy';if(hasItems)cls+=' has-items';
+gh+=`<div class="${cls}" onclick="showDayPreview(${day})" style="cursor:pointer">${day}</div>`;}
+g.innerHTML=gh;
+// Auto-show today
+if(isThisMonth)showDayPreview(todayD.getDate());}
+
+function showDayPreview(day){
+const prev=$('calPreview');if(!prev)return;
+const dateStr=`${calY}-${String(calM).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+const info=calData.days[day];
+
+// Highlight selected day
+document.querySelectorAll('.cal-d').forEach(d=>d.style.outline='');
+const allDays=[...document.querySelectorAll('.cal-d')];
+const dayEl=allDays.find(d=>d.textContent==day&&!d.classList.contains('empty'));
+if(dayEl)dayEl.style.outline='2px solid var(--pk-d)';
+
+let h=`<div style="font-size:11px;font-weight:600;color:var(--pk-d);margin-bottom:6px">📅 ${dateStr}</div>`;
+if(!info||(!info.tasks&&!info.schedules)){
+h+='<div style="font-size:11px;color:var(--br-l)">Nothing scheduled</div>';
+prev.innerHTML=h;return;}
+
+// Show items
+const items=info.items||[];
+const scheds=items.filter(i=>i.time_start);
+const tasks_list=items.filter(i=>!i.time_start);
+
+if(scheds.length){
+scheds.sort((a,b)=>(a.time_start||'').localeCompare(b.time_start||''));
+scheds.forEach(s=>{
+const loc=s.location?` <span style="font-size:8px;padding:1px 4px;border-radius:3px;background:var(--lav);color:var(--lav-d)">📍${s.location}</span>`:'';
+h+=`<div style="display:flex;align-items:center;gap:6px;padding:4px 0;font-size:11px;border-bottom:1px solid rgba(248,164,184,.08)">`;
+h+=`<span style="font-weight:600;min-width:75px;color:var(--br-l)">${s.time_start||''}-${s.time_end||''}</span>`;
+h+=`<span>${s.title}${loc}</span></div>`;});}
+
+if(tasks_list.length){
+tasks_list.forEach(t=>{
+h+=`<div style="font-size:11px;padding:3px 0;color:var(--br)">📌 ${t.title||t.deadline||''}</div>`;});}
+
+prev.innerHTML=h;}
+
+function navCal(dir){calM+=dir;if(calM>12){calM=1;calY++}if(calM<1){calM=12;calY--}loadCal();}
+
+// ─── Habits ───
+function rHabits(){
+const hd=D.habits||{habits:[],correlations:[],suggestions:[]};
+let h='<div class="cd"><div class="ct">&#127793; Habits</div>';
+if(!hd.habits.length)h+='<p style="font-size:11px;color:var(--br-l);margin-bottom:8px">No habits yet!</p>';
+hd.habits.forEach(x=>{const tI=x.trend==='improving'?'&#9650;':x.trend==='declining'?'&#9660;':'&#9644;';
+h+=`<div class="hi"><button class="ht ${x.done_today?'on':''}" onclick="togHab('${x.name}')"></button><div style="flex:1;min-width:0"><div class="hn">${x.name}</div><div class="hs">${x.rate_7d}% ${tI}</div></div><div class="hk">${x.streak}d&#128293;</div><div class="ha"><button class="bd" onclick="delHab('${x.name}')">&#128465;</button></div></div>`;});
+h+='<button class="bg" onclick="om(\'mHab\')">+ Add habit</button>';
+if(hd.correlations&&hd.correlations.length){h+='<div style="margin-top:10px"><div style="font-size:11px;font-weight:600;margin-bottom:4px;color:var(--pk-d)">&#128161; Insights</div>';hd.correlations.forEach(c=>{h+=`<div class="ii">${c}</div>`});h+='</div>';}
+if(hd.suggestions&&hd.suggestions.length){h+='<div style="margin-top:6px;font-size:11px">';hd.suggestions.forEach(s=>{h+=`<div style="padding:2px 0;color:var(--br-l)">&#10148; ${s}</div>`});h+='</div>';}
+return h+'</div>';}
+
+// ─── Metrics ───
+function rMetrics(){
+const m=D.metrics;
+let h='';
+// Wellness
+if(m&&m.wellness&&m.wellness.has_data){
+h+=`<div class="wellness"><div class="ws">${m.wellness.score}/100</div><div class="wr">${m.wellness.rating}</div></div>`;}
+// Badges
+h+='<div class="cd"><div class="ct">&#128200; Metrics</div>';
+if(m&&m.has_data){
+const tI=t=>t==='improving'?'<span class="tu">&#9650;</span>':t==='declining'?'<span class="td">&#9660;</span>':'<span class="ts">&#9644;</span>';
+h+='<div class="mg">';
+h+=`<div class="mb"><div class="v">${m.sleep.latest}h</div><div class="l">Sleep</div><div class="s">${tI(m.sleep.trend)} ${m.sleep.avg_7d}h</div></div>`;
+h+=`<div class="mb"><div class="v">${m.focus.latest}/10</div><div class="l">Focus</div><div class="s">${tI(m.focus.trend)} ${m.focus.avg_7d}</div></div>`;
+h+=`<div class="mb"><div class="v">${(m.spending.daily_avg/1000).toFixed(0)}k</div><div class="l">Spend</div><div class="s">7d:${(m.spending.total_7d/1000).toFixed(0)}k</div></div>`;
+if(m.weight&&m.weight.has_data)h+=`<div class="mb"><div class="v">${m.weight.latest}</div><div class="l">Weight</div><div class="s">avg ${m.weight.avg_7d}</div></div>`;
+if(m.steps&&m.steps.has_data)h+=`<div class="mb"><div class="v">${(m.steps.latest/1000).toFixed(1)}k</div><div class="l">Steps</div><div class="s">avg ${(m.steps.avg_7d/1000).toFixed(1)}k</div></div>`;
+if(m.kcal&&m.kcal.has_data)h+=`<div class="mb"><div class="v">${m.kcal.latest}</div><div class="l">Kcal</div><div class="s">avg ${m.kcal.avg_7d}</div></div>`;
+if(m.water&&m.water.has_data)h+=`<div class="mb"><div class="v">${m.water.latest}</div><div class="l">Water</div><div class="s">avg ${m.water.avg_7d}ml</div></div>`;
+if(m.coffee&&m.coffee.has_data)h+=`<div class="mb"><div class="v">${m.coffee.latest}</div><div class="l">Coffee</div><div class="s">avg ${m.coffee.avg_7d}</div></div>`;
+h+='</div>';}else h+='<p style="font-size:11px;color:var(--br-l);margin-bottom:8px">No data yet!</p>';
+// Log form
+h+=`<div class="mf"><h4>&#128221; Log Yesterday's Metrics</h4><div class="fg">
+<div><label>Sleep</label><input type="number" id="xS" step="0.5" placeholder="7.5"></div>
+<div><label>Focus</label><input type="number" id="xF" min="1" max="10" placeholder="8"></div>
+<div><label>Weight</label><input type="number" id="xW" step="0.1" placeholder="60"></div>
+<div><label>Kcal</label><input type="number" id="xK" placeholder="1800"></div>
+<div><label>Steps</label><input type="number" id="xSt" placeholder="8000"></div>
+<div><label>Water</label><input type="number" id="xWa" placeholder="2000"></div>
+<div><label>Coffee</label><input type="number" id="xCo" placeholder="2"></div>
+<div><label>Spending</label><input type="number" id="xSp" placeholder="25000"></div>
+</div><div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="bp sm" onclick="saveMet()">Save</button></div></div>`;
+h+='</div>';
+// Food Log, Study, Period
+h+=rFoodLog();
+h+=rStudySection();
+h+=rPeriodSection();
+return h;}
+
+function rFoodLog(){
+const fd=D.food_today||{entries:[],total_kcal:0};
+let h='<div class="cd"><div class="ct">&#127858; Food Log</div>';
+if(fd.entries.length){
+const pct=Math.min(100,Math.round(fd.total_kcal/2000*100));
+h+=`<div style="font-size:12px;margin-bottom:4px"><b>${fd.total_kcal} kcal</b> / 2000 target</div>`;
+h+=`<div class="kcal-bar"><div class="fill" style="width:${pct}%"></div></div>`;
+fd.entries.forEach((e,i)=>{h+=`<div class="fi"><span class="fm">${e.meal||'other'}</span><span class="fn">${e.food_name}</span><span class="fk">${e.kcal_estimate||0} kcal</span><button class="bd" onclick="delFood('${fd.date}',${i})">x</button></div>`});}
+else h+='<p style="font-size:11px;color:var(--br-l);margin-bottom:6px">No food logged today</p>';
+h+='<button class="bg" onclick="om(\'mFood\')">+ Log food</button></div>';
+return h;}
+
+// ─── Papers ───
+function rPapers(){
+const pd=D.papers||{papers:[],connections:[],next_topics:[],papers_read_total:0,topics_studied:[]};
+let h='<div class="cd"><div class="ct">&#128218; Paper Recommendations <button class="bp sm" onclick="refreshPapers()" style="margin-left:8px;font-size:9px">Refresh</button></div>';
+if(!pd.papers.length){h+='<div style="font-size:11px;color:var(--br-l);margin-bottom:10px">Loading recommendations... (fetching from ArXiv)</div>';}
+else{h+=`<div style="font-size:11px;color:var(--br-l);margin-bottom:10px">Read: ${pd.papers_read_total} | Topics: ${pd.topics_studied.join(', ')}</div>`;}
+pd.papers.forEach(p=>{if(p.arxiv_id==='unavailable')return;
+h+=`<div class="pc"><h4>${p.title}</h4><div class="pm">${(p.authors||[]).join(', ')} &middot; ${p.published||''}</div><div class="pa">${p.abstract}</div><div class="pl">`;
+if(p.url)h+=`<a href="${p.url}" target="_blank">View</a>`;
+if(p.pdf_url)h+=`<a href="${p.pdf_url}" target="_blank">PDF</a>`;
+h+=`<button class="mr" onclick="markR('${p.arxiv_id}',this)">Mark Read</button></div></div>`;});
+if(pd.next_topics&&pd.next_topics.length){h+='<div style="margin-top:8px"><b style="font-size:11px;color:var(--pk-d)">Next Topics</b>';pd.next_topics.forEach(t=>{h+=`<div style="font-size:11px;padding:3px 0">${t}</div>`});h+='</div>';}
+h+='</div>';
+// Summarizer
+h+='<div class="cd"><div class="ct">&#129302; Paper Summarizer</div>';
+h+='<button class="bp" onclick="om(\'mPaper\')">Summarize a paper</button>';
+h+=rSummaries();
+h+='</div>';
+// Reading Queue
+h+=rReadingQueue();
+return h;}
+
+function rSummaries(){
+let h='<div id="sumList"></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/paper-summaries');const d=await r.json();
+let sh='';d.summaries.forEach(s=>{
+sh+=`<div class="ps"><h4>${s.title}</h4>`;
+sh+=`<div class="psl"><b>Problem:</b> ${s.problem}</div>`;
+sh+=`<div class="psl"><b>Idea:</b> ${s.idea}</div>`;
+if(s.setup){sh+=`<div class="psl"><b>Dataset:</b> ${s.setup.dataset}</div>`;
+sh+=`<div class="psl"><b>Metrics:</b> ${s.setup.metrics}</div>`;
+sh+=`<div class="psl"><b>Baselines:</b> ${s.setup.baselines}</div>`;}
+sh+=`<div class="psl"><b>Results:</b> ${s.results}</div>`;
+sh+=`<div class="psl"><b>Weakness:</b> ${s.weakness}</div>`;
+if(s.tags&&s.tags.length){sh+='<div class="pst">';s.tags.forEach(t=>{sh+=`<span>${t}</span>`});sh+='</div>';}
+sh+=`<div style="margin-top:6px"><a href="${s.source_url}" target="_blank" style="font-size:10px;color:var(--pk-d)">Source</a> <button class="bd" onclick="delSum('${s.id}')">Delete</button></div></div>`;});
+const el=$('sumList');if(el)el.innerHTML=sh;}catch(e){}},200);
+return h;}
+
+// ─── Media ───
+function rMedia(){
+let h='<div class="cd"><div class="ct">&#127916; Media Log</div>';
+h+='<button class="bp" onclick="om(\'mMedia\')" style="margin-bottom:10px">+ Add media</button>';
+h+='<div id="mediaList"><div class="ld">Loading...</div></div></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/media');const d=await r.json();
+let mh='';if(!d.entries.length)mh='<p style="font-size:11px;color:var(--br-l)">No media logged yet</p>';
+d.entries.forEach(e=>{
+const stars='&#11088;'.repeat(e.rating||0);
+mh+=`<div class="mc">${e.thumbnail_url?`<img src="${e.thumbnail_url}" onerror="this.style.display='none'" alt="">`:''}`;
+mh+=`<div class="mi"><span class="type-badge ${e.type}">${e.type}</span> <h5><a href="${e.link}" target="_blank">${e.title}</a></h5><div class="ma">${e.author||''} &middot; ${e.date}</div>${e.notes?'<div class="mn">'+e.notes+'</div>':''}</div>`;
+mh+=`<div><div class="stars">${stars}</div><button class="bd" onclick="delMedia('${e.id}')" style="margin-top:4px">x</button></div></div>`;});
+const el=$('mediaList');if(el)el.innerHTML=mh;}catch(e){}},200);
+return h;}
+
+// ─── Journal ───
+function rJournal(){
+let h='<div class="cd"><div class="ct">&#128221; Journal & Mood</div>';
+// Date picker
+h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><label style="font-size:10px;color:var(--br-l);font-weight:500">Date:</label><input type="date" id="jDate" value="'+today+'" style="padding:5px 8px;border:1px solid var(--pk-p);border-radius:8px;font-size:11px;font-family:inherit" onchange="loadJournalForDate(this.value)"></div>';
+// Mood picker
+const moods=['&#128534;','&#128533;','&#128528;','&#128522;','&#129321;'];
+h+='<div class="mood-pick">';
+moods.forEach((m,i)=>{h+=`<button class="mood-btn ${selMood===i+1?'sel':''}" onclick="selMood=${i+1};renderAll()">${m}</button>`});
+h+='</div>';
+h+=`<textarea class="jta" id="jEntry" placeholder="How are you feeling today? What's on your mind...">${D._journalText||''}</textarea>`;
+h+='<div style="display:flex;justify-content:flex-end;margin-top:8px"><button class="bp" onclick="saveJournal()">Save Entry</button></div>';
+// Daily wrap-up prompts
+h+='<div style="margin-top:10px;padding:12px;background:linear-gradient(135deg,var(--lav),var(--blush));border-radius:var(--rs)">';
+h+='<div style="font-size:11px;font-weight:600;color:var(--lav-d);margin-bottom:8px">🌙 Daily Wrap-up</div>';
+h+='<div style="margin-bottom:6px"><label style="font-size:10px;color:var(--br-l)">Best moment today?</label><input id="wuBest" placeholder="..." style="width:100%;padding:6px;border:1px solid var(--pk-p);border-radius:6px;font-size:11px;font-family:inherit;margin-top:2px"></div>';
+h+='<div style="margin-bottom:6px"><label style="font-size:10px;color:var(--br-l)">What drained you?</label><input id="wuDrain" placeholder="..." style="width:100%;padding:6px;border:1px solid var(--pk-p);border-radius:6px;font-size:11px;font-family:inherit;margin-top:2px"></div>';
+h+='<div style="margin-bottom:6px"><label style="font-size:10px;color:var(--br-l)">Tomorrow\'s #1 priority?</label><input id="wuPriority" placeholder="..." style="width:100%;padding:6px;border:1px solid var(--pk-p);border-radius:6px;font-size:11px;font-family:inherit;margin-top:2px"></div>';
+h+='<button class="bp sm" onclick="saveWrapup()" style="margin-top:4px">Save wrap-up</button></div>';
+h+='</div>';
+// Tarot spread
+h+='<div class="cd"><div class="ct">&#127876; Daily Tarot Spread</div>';
+h+='<div style="margin-bottom:12px">';
+h+='<div style="font-size:11px;color:var(--br-l);margin-bottom:8px">Choose your spread size and draw your cards</div>';
+h+='<div style="display:flex;gap:6px;margin-bottom:10px">';
+h+='<button class="bp sm" onclick="drawSpread(3)" id="draw3">3 Cards (Past/Present/Future)</button>';
+h+='<button class="bp sm" onclick="drawSpread(4)" id="draw4" style="background:var(--lav-d)">4 Cards (Situation)</button>';
+h+='<button class="bp sm" onclick="drawSpread(5)" id="draw5" style="background:var(--yl)">5 Cards (Daily Cross)</button>';
+h+='</div>';
+h+='<div style="font-size:10px;color:var(--br-l);margin-bottom:6px">Or manually select cards:</div>';
+h+='<div id="manualCards"></div>';
+h+='<button class="bg" style="font-size:10px;padding:5px;width:auto;display:inline-block;margin-top:4px" onclick="addManualCard()">+ Add card</button>';
+h+='</div>';
+h+='<div id="drawnCards" style="margin-bottom:10px"></div>';
+h+='<div id="tarotResult"></div>';
+h+='<div id="tarotHistory" style="margin-top:10px"></div></div>';
+
+// Load card dropdown options and history
+setTimeout(async()=>{
+try{
+const cr=await fetch('/api/tarot/cards');const cd=await cr.json();
+window._tarotCards=cd.cards;
+// Add first manual card selector
+addManualCard();
+const hr=await fetch('/api/tarot/history');const hd=await hr.json();
+const hdiv=$('tarotHistory');if(hdiv&&hd.readings&&hd.readings.length){
+let hh='<div style="font-size:11px;font-weight:600;color:var(--pk-d);margin-bottom:6px">Past Spreads</div>';
+hd.readings.slice(0,5).forEach(r=>{
+const cards=r.cards||[{card:r.card,orientation:r.orientation}];
+const cardStr=cards.map(c=>c.card+' ('+c.orientation+')').join(' | ');
+hh+=`<div class="je" style="margin-bottom:4px"><span class="jd">${r.date}</span> <b>${r.spread||'Single'}</b><div style="font-size:10px;color:var(--br-l);margin-top:2px">${cardStr}</div><div class="jt" style="font-size:11px">${(r.reading||'').slice(0,120)}...</div></div>`;});
+hdiv.innerHTML=hh;}
+}catch(e){}},300);
+
+// Mood trend
+h+='<div class="cd"><div class="ct">&#128200; Mood Trend</div><div id="moodTrend"></div></div>';
+// Past entries
+h+='<div class="cd"><div class="ct">&#128214; Past Entries</div><div id="pastJournal"></div></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/journal');const d=await r.json();
+// Trend
+let th='<div class="mood-trend">';
+(d.mood_trend||[]).reverse().forEach(m=>{const h=m.mood?(m.mood*8):0;
+th+=`<div class="mood-bar"><div class="bar" style="height:${h}px"></div><div class="dd">${m.date.slice(5)}</div></div>`});
+th+='</div>';const te=$('moodTrend');if(te)te.innerHTML=th;
+// Entries
+let eh='';(d.entries||[]).forEach(e=>{const mi=['','&#128534;','&#128533;','&#128528;','&#128522;','&#129321;'][e.mood||0];
+eh+=`<div class="je"><span class="jd">${e.date}</span> <span class="jm">${mi}</span><div class="jt">${e.entry||''}</div></div>`});
+const pe=$('pastJournal');if(pe)pe.innerHTML=eh||'<p style="font-size:11px;color:var(--br-l)">No entries yet</p>';
+// Load today's entry
+const tr=await fetch(`/api/journal/${today}`);const td=await tr.json();
+if(td.entry){D._journalText=td.entry;const ta=$('jEntry');if(ta&&!ta.value)ta.value=td.entry;}
+if(td.mood){selMood=td.mood;}
+}catch(e){}},200);
+return h;}
+
+// ─── Reads ───
+function rReads(){
+const p=D.substack||{};
+let h='<div class="cd"><div class="ct">&#128240; Substack Pick <button class="bp sm" onclick="refreshSubstack()" style="margin-left:8px;font-size:9px">Refresh</button></div>';
+if(!p.title){h+='<div style="font-size:11px;color:var(--br-l)">Loading recommendation...</div>';}
+else{h+='<div class="ssc">';
+h+=`<h4>${p.title}</h4><div class="so">${p.source||''} &middot; ${p.published||''}</div>`;
+if(p.description)h+=`<div class="ex">${p.description}</div>`;
+if(p.link)h+=`<a href="${p.link}" target="_blank" class="bp">Read &rarr;</a>`;
+h+='</div>';}
+h+='</div>';
+
+// Article TBR (To Be Read)
+h+='<div class="cd"><div class="ct">&#128214; To Be Read</div>';
+h+='<div style="display:flex;gap:6px;margin-bottom:10px"><button class="bp sm" onclick="om(\'mTBR\')">+ Add article</button></div>';
+h+='<div id="tbrList"><div class="ld">Loading...</div></div></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/reading-queue');const d=await r.json();
+const articles=(d.items||[]).filter(i=>i.type!=='paper'&&i.type!=='book');
+const div=$('tbrList');if(!div)return;
+if(!articles.length){div.innerHTML='<p style="font-size:11px;color:var(--br-l)">No articles to read. Add some!</p>';return;}
+let ah='';
+const counts={unread:articles.filter(i=>i.status==='unread').length,reading:articles.filter(i=>i.status==='reading').length,done:articles.filter(i=>i.status==='done').length};
+ah+=`<div style="font-size:10px;color:var(--br-l);margin-bottom:6px">Reading: ${counts.reading} | Unread: ${counts.unread} | Done: ${counts.done}</div>`;
+articles.forEach(i=>{
+const stCol={unread:'var(--br-ll)',reading:'var(--yl)',done:'var(--gn-d)'}[i.status]||'var(--br-ll)';
+const stLabel={unread:'Unread',reading:'Reading',done:'Done'}[i.status]||'Unread';
+ah+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;margin-bottom:4px;background:var(--blush)">`;
+ah+=`<button style="font-size:9px;padding:3px 8px;border-radius:6px;border:none;background:${stCol};color:#fff;cursor:pointer;font-weight:600;font-family:inherit;min-width:50px" onclick="cycleTBR('${i.id}','${i.status}')">${stLabel}</button>`;
+ah+=`<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><a href="${i.url||'#'}" target="_blank" style="color:var(--br);text-decoration:none">${i.title}</a></div>`;
+ah+=`<div style="font-size:9px;color:var(--br-ll)">${i.type} &middot; ~${i.est_read_min||'?'}min</div></div>`;
+ah+=`<button class="bd" onclick="delTBR('${i.id}')">x</button></div>`;});
+div.innerHTML=ah;
+}catch(e){}},250);
+
+return h;}
+
+async function refreshSubstack(){
+$('p-reads').innerHTML='<div class="ld">Fetching new pick...</div>';
+try{const r=await fetch('/api/external');const d=await r.json();
+D.substack=d.substack;D.papers=d.papers;D.news=d.news;D.weather=d.weather;
+$('p-reads').innerHTML=rReads();$('p-papers').innerHTML=rPapers();$('p-news').innerHTML=rNews();
+if(d.weather&&d.weather.has_data){$('p-focus').innerHTML=rFocus();}
+}catch(e){$('p-reads').innerHTML='<div class="cd">Failed to load</div>';}}
+
+// ─── News ───
+function rNews(){
+const nd=D.news||{political:[],finance:{}};
+let h='';
+// Stocks
+h+='<div class="cd"><div class="ct">&#128176; Stock Portfolio</div><div id="stocksDiv"><div class="ld">Loading stocks...</div></div></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/stocks');const d=await r.json();
+let sh='';(d.stocks||[]).forEach(s=>{if(!s.has_data){sh+=`<div class="stk"><h4>${s.symbol}</h4><p style="font-size:11px;color:var(--br-l)">${s.error||'No data'}</p></div>`;return;}
+const up=s.change>=0;
+sh+=`<div class="stk"><h4>${s.symbol} <span class="chg ${up?'up':'down'}">${up?'+':''}${s.change_pct.toFixed(2)}%</span></h4>`;
+sh+=`<div class="price">Rp ${s.price.toLocaleString()}</div>`;
+sh+='<div style="margin-top:6px">';(s.signals||[]).forEach(sg=>{sh+=`<span class="sig">${sg}</span>`});sh+='</div>';
+if(s.news&&s.news.length){sh+='<div style="margin-top:8px;font-size:10px;color:var(--br-l)"><b>News:</b>';s.news.forEach(n=>{sh+=`<div><a href="${n.link}" target="_blank" style="color:var(--pk-d);font-size:10px">${n.title}</a></div>`});sh+='</div>';}
+sh+='</div>';});
+const el=$('stocksDiv');if(el)el.innerHTML=sh||'<p style="font-size:11px;color:var(--br-l)">No stocks configured</p>';}catch(e){const el=$('stocksDiv');if(el)el.innerHTML='<p style="font-size:11px;color:var(--br-l)">Failed to load stocks</p>';}},300);
+// Political
+h+='<div class="cd"><div class="ct">&#127758; Political News</div>';
+if(nd.political&&nd.political.length){nd.political.slice(0,5).forEach(i=>{h+=nI(i)});}else h+='<p style="font-size:11px;color:var(--br-l)">No news</p>';
+h+='</div>';
+// Finance
+h+='<div class="cd"><div class="ct">&#128176; Finance News</div>';
+const rg=[{k:'korean',l:'KR'},{k:'indonesian',l:'ID'},{k:'american',l:'US'}];
+h+='<div class="nt">';rg.forEach((r,i)=>{h+=`<button class="ntb ${i===0?'a':''}" onclick="swFin('${r.k}',this)">${r.l}</button>`});h+='</div>';
+rg.forEach((r,i)=>{const items=(nd.finance&&nd.finance[r.k])||[];
+h+=`<div class="np ${i===0?'a':''}" id="fn-${r.k}">`;
+if(items.length){items.slice(0,5).forEach(i=>{h+=nI(i)})}else h+='<p style="font-size:11px;color:var(--br-l)">No news</p>';
+h+='</div>'});h+='</div>';
+return h;}
+
+function nI(i){return`<div class="ni"><h5>${i.title}</h5><span class="ns">${i.source||''}</span>${i.description?'<div class="nd">'+i.description+'</div>':''}${i.link?'<a href="'+i.link+'" target="_blank">Read &rarr;</a>':''}</div>`}
+function swFin(r,b){b.parentElement.querySelectorAll('.ntb').forEach(t=>t.classList.remove('a'));b.closest('.cd').querySelectorAll('.np').forEach(p=>p.classList.remove('a'));b.classList.add('a');$('fn-'+r).classList.add('a')}
+
+// ─── Actions ───
+async function togTask(i){const s=D.tasks.prioritized_tasks[i].status==='done'?'pending':'done';await fetch(`/api/tasks/${i}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:s})});load()}
+async function delTask(i){await fetch(`/api/tasks/${i}`,{method:'DELETE'});load()}
+async function addTask(){const t=$('tT').value;if(!t)return;await fetch('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,deadline:$('tD').value||'',category:$('tC').value,energy:$('tE').value,impact:parseInt($('tI').value)||5,status:'pending',notes:''})});$('tT').value='';cm('mTask');load()}
+async function addRem(){const t=$('rT').value;if(!t)return;const d=$('rD').value,tm=$('rTm').value;await fetch('/api/reminders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:t,time:(d&&tm)?d+'T'+tm:(d||''),recurring:false})});$('rT').value='';cm('mRem');load()}
+async function delRem(i){await fetch(`/api/reminders/${i}`,{method:'DELETE'});load()}
+async function togHab(n){await fetch(`/api/habits/${encodeURIComponent(n)}/toggle`,{method:'PUT'});load()}
+async function delHab(n){if(!confirm('Delete "'+n+'"?'))return;await fetch(`/api/habits/${encodeURIComponent(n)}`,{method:'DELETE'});load()}
+async function addHab(){const n=$('hN').value;if(!n)return;await fetch('/api/habits',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,frequency:$('hF').value})});$('hN').value='';cm('mHab');load()}
+let schMode='single';
+function setSchMode(mode){
+schMode=mode;
+$('schSingle').style.display=mode==='single'?'block':'none';
+$('schWeekly').style.display=mode==='weekly'?'block':'none';
+$('schMode1').style.background=mode==='single'?'':'var(--blush)';
+$('schMode1').style.color=mode==='single'?'':'var(--br)';
+$('schMode2').style.background=mode==='weekly'?'':'var(--blush)';
+$('schMode2').style.color=mode==='weekly'?'':'var(--br)';
+}
+function togDay(btn){btn.classList.toggle('sel')}
+function getSelectedDays(){return[...document.querySelectorAll('.day-btn.sel')].map(b=>parseInt(b.dataset.day))}
+function getDatesForDays(days,from,until){
+const dates=[];const start=new Date(from+'T00:00:00');const end=new Date(until+'T00:00:00');
+const cur=new Date(start);
+while(cur<=end){if(days.includes(cur.getDay())){dates.push(cur.toISOString().split('T')[0])}cur.setDate(cur.getDate()+1)}
+return dates;}
+
+async function addSch(){
+const t=$('sT').value;if(!t)return;
+const base={title:t,time_start:$('sS').value,time_end:$('sE').value,type:$('sTp').value,location:$('sLoc').value};
+if(schMode==='single'){
+await fetch('/api/schedules',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...base,date:$('sD').value||today})});
+}else{
+const days=getSelectedDays();
+const from=$('sFrom').value;const until=$('sUntil').value;
+if(!days.length||!from||!until){alert('Pick days + date range');return}
+const dates=getDatesForDays(days,from,until);
+for(const d of dates){await fetch('/api/schedules',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...base,date:d})})}
+}
+$('sT').value='';document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('sel'));
+cm('mSch');load()}
+async function delSch(id){await fetch(`/api/schedules/${id}`,{method:'DELETE'});load()}
+let editSchId='';
+function editSch(id,title,start,end,type,location,date){
+editSchId=id;
+$('seT').value=title;$('seD').value=date;$('seS').value=start;$('seE').value=end;$('seTp').value=type;$('seLoc').value=location;
+om('mSchEdit');}
+async function saveSch(){if(!editSchId)return;
+await fetch(`/api/schedules/${editSchId}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:$('seT').value,date:$('seD').value,time_start:$('seS').value,time_end:$('seE').value,type:$('seTp').value,location:$('seLoc').value})});
+cm('mSchEdit');load()}
+async function saveMet(){const g=id=>{const v=$(id).value;return v?Number(v):undefined};const e={};const s=g('xS');if(s!==undefined)e.sleep_hours=s;const f=g('xF');if(f!==undefined)e.focus_score=f;const w=g('xW');if(w!==undefined)e.weight_kg=w;const k=g('xK');if(k!==undefined)e.kcal=k;const st=g('xSt');if(st!==undefined)e.steps=st;const wa=g('xWa');if(wa!==undefined)e.water_ml=wa;const co=g('xCo');if(co!==undefined)e.coffee_cups=co;const sp=g('xSp');if(sp!==undefined)e.spending={total:sp};if(!Object.keys(e).length)return;
+// Log as yesterday's date
+const yd=new Date();yd.setDate(yd.getDate()-1);e.date=yd.toISOString().split('T')[0];
+await fetch('/api/metrics',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(e)});['xS','xF','xW','xK','xSt','xWa','xCo','xSp'].forEach(id=>$(id).value='');load()}
+async function addFood(){const n=$('fN').value;if(!n)return;await fetch('/api/food',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({meal:$('fM').value,food_name:n,kcal_estimate:parseInt($('fK').value)||0,time:$('fTm').value})});$('fN').value='';cm('mFood');load()}
+async function delFood(d,i){await fetch(`/api/food/${d}/${i}`,{method:'DELETE'});load()}
+async function saveJournal(){const e=$('jEntry');if(!e)return;const jd=$('jDate')?$('jDate').value:today;await fetch('/api/journal',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:jd,mood:selMood,entry:e.value})});D._journalText=e.value;load()}
+
+async function loadJournalForDate(dateStr){
+try{const r=await fetch(`/api/journal/${dateStr}`);const d=await r.json();
+const ta=$('jEntry');if(ta)ta.value=d.entry||'';
+D._journalText=d.entry||'';
+if(d.mood)selMood=d.mood;
+// Re-render mood buttons
+const moods=['&#128534;','&#128533;','&#128528;','&#128522;','&#129321;'];
+document.querySelectorAll('.mood-btn').forEach((b,i)=>{b.classList.toggle('sel',selMood===i+1)});
+}catch(e){}}
+
+// ─── Tarot Spread ───
+let drawnSpread=[];
+let manualCardCount=0;
+
+async function drawSpread(num){
+const div=$('drawnCards');div.innerHTML='<div class="ld">Drawing cards...</div>';
+try{const r=await fetch(`/api/tarot/draw?num=${num}`);const d=await r.json();
+drawnSpread=d.cards;
+let ch=`<div style="font-size:12px;font-weight:600;color:var(--pk-d);margin-bottom:8px">${d.spread} Spread</div>`;
+ch+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">';
+d.cards.forEach((c,i)=>{
+const pos=d.positions[i]||'';
+const isRev=c.orientation==='reversed';
+ch+=`<div style="flex:1;min-width:80px;padding:12px;border-radius:var(--rs);background:linear-gradient(135deg,#2D1B4E,#4A2D6E);color:#F0E6FF;text-align:center">`;
+ch+=`<div style="font-size:9px;opacity:.6;margin-bottom:4px">${pos}</div>`;
+ch+=`<div style="font-size:22px;margin-bottom:4px${isRev?' ;transform:rotate(180deg)':''}">&#127876;</div>`;
+ch+=`<div style="font-size:11px;font-weight:600">${c.card}</div>`;
+ch+=`<div style="font-size:9px;opacity:.7">${c.orientation}</div></div>`;});
+ch+='</div>';
+ch+='<button class="bp" onclick="readDrawnSpread()">Get Reading &#10024;</button>';
+div.innerHTML=ch;
+}catch(e){div.innerHTML='<p style="font-size:11px;color:var(--rd-d)">Failed to draw</p>';}}
+
+async function readDrawnSpread(){
+if(!drawnSpread.length)return;
+const div=$('tarotResult');div.innerHTML='<div class="ld">Reading your spread... (may take 15-20s)</div>';
+try{const r=await fetch('/api/tarot/read',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cards:drawnSpread})});
+const d=await r.json();
+let rh=`<div style="padding:16px;border-radius:var(--rs);background:linear-gradient(135deg,#2D1B4E,#4A2D6E);color:#F0E6FF;margin-top:8px">`;
+rh+=`<div style="font-size:14px;font-weight:600;margin-bottom:10px">&#10024; ${d.spread} Reading</div>`;
+rh+=`<div style="font-size:12px;line-height:1.8;opacity:.95;white-space:pre-wrap">${d.reading.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>')}</div></div>`;
+div.innerHTML=rh;
+}catch(e){div.innerHTML='<p style="font-size:11px;color:var(--rd-d)">Failed to read</p>';}}
+
+function addManualCard(){
+if(manualCardCount>=5)return;
+manualCardCount++;
+const div=$('manualCards');
+const row=document.createElement('div');
+row.style.cssText='display:flex;gap:4px;margin-bottom:4px;align-items:center';
+row.innerHTML=`<select class="mc-card" style="flex:1;padding:5px;border:1px solid var(--pk-p);border-radius:6px;font-size:10px;font-family:inherit"></select>
+<select class="mc-ori" style="padding:5px;border:1px solid var(--pk-p);border-radius:6px;font-size:10px;font-family:inherit"><option value="upright">Upright</option><option value="reversed">Reversed</option></select>`;
+div.appendChild(row);
+const sel=row.querySelector('.mc-card');
+(window._tarotCards||[]).forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;sel.appendChild(o)});
+// Add read button if we have 3+ cards
+if(manualCardCount>=3){
+let btn=$('manualReadBtn');
+if(!btn){btn=document.createElement('button');btn.id='manualReadBtn';btn.className='bp sm';btn.style.marginTop='6px';btn.textContent='Read Manual Spread ✨';btn.onclick=readManualSpread;div.parentElement.appendChild(btn);}}}
+
+async function readManualSpread(){
+const cards=[...document.querySelectorAll('.mc-card')].map((sel,i)=>{
+const ori=document.querySelectorAll('.mc-ori')[i];
+return{card:sel.value,orientation:ori?ori.value:'upright'};
+});
+if(cards.length<3){alert('Select at least 3 cards');return;}
+drawnSpread=cards;
+await readDrawnSpread();}
+
+async function doTarotRead(){await drawSpread(3);}
+async function markR(id,b){await fetch('/api/papers/mark-read',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({arxiv_id:id})});b.textContent='Read!';b.classList.add('rd')}
+
+async function refreshPapers(){
+$('p-papers').innerHTML='<div class="ld">Fetching papers from ArXiv...</div>';
+try{const r=await fetch('/api/papers');D.papers=await r.json();$('p-papers').innerHTML=rPapers();}
+catch(e){$('p-papers').innerHTML='<div class="cd">Failed to load papers</div>';}}
+async function fetchAndAddMedia(){const l=$('mL').value;if(!l)return;$('metaPrev').innerHTML='<div class="ld">Fetching...</div>';try{const r=await fetch('/api/media',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({link:l,notes:$('mN').value,rating:parseInt($('mR').value)||4})});$('mL').value='';$('mN').value='';cm('mMedia');load();}catch(e){$('metaPrev').innerHTML='Error fetching'}}
+async function delMedia(id){await fetch(`/api/media/${id}`,{method:'DELETE'});load()}
+async function summarizePaper(){const u=$('pU').value;if(!u)return;$('sumStatus').textContent='Summarizing... (this may take 10-20s)';$('sumBtn').disabled=true;try{const r=await fetch('/api/papers/summarize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:u})});const d=await r.json();if(d.error){$('sumStatus').textContent='Error: '+d.error}else{$('sumStatus').textContent='Done!';$('pU').value='';cm('mPaper');load()}}catch(e){$('sumStatus').textContent='Failed'}$('sumBtn').disabled=false}
+async function delSum(id){await fetch(`/api/paper-summaries/${id}`,{method:'DELETE'});load()}
+
+// ─── Expenses ───
+function rExpenses(){
+let h='<div class="cd"><div class="ct">&#128176; Expenses</div>';
+h+='<button class="bp" onclick="om(\'mExpense\')" style="margin-bottom:10px">+ Add Expense</button>';
+h+='<div id="expDiv"><div class="ld">Loading...</div></div></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/expenses');const d=await r.json();
+const div=$('expDiv');if(!div)return;
+let eh='';
+// Monthly summary
+eh+=`<div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap">`;
+eh+=`<div class="mb" style="flex:1;min-width:80px"><div class="v">${(d.total/1000).toFixed(0)}k</div><div class="l">This month</div></div>`;
+eh+=`<div class="mb" style="flex:1;min-width:80px"><div class="v">${(d.daily_avg/1000).toFixed(0)}k</div><div class="l">Daily avg</div></div>`;
+eh+=`<div class="mb" style="flex:1;min-width:80px"><div class="v">${d.entry_count}</div><div class="l">Purchases</div></div>`;
+eh+=`</div>`;
+// Category breakdown as bars
+if(Object.keys(d.by_category||{}).length){
+eh+='<div style="margin-bottom:12px">';
+const maxCat=Math.max(...Object.values(d.by_category));
+Object.entries(d.by_category).forEach(([cat,amt])=>{
+const pct=Math.round(amt/Math.max(maxCat,1)*100);
+const icons={food:'🍱',transport:'🚌',coffee:'☕',shopping:'🛍️',entertainment:'🎬',groceries:'🛒',other:'📦'};
+eh+=`<div style="margin-bottom:4px"><div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:1px"><span>${icons[cat]||'📦'} ${cat}</span><span style="font-weight:600">${(amt/1000).toFixed(0)}k</span></div>`;
+eh+=`<div style="height:6px;border-radius:3px;background:var(--pk-l);overflow:hidden"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--pk),var(--rose));border-radius:3px"></div></div></div>`;});
+eh+='</div>';}
+// Recent entries
+const dr=await fetch(`/api/expenses?date=${today}`);const dd=await dr.json();
+if(dd.entries&&dd.entries.length){
+eh+='<div style="font-size:11px;font-weight:600;color:var(--pk-d);margin-bottom:4px">Today</div>';
+dd.entries.forEach(e=>{
+const icons={food:'🍱',transport:'🚌',coffee:'☕',shopping:'🛍️',entertainment:'🎬',groceries:'🛒',other:'📦'};
+eh+=`<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid rgba(248,164,184,.06);font-size:11px">`;
+eh+=`<span>${icons[e.category]||'📦'}</span><span style="flex:1">${e.description||e.category}</span>`;
+eh+=`<span style="font-weight:600">${(e.amount/1000).toFixed(1)}k</span>`;
+eh+=`<button class="bd" style="font-size:8px;padding:1px 4px" onclick="delExpense('${e.id}')">x</button></div>`;});}
+div.innerHTML=eh||'<p style="font-size:11px;color:var(--br-l)">No expenses this month</p>';
+}catch(e){}},200);
+return h;}
+
+async function addExpense(){const a=parseInt($('expAmt').value);if(!a)return;
+const d=$('expDate').value||today;
+await fetch('/api/expenses',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:a,category:$('expCat').value,description:$('expDesc').value,date:d})});
+$('expAmt').value='';$('expDesc').value='';cm('mExpense');load();}
+async function delExpense(id){await fetch(`/api/expenses/${id}`,{method:'DELETE'});load();}
+
+// ─── Watchlist ───
+function rWatchlist(){
+let h='<div class="cd"><div class="ct">&#127916; Media Watchlist</div>';
+h+='<button class="bp" onclick="om(\'mWatch\')" style="margin-bottom:10px">+ Add Show</button>';
+h+='<div id="watchDiv"><div class="ld">Loading...</div></div></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/watchlist');const d=await r.json();
+const div=$('watchDiv');if(!div)return;
+let wh='';
+wh+=`<div style="display:flex;gap:8px;margin-bottom:10px;font-size:11px;color:var(--br-l)">Watching: ${d.watching} | Completed: ${d.completed} | Total: ${d.total}</div>`;
+
+const sections=[['watching','📺 Watching'],['plan_to_watch','📋 Plan to Watch'],['completed','✅ Completed'],['dropped','❌ Dropped']];
+sections.forEach(([status,label])=>{
+const items=d.by_status[status]||[];if(!items.length)return;
+wh+=`<div style="font-size:11px;font-weight:600;color:var(--pk-d);margin:8px 0 4px">${label}</div>`;
+items.forEach(i=>{
+const stars='⭐'.repeat(i.rating||0);
+const typeIcons={kdrama:'🇰🇷',anime:'🎌',movie:'🎬',tvshow:'📺',variety:'🎤'};
+const epStr=i.episodes_total?`${i.episodes_watched||0}/${i.episodes_total} eps`:'';
+wh+=`<div style="display:flex;gap:10px;padding:8px;background:var(--blush);border-radius:var(--rs);margin-bottom:4px;align-items:flex-start">`;
+if(i.thumbnail)wh+=`<img src="${i.thumbnail}" style="width:50px;height:70px;object-fit:cover;border-radius:6px;flex-shrink:0" onerror="this.style.display='none'">`;
+wh+=`<div style="flex:1;min-width:0">`;
+wh+=`<div style="display:flex;align-items:center;gap:4px"><span>${typeIcons[i.type]||'📺'}</span><b style="font-size:12px">${i.title}</b></div>`;
+wh+=`<div style="font-size:10px;color:var(--br-l)">${epStr} ${stars}</div>`;
+if(i.notes)wh+=`<div style="font-size:10px;color:var(--br-l);margin-top:2px">${i.notes}</div>`;
+if(status==='watching'&&i.episodes_total)wh+=`<button class="bp sm" style="margin-top:4px;font-size:9px" onclick="bumpEp('${i.id}',${(i.episodes_watched||0)+1})">+1 episode</button>`;
+wh+=`</div>`;
+wh+=`<div style="display:flex;flex-direction:column;gap:2px"><button style="background:0;border:0;cursor:pointer;font-size:10px;opacity:.5" onclick="cycleWatchStatus('${i.id}','${i.status}')">↻</button><button class="bd" onclick="delWatch('${i.id}')">x</button></div></div>`;});});
+
+div.innerHTML=wh||'<p style="font-size:11px;color:var(--br-l)">No shows yet. Add your first!</p>';
+}catch(e){}},200);
+return h;}
+
+async function addWatch(){const t=$('wTitle').value;if(!t)return;
+await fetch('/api/watchlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,type:$('wType').value,status:$('wStatus').value,rating:parseInt($('wRating').value)||0,episodes_total:parseInt($('wEpTotal').value)||0,episodes_watched:parseInt($('wEpWatched').value)||0,notes:$('wNotes').value,url:$('wUrl').value})});
+$('wTitle').value='';$('wNotes').value='';cm('mWatch');load();}
+async function delWatch(id){await fetch(`/api/watchlist/${id}`,{method:'DELETE'});load();}
+async function bumpEp(id,ep){await fetch(`/api/watchlist/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({episodes_watched:ep})});load();}
+async function cycleWatchStatus(id,cur){
+const next={watching:'completed',plan_to_watch:'watching',completed:'plan_to_watch',dropped:'plan_to_watch'}[cur]||'watching';
+await fetch(`/api/watchlist/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:next})});load();}
+
+// ─── Wishlist ───
+function rWishlist(){
+let h='<div class="cd"><div class="ct">&#127873; Wish List</div>';
+h+='<button class="bp" onclick="om(\'mWish\')" style="margin-bottom:10px">+ Add Item</button>';
+h+='<div id="wishDiv"><div class="ld">Loading...</div></div></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/wishlist');const d=await r.json();
+const div=$('wishDiv');if(!div)return;
+let wh='';
+wh+=`<div style="font-size:11px;color:var(--br-l);margin-bottom:8px">${d.unpurchased_count} items &middot; Total: ${(d.total_cost/1000).toFixed(0)}k원</div>`;
+const unpurchased=d.items.filter(i=>!i.purchased);
+const purchased=d.items.filter(i=>i.purchased);
+
+unpurchased.forEach(i=>{
+const priCol={need:'var(--rd)',want:'var(--yl)',someday:'var(--bl)'}[i.priority]||'var(--bl)';
+wh+=`<div style="display:flex;gap:8px;padding:8px;background:var(--blush);border-radius:var(--rs);margin-bottom:4px;align-items:center">`;
+if(i.thumbnail)wh+=`<img src="${i.thumbnail}" style="width:40px;height:40px;object-fit:cover;border-radius:6px" onerror="this.style.display='none'">`;
+wh+=`<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${i.url?'<a href="'+i.url+'" target="_blank" style="color:var(--br);text-decoration:none">'+i.title+'</a>':i.title}</div>`;
+wh+=`<div style="font-size:10px;color:var(--br-l)">${i.price?(i.price/1000).toFixed(0)+'k원':''} ${i.notes||''}</div></div>`;
+wh+=`<span style="font-size:8px;padding:2px 6px;border-radius:4px;background:${priCol};font-weight:600">${i.priority}</span>`;
+wh+=`<button class="bp sm" style="font-size:9px;background:var(--gn)" onclick="toggleWish('${i.id}')">Got it!</button>`;
+wh+=`<button class="bd" onclick="delWish('${i.id}')">x</button></div>`;});
+
+if(purchased.length){
+wh+='<div style="font-size:11px;font-weight:600;color:var(--gn-d);margin:8px 0 4px">✅ Purchased</div>';
+purchased.forEach(i=>{
+wh+=`<div style="display:flex;align-items:center;gap:6px;padding:4px 0;font-size:11px;opacity:.5;text-decoration:line-through"><span>${i.title}</span><span style="color:var(--br-l)">${i.price?(i.price/1000).toFixed(0)+'k':''}원</span></div>`;});}
+
+div.innerHTML=wh||'<p style="font-size:11px;color:var(--br-l)">Wish list empty!</p>';
+}catch(e){}},200);
+return h;}
+
+async function addWish(){const t=$('wiTitle').value||$('wiUrl').value;if(!t&&!$('wiUrl').value)return;
+await fetch('/api/wishlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:$('wiTitle').value,price:parseInt($('wiPrice').value)||0,url:$('wiUrl').value,priority:$('wiPri').value,notes:$('wiNotes').value})});
+$('wiTitle').value='';$('wiUrl').value='';cm('mWish');load();}
+async function delWish(id){await fetch(`/api/wishlist/${id}`,{method:'DELETE'});load();}
+async function toggleWish(id){await fetch(`/api/wishlist/${id}/toggle`,{method:'PUT'});load();}
+
+// ─── Recipes ───
+function rRecipes(){
+let h='<div class="cd"><div class="ct">&#127858; Recipes & Meal Planner</div>';
+h+='<button class="bp" onclick="om(\'mRecipe\')" style="margin-bottom:10px">+ Add Recipe</button>';
+h+='<div id="recipeDiv"><div class="ld">Loading...</div></div></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/recipes');const d=await r.json();
+const div=$('recipeDiv');if(!div)return;
+let rh='';
+
+// This week's meal plan
+const plan=d.plan||{};
+const planDays=Object.entries(plan).filter(([_,meals])=>Object.keys(meals).length>0);
+if(planDays.length){
+rh+='<div style="font-size:11px;font-weight:600;color:var(--pk-d);margin-bottom:4px">This Week</div>';
+planDays.forEach(([dt,meals])=>{
+const dayName=new Date(dt+'T00:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+rh+=`<div style="padding:4px 0;font-size:10px;border-bottom:1px solid rgba(248,164,184,.06)"><b>${dayName}:</b> `;
+rh+=Object.entries(meals).map(([m,name])=>`${m}: ${name}`).join(' | ');
+rh+=`</div>`;});
+rh+='<div style="margin-bottom:10px"></div>';}
+
+// Recipe collection
+if(d.recipes&&d.recipes.length){
+rh+='<div style="font-size:11px;font-weight:600;color:var(--pk-d);margin-bottom:6px">My Recipes</div>';
+d.recipes.forEach(rc=>{
+rh+=`<div style="padding:10px;background:var(--blush);border-radius:var(--rs);margin-bottom:4px">`;
+rh+=`<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:12px">${rc.title}</b>`;
+rh+=`<div style="display:flex;gap:4px;align-items:center">`;
+if(rc.kcal)rh+=`<span style="font-size:9px;color:var(--br-l)">${rc.kcal} kcal</span>`;
+if(rc.prep_time)rh+=`<span style="font-size:9px;color:var(--br-l)">${rc.prep_time}</span>`;
+rh+=`<button class="bd" onclick="delRecipe('${rc.id}')">x</button></div></div>`;
+if(rc.ingredients&&rc.ingredients.length)rh+=`<div style="font-size:10px;color:var(--br-l);margin-top:2px">${rc.ingredients.join(', ')}</div>`;
+if(rc.instructions)rh+=`<div style="font-size:10px;margin-top:4px">${rc.instructions.slice(0,100)}${rc.instructions.length>100?'...':''}</div>`;
+if(rc.tags&&rc.tags.length)rh+=`<div style="margin-top:3px">${rc.tags.map(t=>'<span style="font-size:8px;background:var(--pk-l);padding:1px 5px;border-radius:3px;color:var(--pk-d);font-weight:600;margin-right:2px">'+t+'</span>').join('')}</div>`;
+rh+=`</div>`;});}
+else rh+='<p style="font-size:11px;color:var(--br-l)">No recipes saved yet. Add your favorites!</p>';
+
+div.innerHTML=rh;
+}catch(e){}},200);
+return h;}
+
+async function addRecipe(){const t=$('rcTitle').value;if(!t)return;
+const ingr=$('rcIngr').value?$('rcIngr').value.split('\n').map(i=>i.trim()).filter(Boolean):[];
+const tags=$('rcTags').value?$('rcTags').value.split(',').map(t=>t.trim()).filter(Boolean):[];
+await fetch('/api/recipes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,ingredients:ingr,instructions:$('rcInstr').value,kcal:parseInt($('rcKcal').value)||0,prep_time:$('rcTime').value,tags})});
+$('rcTitle').value='';$('rcIngr').value='';$('rcInstr').value='';cm('mRecipe');load();}
+async function delRecipe(id){await fetch(`/api/recipes/${id}`,{method:'DELETE'});load();}
+
+// ─── Goals (TOPIK etc) ───
+function rGoals(){
+const goalsList=D.goals||[];
+let h='';
+
+if(!goalsList.length){
+h+='<div class="cd"><div class="ct">&#127919; Goals</div><p style="font-size:11px;color:var(--br-l)">No active goals</p></div>';
+return h;}
+
+goalsList.forEach(g=>{
+const s=g.summary||{};
+const daysLeft=s.days_left;
+const urgency=daysLeft<=7?'var(--rd)':daysLeft<=30?'var(--yl)':'var(--gn)';
+
+// Main goal card
+h+=`<div class="cd"><div class="ct">&#127919; ${g.title}</div>`;
+
+// Countdown
+h+=`<div style="display:flex;gap:12px;align-items:center;margin-bottom:14px">`;
+h+=`<div style="text-align:center;min-width:70px"><div style="font-size:32px;font-weight:700;color:${urgency}">${daysLeft!==null?daysLeft:'?'}</div><div style="font-size:10px;color:var(--br-l)">days left</div></div>`;
+h+=`<div style="flex:1">`;
+h+=`<div style="font-size:11px;color:var(--br-l)">Target: ${g.target_date}</div>`;
+h+=`<div style="font-size:11px;color:var(--br-l)">Streak: ${s.streak||0} days &#128293;</div>`;
+h+=`<div style="font-size:11px;color:var(--br-l)">Words learned: ${s.total_words||0} / ${g.study_plan?.total_vocab_target||1000}</div>`;
+h+=`<div style="height:8px;border-radius:4px;background:var(--pk-l);margin-top:4px;overflow:hidden"><div style="height:100%;width:${s.vocab_progress_pct||0}%;background:linear-gradient(90deg,var(--pk),var(--rose));border-radius:4px"></div></div>`;
+h+=`</div></div>`;
+
+// Daily target
+h+=`<div style="padding:10px;background:linear-gradient(135deg,var(--pk-l),var(--blush));border-radius:var(--rs);margin-bottom:12px;font-size:12px">`;
+h+=`&#127919; Today's target: <b>${s.adjusted_daily_target||20} words</b> &middot; Total studied: ${s.total_minutes||0} min (${s.days_studied||0} days)`;
+h+=`</div>`;
+
+// Daily log form
+h+=`<div style="padding:12px;background:var(--blush);border-radius:var(--rs);margin-bottom:12px;border:1px dashed rgba(248,164,184,.3)">`;
+h+=`<div style="font-size:11px;font-weight:600;color:var(--pk-d);margin-bottom:8px">&#128221; Log Today's Study</div>`;
+h+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(75px,1fr));gap:6px">`;
+h+=`<div><label style="font-size:9px;color:var(--br-l);display:block;margin-bottom:2px">Words</label><input type="number" id="gWords" placeholder="20" style="width:100%;padding:5px;border:1px solid var(--pk-p);border-radius:6px;font-size:11px;font-family:inherit"></div>`;
+h+=`<div><label style="font-size:9px;color:var(--br-l);display:block;margin-bottom:2px">Grammar</label><input type="number" id="gGrammar" placeholder="3" style="width:100%;padding:5px;border:1px solid var(--pk-p);border-radius:6px;font-size:11px;font-family:inherit"></div>`;
+h+=`<div><label style="font-size:9px;color:var(--br-l);display:block;margin-bottom:2px">Minutes</label><input type="number" id="gMins" placeholder="30" style="width:100%;padding:5px;border:1px solid var(--pk-p);border-radius:6px;font-size:11px;font-family:inherit"></div>`;
+h+=`</div>`;
+h+=`<div style="display:flex;justify-content:flex-end;margin-top:6px"><button class="bp sm" onclick="logGoalStudy('${g.id}')">Log</button></div></div>`;
+
+// Flashcard management
+h+=`<div style="border-top:1px solid var(--pk-p);margin:10px 0;padding-top:10px">`;
+h+=`<div style="font-size:12px;font-weight:600;color:var(--pk-d);margin-bottom:8px">&#127183; TOPIK Flashcards</div>`;
+h+=`<div style="display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap">`;
+h+=`<button class="bp sm" onclick="genTopikCards('${g.id}','general vocabulary')">&#10024; Generate Vocab</button>`;
+h+=`<button class="bp sm" style="background:var(--lav-d)" onclick="genTopikCards('${g.id}','grammar patterns')">&#10024; Grammar</button>`;
+h+=`<button class="bp sm" style="background:var(--gn)" onclick="om('mTopikDeck')">+ New Deck</button>`;
+h+=`</div>`;
+h+=`<div id="topikGenStatus" style="font-size:10px;color:var(--br-l)"></div>`;
+h+=`<div id="topikDecks"><div class="ld">Loading decks...</div></div></div>`;
+
+// Load TOPIK decks inline
+setTimeout(async()=>{
+try{const r=await fetch('/api/uni/flashcards');const d=await r.json();
+const decks=(d.decks||[]).filter(dk=>dk.title.toLowerCase().includes('topik')||dk.title.includes('한국'));
+const div=$('topikDecks');if(!div)return;
+if(!decks.length){div.innerHTML='<p style="font-size:11px;color:var(--br-l)">No TOPIK decks yet. Generate or create one!</p>';return;}
+let dh='';
+decks.forEach(dk=>{
+const due=dk.cards.filter(c=>c.next_review<=today).length;
+dh+=`<div style="padding:10px;background:var(--blush);border-radius:var(--rs);margin-bottom:6px;border:1px solid rgba(248,164,184,.08)">`;
+dh+=`<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">`;
+dh+=`<b style="font-size:12px;flex:1">${dk.title}</b>`;
+dh+=`<span style="font-size:10px;color:var(--br-l)">${dk.cards.length} cards</span>`;
+if(due)dh+=`<span style="font-size:9px;padding:2px 6px;border-radius:4px;background:var(--yl);color:#C97A2E;font-weight:600">${due} due</span>`;
+dh+=`<button class="bp sm" onclick="window.location.href='/uni'" style="font-size:9px">Review</button>`;
+dh+=`<button class="bd" onclick="delTopikDeck('${dk.id}')">x</button></div>`;
+// Show cards in this deck
+dh+=`<div style="max-height:150px;overflow-y:auto">`;
+dk.cards.forEach((c,ci)=>{
+dh+=`<div style="display:flex;align-items:center;gap:4px;padding:3px 0;border-bottom:1px solid rgba(248,164,184,.06);font-size:10px">`;
+dh+=`<span style="flex:1;font-weight:600">${c.question}</span>`;
+dh+=`<span style="flex:1;color:var(--br-l)">${(c.answer||'').slice(0,40)}${c.answer&&c.answer.length>40?'...':''}</span>`;
+dh+=`<button style="background:0;border:0;cursor:pointer;font-size:10px;opacity:.5" onclick="editTopikCard('${dk.id}','${c.id}','${c.question.replace(/'/g,"\\'")}','${(c.answer||'').replace(/'/g,"\\'").replace(/\n/g,' ')}')">&#9998;</button>`;
+dh+=`<button class="bd" style="font-size:8px;padding:1px 4px" onclick="delTopikCard('${dk.id}','${c.id}')">x</button></div>`;});
+dh+=`</div>`;
+dh+=`<button class="bg" style="font-size:9px;padding:4px;margin-top:4px" onclick="topikAddCardDeck='${dk.id}';om('mTopikCard')">+ Add card</button>`;
+dh+=`</div>`;});
+div.innerHTML=dh;
+}catch(e){}},300);
+
+// Practice test log
+h+=`<div style="margin-top:10px"><div style="font-size:12px;font-weight:600;color:var(--pk-d);margin-bottom:6px">&#128221; Practice Tests</div>`;
+h+=`<div style="display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap">`;
+h+=`<input type="number" id="gTestReading" placeholder="읽기" style="width:55px;padding:5px;border:1px solid var(--pk-p);border-radius:6px;font-size:10px;font-family:inherit">`;
+h+=`<input type="number" id="gTestListening" placeholder="듣기" style="width:55px;padding:5px;border:1px solid var(--pk-p);border-radius:6px;font-size:10px;font-family:inherit">`;
+h+=`<input type="number" id="gTestWriting" placeholder="쓰기" style="width:55px;padding:5px;border:1px solid var(--pk-p);border-radius:6px;font-size:10px;font-family:inherit">`;
+h+=`<button class="bp sm" onclick="logGoalTest('${g.id}')">Log Test</button></div>`;
+
+if(g.practice_tests&&g.practice_tests.length){
+g.practice_tests.slice(0,5).forEach(t=>{
+const total=(t.reading||0)+(t.listening||0)+(t.writing||0);
+h+=`<div style="display:flex;align-items:center;gap:6px;padding:4px 0;font-size:10px;border-bottom:1px solid rgba(248,164,184,.08)">`;
+h+=`<span style="color:var(--br-l)">${t.date}</span>`;
+h+=`<span>읽기:${t.reading||'-'}</span><span>듣기:${t.listening||'-'}</span><span>쓰기:${t.writing||'-'}</span>`;
+h+=`<b style="margin-left:auto">Total: ${total}</b></div>`;});}
+h+=`</div></div>`;});
+
+return h;}
+
+async function logGoalStudy(gid){
+const w=parseInt($('gWords')?.value)||0;
+const g=parseInt($('gGrammar')?.value)||0;
+const m=parseInt($('gMins')?.value)||0;
+if(!w&&!g&&!m)return;
+await fetch(`/api/goals/${gid}/log`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({words_learned:w,grammar_points:g,minutes:m})});
+['gWords','gGrammar','gMins'].forEach(id=>{if($(id))$(id).value=''});
+load();}
+
+async function logGoalTest(gid){
+const r=parseInt($('gTestReading')?.value)||0;
+const l=parseInt($('gTestListening')?.value)||0;
+const w=parseInt($('gTestWriting')?.value)||0;
+await fetch(`/api/goals/${gid}/test`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({reading:r,listening:l,writing:w})});
+['gTestReading','gTestListening','gTestWriting'].forEach(id=>{if($(id))$(id).value=''});
+load();}
+
+async function genTopikCards(gid,category){
+const st=$('topikGenStatus');if(st)st.textContent='Generating TOPIK cards... (15-20s)';
+try{const r=await fetch('/api/goals/topik/flashcards',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({level:'5-6',category,num_cards:15})});
+const d=await r.json();
+if(d.cards&&d.cards.length){
+await fetch('/api/uni/flashcards',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:'TOPIK - '+category,cards:d.cards})});
+if(st)st.textContent=`Generated ${d.cards.length} cards!`;load();}
+else if(st)st.textContent='Failed to generate';
+}catch(e){if(st)st.textContent='Error: '+e;}}
+
+// TOPIK deck/card CRUD
+let topikAddCardDeck='',topikEditDeck='',topikEditCard='';
+
+async function createTopikDeck(){
+const n=$('tkDeckName').value;if(!n)return;
+await fetch('/api/uni/flashcards',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:n,cards:[]})});
+$('tkDeckName').value='';cm('mTopikDeck');load();}
+
+async function delTopikDeck(did){if(!confirm('Delete this deck and all its cards?'))return;
+await fetch(`/api/uni/flashcards/${did}`,{method:'DELETE'});load();}
+
+async function addTopikCard(){
+const q=$('tkCardQ').value;const a=$('tkCardA').value;
+if(!q||!topikAddCardDeck)return;
+await fetch(`/api/uni/flashcards/${topikAddCardDeck}/cards`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,answer:a})});
+$('tkCardQ').value='';$('tkCardA').value='';cm('mTopikCard');load();}
+
+async function delTopikCard(did,cid){
+await fetch(`/api/uni/flashcards/${did}/cards/${cid}`,{method:'DELETE'});
+load();}
+
+function editTopikCard(did,cid,q,a){
+topikEditDeck=did;topikEditCard=cid;
+$('tkEditQ').value=q;$('tkEditA').value=a;
+om('mTopikEdit');}
+
+async function saveTopikEdit(){
+const newQ=$('tkEditQ').value;const newA=$('tkEditA').value;
+if(!newQ||!topikEditDeck)return;
+await fetch(`/api/uni/flashcards/${topikEditDeck}/cards/${topikEditCard}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:newQ,answer:newA})});
+cm('mTopikEdit');load();}
+
+// ─── Links / Bookmarks ───
+let bkmFolder='All';
+function rLinks(){
+let h='<div class="cd"><div class="ct">&#128278; Link Dumps</div>';
+h+='<div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap">';
+h+='<button class="bp" onclick="openBkmModal()">+ Save link</button>';
+h+='<button class="bp sm" style="background:var(--lav-d)" onclick="om(\'mFolder\')">+ Folder</button>';
+h+='<input id="bkmSearch" placeholder="Search links..." style="flex:1;min-width:120px;padding:6px 10px;border:1px solid var(--pk-p);border-radius:8px;font-size:11px;font-family:inherit" onkeyup="searchBkm(this.value)">';
+h+='</div>';
+h+='<div id="bkmFolders" style="margin-bottom:10px"></div>';
+h+='<div id="bkmList"><div class="ld">Loading...</div></div></div>';
+setTimeout(()=>loadBkm(),100);
+return h;}
+
+async function loadBkm(query){
+const params=new URLSearchParams();
+if(query)params.set('q',query);
+if(bkmFolder!=='All')params.set('folder',bkmFolder);
+try{
+const r=await fetch('/api/bookmarks?'+params);const d=await r.json();
+const fe=$('bkmFolders');
+if(fe){let fh='<div style="display:flex;gap:4px;flex-wrap:wrap">';
+fh+=`<button onclick="bkmFolder='All';loadBkm()" style="padding:4px 10px;border:none;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;background:${bkmFolder==='All'?'var(--pk-l)':'var(--blush)'};color:var(--br)">All</button>`;
+(d.folders||[]).forEach(f=>{fh+=`<button onclick="bkmFolder='${f}';loadBkm()" style="padding:4px 10px;border:none;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;background:${bkmFolder===f?'var(--pk-l)':'var(--blush)'};color:var(--br)">${f}</button>`});
+fh+='</div>';fe.innerHTML=fh;}
+const le=$('bkmList');
+if(le){let lh='';
+const pinned=d.bookmarks.filter(b=>b.pinned);
+const unpinned=d.bookmarks.filter(b=>!b.pinned);
+const all=[...pinned,...unpinned];
+if(!all.length)lh='<p style="font-size:11px;color:var(--br-l)">No bookmarks yet. Start dumping links!</p>';
+all.forEach(b=>{
+lh+=`<div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:var(--rs);margin-bottom:5px;background:linear-gradient(135deg,var(--blush),#FFF8FA);border:1px solid rgba(248,164,184,.08)${b.pinned?';border-left:3px solid var(--pk)':''}">`;
+if(b.favicon)lh+=`<img src="${b.favicon}" style="width:16px;height:16px;border-radius:3px;margin-top:2px;flex-shrink:0" onerror="this.style.display='none'">`;
+lh+='<div style="flex:1;min-width:0">';
+lh+=`<div style="font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><a href="${b.url}" target="_blank" style="color:var(--br);text-decoration:none">${b.title}</a></div>`;
+lh+=`<div style="font-size:9px;color:var(--br-ll)">${b.domain} &middot; ${b.folder} &middot; ${b.date}</div>`;
+if(b.note)lh+=`<div style="font-size:10px;color:var(--br-l);margin-top:2px">${b.note}</div>`;
+if(b.tags&&b.tags.length)lh+=`<div style="margin-top:3px">${b.tags.map(t=>'<span style="font-size:8px;background:var(--pk-l);padding:1px 6px;border-radius:4px;color:var(--pk-d);font-weight:600;margin-right:3px">'+t+'</span>').join('')}</div>`;
+lh+='</div>';
+lh+=`<div style="display:flex;gap:3px;flex-shrink:0">`;
+lh+=`<button onclick="pinBkm('${b.id}')" style="background:0;border:0;cursor:pointer;font-size:12px;opacity:${b.pinned?1:.3}" title="Pin">&#128204;</button>`;
+lh+=`<button class="bd" onclick="delBkm('${b.id}')">x</button>`;
+lh+='</div></div>';});
+le.innerHTML=lh;}
+}catch(e){}}
+
+function searchBkm(q){loadBkm(q)}
+function openBkmModal(){
+fetch('/api/bookmarks').then(r=>r.json()).then(d=>{
+const sel=$('bF');sel.innerHTML='';
+(d.folders||['General']).forEach(f=>{const o=document.createElement('option');o.value=f;o.textContent=f;sel.appendChild(o)});
+});om('mBkm');}
+
+async function addBookmark(){
+const url=$('bU').value;if(!url)return;
+const tags=$('bTg').value?$('bTg').value.split(',').map(t=>t.trim()).filter(Boolean):[];
+await fetch('/api/bookmarks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url,folder:$('bF').value,tags,note:$('bN').value})});
+$('bU').value='';$('bTg').value='';$('bN').value='';cm('mBkm');loadBkm();}
+
+async function delBkm(id){await fetch(`/api/bookmarks/${id}`,{method:'DELETE'});loadBkm();}
+async function pinBkm(id){await fetch(`/api/bookmarks/${id}/pin`,{method:'PUT'});loadBkm();}
+async function addFolder(){const n=$('fName').value;if(!n)return;await fetch('/api/bookmarks/folders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n})});$('fName').value='';cm('mFolder');loadBkm();}
+
+// TBR (To Be Read) — articles
+async function addTBR(){const t=$('tbrTitle').value;if(!t)return;
+await fetch('/api/reading-queue',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,url:$('tbrUrl').value,type:$('tbrType').value,est_read_min:parseInt($('tbrTime').value)||10})});
+$('tbrTitle').value='';$('tbrUrl').value='';cm('mTBR');load();}
+async function cycleTBR(id,cur){const next={unread:'reading',reading:'done',done:'unread'}[cur]||'unread';
+await fetch(`/api/reading-queue/${id}/status`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:next})});load();}
+async function delTBR(id){await fetch(`/api/reading-queue/${id}`,{method:'DELETE'});load();}
+
+// ─── Pomodoro Timer ───
+let pomCount=0,pomTimeLeft=25*60,pomRunning=false,pomInterval=null,pomPhase='work',pomCycle=0;
+const POM={work:25*60,break:5*60,longBreak:15*60};
+function pomToggle(){
+if(pomRunning){clearInterval(pomInterval);pomRunning=false;$('pomStartBtn').textContent='Resume';return;}
+pomRunning=true;$('pomStartBtn').textContent='Pause';
+pomInterval=setInterval(()=>{
+pomTimeLeft--;
+if(pomTimeLeft<=0){clearInterval(pomInterval);pomRunning=false;
+if(pomPhase==='work'){pomCount++;pomCycle++;$('pomCount').textContent=pomCount;
+fetch('/api/metrics/pomodoro',{method:'POST'});
+if(pomCycle>=4){pomPhase='longBreak';pomTimeLeft=POM.longBreak;pomCycle=0;}
+else{pomPhase='break';pomTimeLeft=POM.break;}}
+else{pomPhase='work';pomTimeLeft=POM.work;}
+$('pomStartBtn').textContent='Start';$('pomPhaseLabel').textContent=pomPhase==='work'?'Work':pomPhase==='break'?'Break':'Long Break';}
+const m=Math.floor(pomTimeLeft/60),s=pomTimeLeft%60;
+$('pomDisplay').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+},1000);}
+function pomReset(){clearInterval(pomInterval);pomRunning=false;pomPhase='work';pomTimeLeft=POM.work;
+$('pomDisplay').textContent='25:00';$('pomStartBtn').textContent='Start';$('pomPhaseLabel').textContent='Work';}
+function pomSkip(){clearInterval(pomInterval);pomRunning=false;
+if(pomPhase==='work'){pomPhase='break';pomTimeLeft=POM.break;}
+else{pomPhase='work';pomTimeLeft=POM.work;}
+const m=Math.floor(pomTimeLeft/60),s=pomTimeLeft%60;
+$('pomDisplay').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+$('pomStartBtn').textContent='Start';$('pomPhaseLabel').textContent=pomPhase==='work'?'Work':pomPhase==='break'?'Break':'Long Break';}
+
+// ─── Weekly Review ───
+async function showWeeklyReview(){
+const div=$('weeklyReviewDiv');div.innerHTML='<div class="ld">Generating...</div>';
+try{const r=await fetch('/api/weekly-review');const d=await r.json();
+let h='<div style="margin-top:10px">';
+h+=`<div style="font-size:11px;color:var(--br-l);margin-bottom:8px">${d.week_start} — ${d.week_end}</div>`;
+h+=`<div class="g2" style="gap:8px;margin-bottom:10px">`;
+h+=`<div class="mb"><div class="v">${d.tasks.completed}/${d.tasks.total}</div><div class="l">Tasks</div></div>`;
+if(d.metrics.has_data){
+h+=`<div class="mb"><div class="v">${d.metrics.avg_sleep||'-'}h</div><div class="l">Avg Sleep</div></div>`;
+h+=`<div class="mb"><div class="v">${d.metrics.avg_focus||'-'}</div><div class="l">Avg Focus</div></div>`;}
+h+=`<div class="mb"><div class="v">${d.study.total_hours}h</div><div class="l">Study</div></div>`;
+if(d.mood.avg_mood)h+=`<div class="mb"><div class="v">${d.mood.avg_mood}</div><div class="l">Avg Mood</div></div>`;
+h+=`</div>`;
+if(d.highlights.length){h+='<div style="margin-bottom:8px"><b style="font-size:11px;color:var(--gn-d)">Highlights</b>';d.highlights.forEach(x=>{h+=`<div style="font-size:11px;padding:2px 0">&#127775; ${x}</div>`});h+='</div>';}
+if(d.improvements.length){h+='<div><b style="font-size:11px;color:var(--yl-d)">To Improve</b>';d.improvements.forEach(x=>{h+=`<div style="font-size:11px;padding:2px 0">&#128161; ${x}</div>`});h+='</div>';}
+h+='</div>';div.innerHTML=h;
+}catch(e){div.innerHTML='<p style="font-size:11px;color:var(--rd-d)">Failed to generate</p>';}}
+
+// ─── Study Logger (in Metrics tab) ───
+function rStudySection(){
+let h='<div class="cd"><div class="ct">&#128218; Study Log</div>';
+h+='<button class="bp sm" onclick="om(\'mStudy\')" style="margin-bottom:8px">+ Log session</button>';
+h+='<div id="studyDiv"><div class="ld">Loading...</div></div></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/study');const d=await r.json();
+let sh='';
+if(d.total_hours>0){
+sh+=`<div style="font-size:12px;margin-bottom:8px"><b>${d.total_hours}h</b> this week</div>`;
+if(Object.keys(d.by_subject).length){sh+='<div style="margin-bottom:8px">';
+Object.entries(d.by_subject).forEach(([subj,mins])=>{
+const pct=Math.min(100,Math.round(mins/Math.max(d.total_min,1)*100));
+sh+=`<div style="margin-bottom:4px"><div style="font-size:10px;font-weight:600">${subj} (${Math.round(mins/60*10)/10}h)</div>`;
+sh+=`<div style="height:6px;border-radius:3px;background:var(--pk-l);overflow:hidden"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--pk),var(--rose));border-radius:3px"></div></div></div>`;});
+sh+='</div>';}}
+d.sessions.slice(0,5).forEach(s=>{
+sh+=`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--pk-l);font-size:11px">`;
+sh+=`<b style="min-width:60px">${s.subject}</b><span>${s.duration_min}min</span><span style="color:var(--br-l);flex:1">${s.topic||''}</span>`;
+sh+=`<button class="bd" onclick="delStudy('${s.id}')">x</button></div>`;});
+const el=$('studyDiv');if(el)el.innerHTML=sh||'<p style="font-size:11px;color:var(--br-l)">No sessions this week</p>';
+}catch(e){}},200);
+return h;}
+
+async function addStudy(){
+const subj=$('stSubj').value;if(!subj)return;
+await fetch('/api/study',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+subject:subj,duration_min:parseInt($('stDur').value)||30,topic:$('stTopic').value,notes:$('stNotes').value})});
+$('stSubj').value='';cm('mStudy');load();}
+async function delStudy(id){await fetch(`/api/study/${id}`,{method:'DELETE'});load();}
+
+// ─── Reading Queue (in Papers tab) ───
+function rReadingQueue(){
+let h='<div class="cd"><div class="ct">&#128214; Paper Reading Queue</div>';
+h+='<button class="bp sm" onclick="om(\'mRead\')" style="margin-bottom:8px">+ Add paper to queue</button>';
+h+='<div id="readQDiv"><div class="ld">Loading...</div></div></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/reading-queue');const d=await r.json();
+// Only show papers here (articles go to Links tab TBR)
+const paperItems=(d.items||[]).filter(i=>i.type==='paper'||i.type==='book');
+let rh='';
+const pCounts={unread:paperItems.filter(i=>i.status==='unread').length,reading:paperItems.filter(i=>i.status==='reading').length,done:paperItems.filter(i=>i.status==='done').length};
+rh+=`<div style="font-size:10px;color:var(--br-l);margin-bottom:8px">Reading: ${pCounts.reading} | Unread: ${pCounts.unread} | Done: ${pCounts.done}</div>`;
+paperItems.forEach(i=>{
+const stCol={unread:'var(--br-ll)',reading:'var(--yl-d)',done:'var(--gn-d)'}[i.status]||'var(--br-ll)';
+const stLabel={unread:'Unread',reading:'Reading',done:'Done'}[i.status]||'Unread';
+rh+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;margin-bottom:4px;background:var(--blush)">`;
+rh+=`<button style="font-size:9px;padding:3px 8px;border-radius:6px;border:none;background:${stCol};color:#fff;cursor:pointer;font-weight:600;font-family:inherit;min-width:55px" onclick="cycleReadStatus('${i.id}','${i.status}')">${stLabel}</button>`;
+rh+=`<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><a href="${i.url}" target="_blank" style="color:var(--br);text-decoration:none">${i.title}</a></div>`;
+rh+=`<div style="font-size:9px;color:var(--br-ll)">${i.type} &middot; ~${i.est_read_min||'?'}min</div></div>`;
+rh+=`<button class="bd" onclick="delReading('${i.id}')">x</button></div>`;});
+const el=$('readQDiv');if(el)el.innerHTML=rh||'<p style="font-size:11px;color:var(--br-l)">Queue empty</p>';
+}catch(e){}},200);
+return h;}
+
+async function addReading(){
+const t=$('rqTitle').value;if(!t)return;
+await fetch('/api/reading-queue',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+title:t,url:$('rqUrl').value,type:$('rqType').value,est_read_min:parseInt($('rqTime').value)||20})});
+$('rqTitle').value='';cm('mRead');load();}
+async function cycleReadStatus(id,cur){
+const next={unread:'reading',reading:'done',done:'unread'}[cur]||'unread';
+await fetch(`/api/reading-queue/${id}/status`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:next})});load();}
+async function delReading(id){await fetch(`/api/reading-queue/${id}`,{method:'DELETE'});load();}
+
+// ─── Grades ───
+let assignCourseId='';
+// ─── Period Tracker (in Metrics tab) ───
+function rPeriodSection(){
+let h='<div class="cd"><div class="ct">&#127769; Period Tracker</div>';
+h+='<button class="bp sm" onclick="om(\'mPeriod\')" style="margin-bottom:8px">Log Period</button>';
+h+='<div id="periodDiv"><div class="ld">Loading...</div></div></div>';
+setTimeout(async()=>{
+try{const r=await fetch('/api/period');const d=await r.json();const p=d.phase;const s=d.stats;
+let ph='';
+if(p&&p.has_data){
+ph+=`<div style="padding:12px;border-radius:var(--rs);background:linear-gradient(135deg,${p.color||'var(--pk-l)'},var(--blush));margin-bottom:8px">`;
+ph+=`<div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px">${p.emoji||''}</span><b style="font-size:13px">${p.label}</b></div>`;
+ph+=`<div style="font-size:11px;margin-top:4px">Day ${p.day_of_cycle} of cycle &middot; ${p.energy} energy &middot; ${p.focus_level} focus</div>`;
+ph+=`<div style="font-size:10px;color:var(--br-l);margin-top:4px">Best for: ${(p.best_for||[]).join(', ')}</div>`;
+if(p.days_until_next>0)ph+=`<div style="font-size:10px;color:var(--br-l);margin-top:2px">Next period: ~${p.days_until_next} days (${p.next_period_start})</div>`;
+ph+='</div>';}
+else ph+='<p style="font-size:11px;color:var(--br-l)">No data yet. Log your period to get phase insights!</p>';
+if(s&&s.has_stats){
+ph+=`<div style="font-size:10px;color:var(--br-l)">Avg cycle: ${s.avg_length} days | ${s.regularity} | ${s.total_cycles} cycles logged</div>`;}
+const el=$('periodDiv');if(el)el.innerHTML=ph;
+}catch(e){}},200);
+return h;}
+
+async function logPeriod(){const s=$('prStart').value;if(!s)return;
+const syms=[...document.querySelectorAll('#symPicks .sel')].map(b=>b.dataset.sym);
+await fetch('/api/period/log',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+start_date:s,end_date:$('prEnd').value,symptoms:syms,notes:$('prNotes').value})});
+$('prStart').value='';$('prEnd').value='';document.querySelectorAll('#symPicks .sel').forEach(b=>b.classList.remove('sel'));
+cm('mPeriod');load();}
+
+// ─── Global Search ───
+let searchTimer=null;
+function doGlobalSearch(q){
+clearTimeout(searchTimer);
+const div=$('searchResults');
+if(!q||q.length<2){div.innerHTML='';div.style.display='none';return;}
+div.style.display='block';
+searchTimer=setTimeout(async()=>{
+try{const r=await fetch(`/api/search?q=${encodeURIComponent(q)}`);const d=await r.json();
+if(!d.results.length){div.innerHTML='<div style="padding:12px;font-size:11px;color:var(--br-l)">No results found</div>';return;}
+let h=`<div style="padding:4px 8px;font-size:10px;color:var(--br-l)">${d.total} results</div>`;
+d.results.slice(0,15).forEach(r=>{
+h+=`<div style="display:flex;align-items:flex-start;gap:8px;padding:8px;border-bottom:1px solid rgba(248,164,184,.06);cursor:pointer" onclick="${r.url?`window.open('${r.url}','_blank')`:''};$('searchResults').style.display='none'">`;
+h+=`<span style="font-size:14px;flex-shrink:0">${r.icon||'📌'}</span>`;
+h+=`<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.title}</div>`;
+h+=`<div style="font-size:9px;color:var(--br-l)">${r.source} ${r.detail?'· '+r.detail.slice(0,60):''}</div></div></div>`;});
+div.innerHTML=h;
+}catch(e){div.innerHTML='<div style="padding:12px;font-size:11px;color:var(--rd-d)">Search failed</div>';}
+},300);}
+
+// Close search on click outside
+document.addEventListener('click',e=>{
+const sr=$('searchResults');const si=$('globalSearch');
+if(sr&&sr.style.display==='block'&&!sr.contains(e.target)&&e.target!==si)sr.style.display='none';});
+
+// ─── Send Email Digest ───
+async function sendDigest(){
+const btn=event.target;btn.textContent='Sending...';btn.disabled=true;
+try{const r=await fetch('/api/send-digest',{method:'POST'});const d=await r.json();
+if(d.ok)btn.textContent='✓ Sent!';
+else btn.textContent='Failed: '+(d.error||'').slice(0,30);
+}catch(e){btn.textContent='Failed';}
+setTimeout(()=>{btn.textContent='📧 Send Digest Email';btn.disabled=false;},3000);}
+
+// ─── Trophy Shelf ───
+async function showTrophies(){
+const r=await fetch('/api/achievements');const d=await r.json();
+const panel=$('p-focus');
+let h='<div class="cd"><div class="ct">🏆 Achievement Badges ('+d.unlocked_count+'/'+d.total_count+')</div>';
+h+='<div style="display:flex;gap:6px;flex-wrap:wrap">';
+d.badges.forEach(b=>{
+h+=`<div style="text-align:center;width:60px" title="${b.desc}"><div class="badge ${b.unlocked?'unlocked':'locked'}">${b.emoji}</div><div style="font-size:8px;font-weight:600;margin-top:2px;color:${b.unlocked?'var(--br)':'var(--br-ll)'}">${b.name}</div></div>`;});
+h+='</div></div>';
+// Prepend to focus
+panel.innerHTML=h+panel.innerHTML;}
+
+// ─── Wrap-up ───
+async function saveWrapup(){
+const best=$('wuBest')?.value||'';const drain=$('wuDrain')?.value||'';const pri=$('wuPriority')?.value||'';
+if(!best&&!drain&&!pri)return;
+const jd=$('jDate')?$('jDate').value:today;
+// Append to journal entry
+const existing=$('jEntry')?.value||'';
+const wrapup=`\n\n🌙 Wrap-up:\n✨ Best: ${best}\n😮‍💨 Drained: ${drain}\n🎯 Tomorrow: ${pri}`;
+const full=existing+wrapup;
+await fetch('/api/journal',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:jd,mood:selMood,entry:full})});
+D._journalText=full;
+['wuBest','wuDrain','wuPriority'].forEach(id=>{if($(id))$(id).value=''});
+load();}
+
+// ─── Monthly Report ───
+async function showMonthlyReport(){
+const div=$('p-focus');
+div.innerHTML='<div class="ld">Generating monthly report...</div>'+div.innerHTML;
+try{const r=await fetch('/api/monthly-report');const d=await r.json();
+let h='<div class="cd"><div class="ct">📊 Monthly Report — '+d.month_str+'</div>';
+h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:6px;margin-bottom:10px">';
+if(d.metrics.days_logged)h+=`<div class="mb"><div class="v">${d.metrics.avg_sleep||'-'}h</div><div class="l">Avg Sleep</div></div>`;
+if(d.metrics.avg_focus)h+=`<div class="mb"><div class="v">${d.metrics.avg_focus}</div><div class="l">Avg Focus</div></div>`;
+if(d.study)h+=`<div class="mb"><div class="v">${d.study.total_hours}h</div><div class="l">Study</div></div>`;
+if(d.journal.avg_mood)h+=`<div class="mb"><div class="v">${d.journal.avg_mood}</div><div class="l">Avg Mood</div></div>`;
+h+=`<div class="mb"><div class="v">${d.tasks.completed}</div><div class="l">Tasks Done</div></div>`;
+if(d.papers)h+=`<div class="mb"><div class="v">${d.papers.read}</div><div class="l">Papers</div></div>`;
+if(d.spending.total)h+=`<div class="mb"><div class="v">${(d.spending.total/1000).toFixed(0)}k</div><div class="l">Spent</div></div>`;
+if(d.achievements)h+=`<div class="mb"><div class="v">${d.achievements.unlocked}/${d.achievements.total}</div><div class="l">Badges</div></div>`;
+h+='</div>';
+// Habits
+if(Object.keys(d.habits||{}).length){h+='<div style="font-size:11px;font-weight:600;color:var(--pk-d);margin-bottom:4px">Habit Rates</div>';
+Object.entries(d.habits).forEach(([name,rate])=>{
+h+=`<div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;font-size:10px"><span style="flex:1">${name}</span><span style="font-weight:600">${rate}%</span>`;
+h+=`<div style="width:60px;height:5px;border-radius:3px;background:var(--pk-l);overflow:hidden"><div style="height:100%;width:${rate}%;background:${rate>=70?'var(--gn)':rate>=40?'var(--yl)':'var(--rd)'};border-radius:3px"></div></div></div>`;});
+h+='<div style="margin-bottom:8px"></div>';}
+// Spending
+if(d.spending.by_category&&Object.keys(d.spending.by_category).length){
+h+='<div style="font-size:11px;font-weight:600;color:var(--pk-d);margin-bottom:4px">Spending</div>';
+Object.entries(d.spending.by_category).forEach(([cat,amt])=>{
+h+=`<div style="font-size:10px;display:flex;justify-content:space-between;padding:2px 0"><span>${cat}</span><span style="font-weight:600">${(amt/1000).toFixed(0)}k</span></div>`;});}
+if(d.topik){h+=`<div style="margin-top:8px;font-size:11px"><b>TOPIK:</b> ${d.topik.words_learned} words, ${d.topik.days_studied} days studied</div>`;}
+if(d.gpa!==null&&d.gpa!==undefined){h+=`<div style="margin-top:4px;font-size:11px"><b>GPA:</b> ${d.gpa}</div>`;}
+h+='</div>';
+div.innerHTML=h+div.innerHTML.replace(/<div class="ld">Generating.*?<\/div>/,'');
+}catch(e){}}
+
+load();
+</script>
+
+<!-- Floating Quick Capture Button -->
+<button class="fab" onclick="toggleCapture()" title="Quick Capture">+</button>
+<div class="fab-input" id="fabInput">
+<input id="fabText" placeholder="Type anything... tasks, expenses, thoughts" onkeydown="if(event.key==='Enter')doCapture()">
+<div class="hint">Auto-detects: "todo ..." → task | "spent 4500 coffee" → expense | "remind ..." → reminder | anything else → brain dump</div>
+<div class="fab-result" id="fabResult"></div>
+</div>
+
+<script>
+function toggleCapture(){const f=document.getElementById('fabInput');f.classList.toggle('open');if(f.classList.contains('open'))document.getElementById('fabText').focus();}
+
+async function doCapture(){
+const inp=document.getElementById('fabText');
+const text=inp.value.trim();if(!text)return;
+const res=document.getElementById('fabResult');
+try{
+const r=await fetch('/api/capture',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});
+const d=await r.json();
+const typeLabels={task:'✅ Task created',expense:'💰 Expense logged',reminder:'🔔 Reminder added',wishlist:'🎁 Added to wishlist',brain_dump:'🧠 Saved to brain dump'};
+res.style.display='block';
+res.style.background=d.type==='task'?'var(--gn)':d.type==='expense'?'var(--yl)':'var(--pk-l)';
+res.textContent=typeLabels[d.type]||'📝 Captured';
+inp.value='';
+setTimeout(()=>{res.style.display='none';document.getElementById('fabInput').classList.remove('open');load();},1500);
+}catch(e){res.style.display='block';res.style.background='var(--rd)';res.textContent='Failed';}}
+
+// Close capture on click outside
+document.addEventListener('click',e=>{
+const fab=document.querySelector('.fab');const inp=document.getElementById('fabInput');
+if(inp&&inp.classList.contains('open')&&!inp.contains(e.target)&&e.target!==fab){inp.classList.remove('open');}});
+</script>
+</body>
+</html>

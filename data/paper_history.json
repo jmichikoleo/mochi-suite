@@ -1,0 +1,47 @@
+{
+  "read_papers": [],
+  "topics_studied": [
+    "LLM routing",
+    "mixture of experts"
+  ],
+  "connections": [],
+  "last_recommended": [
+    {
+      "arxiv_id": "2604.02327v1",
+      "title": "Steerable Visual Representations",
+      "authors": [
+        "Jona Ruthardt",
+        "Manu Gaur",
+        "Deva Ramanan"
+      ],
+      "abstract": "Pretrained Vision Transformers (ViTs) such as DINOv2 and MAE provide generic image features that can be applied to a variety of downstream tasks such as retrieval, classification, and segmentation. However, such representations tend to focus on the most salient visual cues in the image, with no way ...",
+      "url": "http://arxiv.org/abs/2604.02327v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.02327v1",
+      "published": "2026-04-02",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "search_query": "mixture of experts language model"
+    },
+    {
+      "arxiv_id": "2604.02322v1",
+      "title": "Batched Contextual Reinforcement: A Task-Scaling Law for Efficient Reasoning",
+      "authors": [
+        "Bangji Yang",
+        "Hongbo Ma",
+        "Jiajun Fan"
+      ],
+      "abstract": "Large Language Models employing Chain-of-Thought reasoning achieve strong performance but suffer from excessive token consumption that inflates inference costs. Existing efficiency methods such as explicit length penalties, difficulty estimators, or multi-stage curricula either degrade reasoning qua...",
+      "url": "http://arxiv.org/abs/2604.02322v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.02322v1",
+      "published": "2026-04-02",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "search_query": "mixture of experts language model"
+    }
+  ]
+}

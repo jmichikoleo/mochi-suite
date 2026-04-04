@@ -1,0 +1,86 @@
+# Mochi's Interests Configuration
+# =================================
+
+# Substack interests & feeds
+substack:
+  topics:
+    - "self-improvement"
+    - "mindset"
+    - "life essays"
+    - "personal growth"
+    - "self-love"
+    - "thinking"
+    - "psychology"
+    - "neuroscience"
+    - "rewiring thoughts"
+    - "confidence"
+    - "deep living"
+    - "education"
+    - "habits"
+    - "ambition"
+    - "brain"
+    - "love"
+    - "potential"
+    - "conversation"
+    - "learning"
+    - "hobbies"
+  feeds:
+    # --- These are the exact Substacks that publish the articles you love ---
+    - name: "ixcarus"
+      url: "https://ixcarus.substack.com/feed"
+      tags: ["brain", "education", "self-improvement", "psychology", "deep living"]
+    - name: "diaries of a thought daughter"
+      url: "https://gabrielleaihara.substack.com/feed"
+      tags: ["self-love", "confidence", "mindset", "personal growth", "potential"]
+    - name: "postcards by hasif"
+      url: "https://hasifff.substack.com/feed"
+      tags: ["love", "life essays", "self-love", "thinking", "deep living"]
+    - name: "plum pits"
+      url: "https://plumpits.substack.com/feed"
+      tags: ["neuroscience", "psychology", "brain", "self-improvement", "thinking"]
+    - name: "fatima notes"
+      url: "https://fatimanotes.substack.com/feed"
+      tags: ["mindset", "self-improvement", "confidence", "deep living"]
+    - name: "Shrinidhi Iyer"
+      url: "https://shrinidhiiyer.substack.com/feed"
+      tags: ["ambition", "habits", "personal growth", "mindset", "self-improvement"]
+    - name: "Thee Book Club"
+      url: "https://theebookclubx.substack.com/feed"
+      tags: ["education", "learning", "self-improvement", "hobbies", "thinking"]
+    - name: "Bella Dane"
+      url: "https://belladane.substack.com/feed"
+      tags: ["conversation", "confidence", "self-improvement", "personal growth"]
+    # --- Other great Substacks with similar vibes ---
+    - name: "Gurwinder"
+      url: "https://gurwinder.substack.com/feed"
+      tags: ["thinking", "psychology", "brain", "mindset", "education"]
+    - name: "More To That"
+      url: "https://moretothat.substack.com/feed"
+      tags: ["life essays", "thinking", "mindset", "deep living", "self-improvement"]
+    - name: "Mark Manson"
+      url: "https://markmanson.substack.com/feed"
+      tags: ["self-improvement", "mindset", "confidence", "love", "personal growth"]
+    - name: "The Profile"
+      url: "https://theprofile.substack.com/feed"
+      tags: ["mindset", "ambition", "personal growth"]
+
+# Research interests (for paper recommendations)
+research:
+  primary_topics:
+    - "LLM routing"
+    - "mixture of experts"
+    - "inference optimization"
+    - "AI agents"
+    - "transformer architecture"
+  secondary_topics:
+    - "reinforcement learning from human feedback"
+    - "prompt engineering"
+    - "multi-agent systems"
+    - "knowledge distillation"
+  keywords:
+    - "routing"
+    - "expert selection"
+    - "token routing"
+    - "load balancing"
+    - "sparse models"
+    - "efficient inference"

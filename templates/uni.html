@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mochi - University</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF0F3;--card:rgba(255,255,255,.75);--hover:#FFE8EE;--pk:#F8A4B8;--pk-d:#E87A95;--pk-l:#FFDBE5;--pk-p:#FFD1DC;--rose:#F9C5D1;--blush:#FFF0F5;--lav:#F0E6FF;--lav-d:#D4B8FF;--br:#6B4C5A;--br-l:#9C7A8A;--br-ll:#C9AEBB;--cr:#FFF5F7;--gn:#B8E6CC;--gn-d:#7CC9A0;--yl:#FFE4C4;--rd:#FFB3B3;--bl:#D4E5FF;--sh:0 2px 16px rgba(248,164,184,.15);--r:20px;--rs:14px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Quicksand',-apple-system,sans-serif;background:linear-gradient(135deg,#FFF0F3,#FFE8F5 50%,#F5E6FF);background-attachment:fixed;color:var(--br);line-height:1.6;min-height:100vh}
+.app{max-width:1200px;margin:0 auto;padding:16px}
+.gnav{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,.6);backdrop-filter:blur(12px);border-radius:12px;margin-bottom:12px;justify-content:center;border:1px solid rgba(248,164,184,.1)}
+.gnav a{padding:8px 18px;border-radius:10px;font-size:12px;font-weight:600;text-decoration:none;color:var(--br-l);transition:.2s;font-family:inherit;display:flex;align-items:center;gap:4px}
+.gnav a:hover{background:rgba(248,164,184,.1);color:var(--br)}
+.gnav a.active{background:linear-gradient(135deg,var(--pk),var(--rose));color:#fff;box-shadow:0 3px 12px rgba(248,164,184,.4)}
+.hdr{text-align:center;padding:16px 0 8px}
+.hdr h1{font-size:24px;font-weight:700}
+.hdr .sub{font-size:12px;color:var(--br-l)}
+.tb{display:flex;gap:3px;background:rgba(255,255,255,.5);backdrop-filter:blur(12px);border-radius:14px;padding:4px;margin:12px 0 16px;position:sticky;top:8px;z-index:50;box-shadow:var(--sh);border:1px solid rgba(248,164,184,.12);overflow-x:auto}
+.tb button{flex:1;padding:8px;border:none;background:0;border-radius:10px;font-size:11px;font-weight:600;cursor:pointer;color:var(--br-l);transition:.25s;font-family:inherit;white-space:nowrap}
+.tb button.a{background:linear-gradient(135deg,var(--pk),var(--rose));color:#fff;box-shadow:0 3px 12px rgba(248,164,184,.4)}
+.tp{display:none;animation:fi .3s ease}.tp.a{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.cd{background:var(--card);backdrop-filter:blur(12px);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:1px solid rgba(248,164,184,.12);margin-bottom:14px}
+.ct{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--pk-d);display:flex;align-items:center;gap:6px}
+.bp{background:linear-gradient(135deg,var(--pk),var(--rose));border:none;padding:7px 18px;border-radius:11px;color:#fff;font-weight:600;cursor:pointer;font-family:inherit;font-size:12px;box-shadow:0 2px 8px rgba(248,164,184,.3);transition:.2s}
+.bp:hover{transform:translateY(-1px)}
+.bp.sm{padding:4px 12px;font-size:11px;border-radius:8px}
+.bg{background:0;border:2px dashed var(--pk-p);padding:9px;border-radius:var(--rs);color:var(--br-l);font-size:12px;font-weight:500;cursor:pointer;font-family:inherit;width:100%;transition:.2s;margin-top:6px}
+.bg:hover{border-color:var(--pk);color:var(--pk-d);background:var(--blush)}
+.bd{background:var(--rd);color:#C62828;border:none;padding:3px 8px;border-radius:6px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:600}
+.mo{display:none;position:fixed;inset:0;background:rgba(107,76,90,.25);backdrop-filter:blur(4px);z-index:100;align-items:center;justify-content:center}
+.mo.a{display:flex}
+.ml{background:#fff;border-radius:var(--r);padding:22px;width:92%;max-width:440px;box-shadow:0 12px 48px rgba(248,164,184,.3)}
+.ml h3{margin-bottom:12px;color:var(--pk-d);font-size:15px}
+.ml .f{margin-bottom:8px}
+.ml label{font-size:11px;color:var(--br-l);display:block;margin-bottom:2px;font-weight:500}
+.ml input,.ml select,.ml textarea{width:100%;padding:8px 10px;border:1px solid var(--pk-p);border-radius:8px;font-size:12px;font-family:inherit}
+.ml input:focus,.ml textarea:focus{outline:none;border-color:var(--pk)}
+.ml .ac{display:flex;gap:6px;margin-top:12px}
+.ml .ac>*{flex:1;text-align:center}
+.ld{text-align:center;padding:30px;color:var(--br-l);font-size:12px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:768px){.g2{grid-template-columns:1fr}}
+.wellness{text-align:center;padding:14px;background:linear-gradient(135deg,var(--pk-l),var(--lav));border-radius:var(--rs);margin-bottom:12px}
+.wellness .ws{font-size:32px;font-weight:700;color:var(--pk-d)}
+.wellness .wr{font-size:13px;font-weight:600}
+
+.course-card{padding:16px;border-radius:var(--rs);background:linear-gradient(135deg,var(--blush),#FFF8FA);border:1px solid rgba(248,164,184,.1);margin-bottom:8px}
+.course-card h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.course-card .cmeta{font-size:10px;color:var(--br-l)}
+
+.fc-card{padding:16px;border-radius:var(--rs);background:linear-gradient(135deg,#2D1B4E,#4A2D6E);color:#F0E6FF;margin-bottom:12px;text-align:center}
+.fc-card .q{font-size:14px;line-height:1.6;margin-bottom:12px;min-height:60px}
+.fc-card .a{font-size:13px;line-height:1.5;background:rgba(255,255,255,.1);padding:12px;border-radius:10px;display:none}
+.fc-actions{display:flex;gap:6px;justify-content:center;margin-top:10px}
+.fc-actions button{padding:6px 16px;border:none;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit}
+
+.day-btn{width:32px;height:32px;border-radius:50%;border:2px solid var(--pk-p);background:#fff;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--br-l);transition:.2s}
+.day-btn:hover{border-color:var(--pk);color:var(--br)}
+.day-btn.sel{background:linear-gradient(135deg,var(--pk),var(--rose));color:#fff;border-color:var(--pk)}
+.exam-card{display:flex;align-items:center;gap:12px;padding:12px;background:var(--blush);border-radius:var(--rs);margin-bottom:6px}
+.exam-days{font-size:22px;font-weight:700;min-width:50px;text-align:center}
+</style>
+</head>
+<body>
+<div class="app">
+<nav class="gnav">
+<a href="/"><span>&#127969;</span> Home</a>
+<a href="/lab"><span>&#128300;</span> Lab</a>
+<a href="/uni" class="active"><span>&#127891;</span> Uni</a>
+<a href="/chat"><span>&#128172;</span> Mochi AI</a>
+</nav>
+<div style="position:relative;margin-bottom:8px"><input id="globalSearch" placeholder="🔍 Search everything..." style="width:100%;padding:10px 14px;border:1px solid rgba(248,164,184,.2);border-radius:14px;font-size:12px;font-family:inherit;background:rgba(255,255,255,.6);backdrop-filter:blur(8px)" oninput="doGlobalSearch(this.value)" onfocus="this.parentElement.querySelector('#searchResults').style.display='block'"><div id="searchResults" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:400px;overflow-y:auto;background:#fff;border-radius:14px;box-shadow:0 8px 32px rgba(248,164,184,.3);z-index:60;margin-top:4px;padding:8px"></div></div>
+<div class="hdr"><h1>&#127891; University</h1><div class="sub">Classes, assignments, materials & study tools</div></div>
+
+<div class="tb">
+<button class="a" data-t="classes">&#128218; Classes</button>
+<button data-t="assignments">&#128221; Assignments</button>
+<button data-t="materials">&#128194; Materials</button>
+<button data-t="study">&#127891; Study Mode</button>
+<button data-t="grades">&#128200; Grades</button>
+<button data-t="exams">&#9203; Exams</button>
+</div>
+
+<div id="p-classes" class="tp a"></div>
+<div id="p-assignments" class="tp"></div>
+<div id="p-materials" class="tp"></div>
+<div id="p-study" class="tp"></div>
+<div id="p-grades" class="tp"></div>
+<div id="p-exams" class="tp"></div>
+</div>
+
+<!-- Modals -->
+<div class="mo" id="mMat"><div class="ml"><h3>&#128194; Add Material</h3>
+<div class="f"><label>Course</label><select id="matCourse"></select></div>
+<div class="f"><label>Title</label><input id="matTitle" placeholder="Lecture 5 slides"></div>
+<div class="f"><label>URL</label><input id="matUrl" placeholder="https://..."></div>
+<div class="f"><label>Folder</label><select id="matFolder"><option value="lectures">Lectures</option><option value="readings">Readings</option><option value="assignments">Assignments</option><option value="notes">Notes</option><option value="general">General</option></select></div>
+<div class="ac"><button class="bg" onclick="cm('mMat')">Cancel</button><button class="bp" onclick="addMaterial()">Add</button></div></div></div>
+
+<div class="mo" id="mDeck"><div class="ml"><h3>&#127891; Create Flashcard Deck</h3>
+<div class="f"><label>Deck title</label><input id="deckTitle" placeholder="ML Midterm Review"></div>
+<div class="f"><label>Course</label><select id="deckCourse"></select></div>
+<div class="ac"><button class="bg" onclick="cm('mDeck')">Cancel</button><button class="bp" onclick="createDeck()">Create</button></div></div></div>
+
+<div class="mo" id="mGenFC"><div class="ml"><h3>&#10024; Generate Flashcards</h3>
+<div class="f"><label>Paste study material</label><textarea id="fcText" rows="6" placeholder="Paste text from your slides, notes, or readings..."></textarea></div>
+<div class="f"><label>Number of cards</label><input type="number" id="fcNum" value="10" min="3" max="20"></div>
+<div id="fcStatus" style="font-size:11px;color:var(--br-l)"></div>
+<div class="ac"><button class="bg" onclick="cm('mGenFC')">Cancel</button><button class="bp" id="genBtn" onclick="generateCards()">Generate</button></div></div></div>
+
+<div class="mo" id="mExam"><div class="ml"><h3>&#9203; Add Exam</h3>
+<div class="f"><label>Exam name</label><input id="exName" placeholder="ML Midterm"></div>
+<div class="f"><label>Course</label><select id="exCourse"></select></div>
+<div class="f"><label>Date</label><input type="date" id="exDate"></div>
+<div class="f"><label>Type</label><select id="exType"><option value="midterm">Midterm</option><option value="final">Final</option><option value="quiz">Quiz</option><option value="project">Project Due</option></select></div>
+<div class="ac"><button class="bg" onclick="cm('mExam')">Cancel</button><button class="bp" onclick="addExam()">Add</button></div></div></div>
+
+<div class="mo" id="mUniTask"><div class="ml"><h3>&#128221; Add Assignment</h3>
+<div class="f"><label>Assignment name</label><input id="utTitle" placeholder="Research Paper Draft"></div>
+<div class="f"><label>Course</label><select id="utCourse"></select></div>
+<div class="f"><label>Due date</label><input type="date" id="utDeadline"></div>
+<div class="f"><label>Energy level</label><select id="utEnergy"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
+<div class="f"><label>Impact (1-10)</label><input type="number" id="utImpact" min="1" max="10" value="7"></div>
+<div class="f"><label>Link (optional)</label><input id="utLink" placeholder="https://..."></div>
+<div class="f"><label>Notes</label><input id="utNotes" placeholder="Details..."></div>
+<div class="ac"><button class="bg" onclick="cm('mUniTask')">Cancel</button><button class="bp" onclick="addUniAssignment()">Add (also creates task)</button></div></div></div>
+
+<div class="mo" id="mCNote"><div class="ml"><h3>&#128221; Add Class Note</h3>
+<div class="f"><label>Course</label><select id="cnCourse"></select></div>
+<div class="f"><label>Date</label><input type="date" id="cnDate"></div>
+<div class="f"><label>Lecture/Topic</label><input id="cnTitle" placeholder="Lecture 5: Neural Networks"></div>
+<div class="f"><label>Notes</label><textarea id="cnContent" rows="6" placeholder="Key points from today's class..."></textarea></div>
+<div class="ac"><button class="bg" onclick="cm('mCNote')">Cancel</button><button class="bp" onclick="addClassNote()">Save</button></div></div></div>
+
+<div class="mo" id="mCourse"><div class="ml"><h3>&#127891; Add Course</h3>
+<div class="f"><label>Course name</label><input id="crName" placeholder="Machine Learning"></div>
+<div class="f"><label>Credits</label><input type="number" id="crCred" value="3" min="1" max="6"></div>
+<div class="f"><label>Semester</label>
+<select id="crSem">
+<option value="Spring 2025">Spring 2025</option>
+<option value="Fall 2025">Fall 2025</option>
+<option value="Spring 2026" selected>Spring 2026</option>
+<option value="Fall 2026">Fall 2026</option>
+<option value="Spring 2027">Spring 2027</option>
+</select>
+<input id="crSemCustom" placeholder="Or type custom semester..." style="margin-top:4px">
+</div>
+<div style="border-top:1px solid var(--pk-p);margin:10px 0;padding-top:10px">
+<div style="font-size:12px;font-weight:600;color:var(--pk-d);margin-bottom:6px">&#128205; Class Schedule (optional)</div>
+<div class="f"><label>Campus</label><select id="crCampus"><option value="">None</option><option value="국립부경대학교">국립부경대학교</option><option value="부산대학교">부산대학교</option><option value="Online">Online</option></select></div>
+<div class="f"><label>Room</label><input id="crRoom" placeholder="Room 301, Building E"></div>
+<div class="f"><label>Day(s)</label>
+<div style="display:flex;gap:4px;flex-wrap:wrap">
+<button type="button" class="day-btn" data-day="1" onclick="this.classList.toggle('sel')">Mo</button>
+<button type="button" class="day-btn" data-day="2" onclick="this.classList.toggle('sel')">Tu</button>
+<button type="button" class="day-btn" data-day="3" onclick="this.classList.toggle('sel')">We</button>
+<button type="button" class="day-btn" data-day="4" onclick="this.classList.toggle('sel')">Th</button>
+<button type="button" class="day-btn" data-day="5" onclick="this.classList.toggle('sel')">Fr</button>
+<button type="button" class="day-btn" data-day="6" onclick="this.classList.toggle('sel')">Sa</button>
+</div></div>
+<div style="display:flex;gap:6px">
+<div class="f" style="flex:1"><label>Start time</label><input type="time" id="crTimeStart"></div>
+<div class="f" style="flex:1"><label>End time</label><input type="time" id="crTimeEnd"></div>
+</div>
+<div style="display:flex;gap:6px">
+<div class="f" style="flex:1"><label>Semester start date</label><input type="date" id="crSemStart"></div>
+<div class="f" style="flex:1"><label>Semester end date</label><input type="date" id="crSemEnd"></div>
+</div>
+</div>
+<div class="ac"><button class="bg" onclick="cm('mCourse')">Cancel</button><button class="bp" onclick="addCourse()">Add</button></div></div></div>
+
+<div class="mo" id="mAssign"><div class="ml"><h3>&#128221; Add Assignment</h3>
+<div class="f"><label>Assignment name</label><input id="asName" placeholder="Midterm"></div>
+<div class="f"><label>Grade (%)</label><input type="number" id="asGrade" min="0" max="100" placeholder="88"></div>
+<div class="f"><label>Weight (%)</label><input type="number" id="asWeight" min="0" max="100" placeholder="30"></div>
+<div class="ac"><button class="bg" onclick="cm('mAssign')">Cancel</button><button class="bp" onclick="addAssign()">Add</button></div></div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+let courses=[],curDeckId=null,dueCards=[],curCardIdx=0;
+
+document.querySelectorAll('.tb button').forEach(b=>{b.addEventListener('click',()=>{
+document.querySelectorAll('.tb button').forEach(x=>x.classList.remove('a'));
+document.querySelectorAll('.tp').forEach(x=>x.classList.remove('a'));
+b.classList.add('a');$('p-'+b.dataset.t).classList.add('a');
+})});
+function om(id){$(id).classList.add('a')}
+function cm(id){$(id).classList.remove('a')}
+
+async function loadAll(){
+const cr=await fetch('/api/courses');const cd=await cr.json();
+courses=cd.courses||[];
+$('p-classes').innerHTML=rClasses(cd);
+$('p-assignments').innerHTML=await rAssignments();
+$('p-materials').innerHTML=await rMaterials();
+$('p-study').innerHTML=await rStudy();
+$('p-grades').innerHTML=rGrades(cd);
+$('p-exams').innerHTML=await rExams();}
+
+function populateCourseSelect(selId){
+const sel=$(selId);if(!sel)return;sel.innerHTML='';
+courses.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.name;sel.appendChild(o)});}
+
+// ─── Classes ───
+function rClasses(cd){
+let h='<div class="cd"><div class="ct">&#128218; My Classes</div>';
+h+='<button class="bp" onclick="om(\'mCourse\')" style="margin-bottom:12px">+ Add Course</button>';
+if(!courses.length){h+='<p style="font-size:12px;color:var(--br-l)">No courses yet. Add your first class!</p>';}
+else{
+// Group by semester
+const bySem={};
+courses.forEach(c=>{const sem=c.semester||'No Semester';bySem[sem]=bySem[sem]||[];bySem[sem].push(c)});
+// Sort semesters (most recent first by name)
+const semKeys=Object.keys(bySem).sort().reverse();
+semKeys.forEach(sem=>{
+h+=`<div style="margin-bottom:14px">`;
+h+=`<div style="font-size:13px;font-weight:700;color:var(--pk-d);margin-bottom:8px;padding-bottom:4px;border-bottom:2px solid var(--pk-l)">&#128197; ${sem}</div>`;
+h+='<div class="g2">';
+bySem[sem].forEach(c=>{
+const dayNames={1:'Mo',2:'Tu',3:'We',4:'Th',5:'Fr',6:'Sa',0:'Su'};
+const classDays=(c.class_days||[]).map(d=>dayNames[d]||d).join(', ');
+const timeStr=(c.time_start&&c.time_end)?c.time_start+'-'+c.time_end:'';
+const locStr=[c.campus,c.room].filter(Boolean).join(' ');
+
+h+=`<div class="course-card" id="cc-${c.id}">`;
+// Header (clickable to expand)
+h+=`<div style="cursor:pointer" onclick="toggleCourseCard('${c.id}')">`;
+h+=`<div style="display:flex;justify-content:space-between;align-items:flex-start">`;
+h+=`<div><h4>${c.name}</h4><div class="cmeta">${c.credits} credits</div>`;
+if(classDays||timeStr||locStr){
+h+='<div style="margin-top:4px;display:flex;gap:4px;flex-wrap:wrap">';
+if(classDays)h+=`<span style="font-size:9px;padding:2px 6px;border-radius:4px;background:var(--bl);color:#4A7CC9;font-weight:600">${classDays}</span>`;
+if(timeStr)h+=`<span style="font-size:9px;padding:2px 6px;border-radius:4px;background:var(--yl);color:#C97A2E;font-weight:600">${timeStr}</span>`;
+if(locStr)h+=`<span style="font-size:9px;padding:2px 6px;border-radius:4px;background:var(--lav);color:var(--lav-d);font-weight:600">&#128205; ${locStr}</span>`;
+h+='</div>';}
+h+=`</div>`;
+h+=`<div style="display:flex;align-items:center;gap:6px">`;
+if(c.grade_pct!==null)h+=`<div style="text-align:right"><div style="font-size:16px;font-weight:700;color:var(--pk-d)">${c.letter}</div><div style="font-size:10px;color:var(--br-l)">${c.grade_pct}%</div></div>`;
+h+=`<span id="ccArrow-${c.id}" style="font-size:12px;color:var(--br-ll);transition:.2s">&#9660;</span>`;
+h+=`</div></div></div>`;
+
+// Expandable overview panel (hidden by default)
+h+=`<div id="ccPanel-${c.id}" style="display:none;margin-top:10px;border-top:1px solid rgba(248,164,184,.1);padding-top:10px">`;
+
+// Quick actions
+h+=`<div style="display:flex;gap:4px;margin-bottom:8px">`;
+h+=`<button class="bp sm" onclick="event.stopPropagation();showCourseMaterials('${c.id}')">&#128194; Materials</button>`;
+h+=`<button class="bp sm" style="background:var(--lav-d)" onclick="event.stopPropagation();showCourseNotes('${c.id}')">&#128221; Notes</button>`;
+h+=`<button class="bp sm" style="background:var(--gn)" onclick="event.stopPropagation();populateCourseSelect('utCourse');$('utCourse').value='${c.id}';om('mUniTask')">&#10133; Assignment</button>`;
+h+=`<button class="bd" onclick="event.stopPropagation();delCourse('${c.id}')" style="margin-left:auto">Delete</button>`;
+h+=`</div>`;
+
+// Overview content (loaded dynamically)
+h+=`<div id="ccOverview-${c.id}"><div class="ld" style="padding:10px">Loading overview...</div></div>`;
+h+=`</div></div>`;});
+h+='</div></div>';});
+}
+// Class notes section
+h+='<div style="margin-top:12px"><button class="bp" onclick="populateCourseSelect(\'cnCourse\');om(\'mCNote\')">+ Add Class Note</button></div>';
+h+='<div id="classNotesDiv" style="margin-top:10px"></div>';
+h+='</div>';
+// Load class notes
+setTimeout(async()=>{
+const r=await fetch('/api/uni/class-notes');const d=await r.json();
+const div=$('classNotesDiv');if(!div)return;
+let nh='';(d.notes||[]).slice(0,10).forEach(n=>{
+const cname=courses.find(c=>c.id===n.course_id)?.name||'';
+nh+=`<div style="padding:10px;background:var(--blush);border-radius:8px;margin-bottom:4px;border:1px solid rgba(248,164,184,.08)">`;
+nh+=`<div style="font-size:10px;color:var(--br-l)">${n.date} &middot; ${cname}</div>`;
+nh+=`<div style="font-size:12px;font-weight:600">${n.title||''}</div>`;
+nh+=`<div style="font-size:11px;margin-top:2px;color:var(--br)">${(n.content||'').slice(0,100)}${(n.content||'').length>100?'...':''}</div>`;
+nh+=`<button class="bd" onclick="delClassNote('${n.id}')" style="margin-top:4px">x</button></div>`;});
+div.innerHTML=nh||'<p style="font-size:11px;color:var(--br-l)">No class notes yet</p>';
+},200);
+return h;}
+
+async function showCourseMaterials(cid){
+document.querySelectorAll('.tb button').forEach(x=>x.classList.remove('a'));
+document.querySelectorAll('.tp').forEach(x=>x.classList.remove('a'));
+document.querySelectorAll('.tb button')[1].classList.add('a');
+$('p-materials').classList.add('a');
+// Filter materials by course
+$('p-materials').innerHTML=await rMaterials(cid);}
+
+async function showCourseNotes(cid){
+const r=await fetch(`/api/uni/class-notes?course_id=${cid}`);const d=await r.json();
+const div=$('classNotesDiv');if(!div)return;
+let nh='';(d.notes||[]).forEach(n=>{
+nh+=`<div style="padding:10px;background:var(--blush);border-radius:8px;margin-bottom:4px">`;
+nh+=`<div style="font-size:10px;color:var(--br-l)">${n.date}</div><div style="font-size:12px;font-weight:600">${n.title||''}</div>`;
+nh+=`<div style="font-size:11px;margin-top:2px">${n.content||''}</div></div>`;});
+div.innerHTML=nh||'<p style="font-size:11px;color:var(--br-l)">No notes for this course</p>';}
+
+// ─── Materials ───
+async function rMaterials(filterCourse){
+const r=await fetch('/api/uni/materials');const d=await r.json();
+let mats=d.materials||[];
+if(filterCourse)mats=mats.filter(m=>m.course_id===filterCourse);
+let h='<div class="cd"><div class="ct">&#128194; Materials Library</div>';
+h+='<button class="bp" onclick="populateCourseSelect(\'matCourse\');om(\'mMat\')" style="margin-bottom:10px">+ Add Material</button>';
+if(!mats.length)h+='<p style="font-size:11px;color:var(--br-l)">No materials yet</p>';
+// Group by course
+const byCourse={};mats.forEach(m=>{const cname=courses.find(c=>c.id===m.course_id)?.name||'Other';byCourse[cname]=byCourse[cname]||[];byCourse[cname].push(m)});
+Object.entries(byCourse).forEach(([cname,items])=>{
+h+=`<div style="font-size:12px;font-weight:600;margin:10px 0 4px;color:var(--pk-d)">${cname}</div>`;
+items.forEach(m=>{
+h+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--blush);border-radius:8px;margin-bottom:3px">`;
+const icon=m.type==='pdf'?'&#128196;':m.type==='slides'?'&#128202;':'&#128279;';
+h+=`<span>${icon}</span><span style="font-size:12px;flex:1"><a href="${m.url||m.file_path||'#'}" target="_blank" style="color:var(--br);text-decoration:none;font-weight:500">${m.title}</a></span>`;
+h+=`<span style="font-size:9px;color:var(--br-ll)">${m.folder}</span>`;
+h+=`<button class="bd" onclick="delMaterial('${m.id}')">x</button></div>`;});});
+return h+'</div>';}
+
+// ─── Study Mode ───
+async function rStudy(){
+let h='<div class="cd"><div class="ct">&#127891; Study Mode</div>';
+h+='<div style="display:flex;gap:6px;margin-bottom:12px">';
+h+='<button class="bp" onclick="populateCourseSelect(\'deckCourse\');om(\'mDeck\')">+ New Deck</button>';
+h+='<button class="bp" style="background:var(--lav-d)" onclick="om(\'mGenFC\')">&#10024; Generate from Text</button></div>';
+// Due cards count
+const dr=await fetch('/api/uni/flashcards/due');const dd=await dr.json();
+if(dd.cards&&dd.cards.length){
+h+=`<div style="padding:12px;background:linear-gradient(135deg,var(--yl),#FFE8D0);border-radius:var(--rs);margin-bottom:12px;font-size:13px;font-weight:600">&#127183; ${dd.cards.length} card${dd.cards.length>1?'s':''} due for review! <button class="bp sm" onclick="startReview()">Start Review</button></div>`;}
+// Review area
+h+='<div id="reviewArea"></div>';
+// Decks
+const fr=await fetch('/api/uni/flashcards');const fd=await fr.json();
+if(fd.decks&&fd.decks.length){
+h+='<div style="margin-top:10px"><div style="font-size:12px;font-weight:600;color:var(--pk-d);margin-bottom:6px">Your Decks</div>';
+fd.decks.forEach(d=>{
+h+=`<div style="display:flex;align-items:center;gap:8px;padding:10px;background:var(--blush);border-radius:8px;margin-bottom:4px">`;
+h+=`<div style="flex:1"><b style="font-size:12px">${d.title}</b><span style="font-size:10px;color:var(--br-l)"> &middot; ${d.cards.length} cards</span></div>`;
+h+=`<button class="bp sm" onclick="startDeckReview('${d.id}')">Review</button>`;
+h+=`<button class="bd" onclick="delDeck('${d.id}')">x</button></div>`;});
+h+='</div>';}
+return h+'</div>';}
+
+async function startReview(){
+const r=await fetch('/api/uni/flashcards/due');const d=await r.json();
+dueCards=d.cards||[];curCardIdx=0;showCard();}
+
+async function startDeckReview(did){
+const r=await fetch(`/api/uni/flashcards/due?deck_id=${did}`);const d=await r.json();
+dueCards=d.cards||[];curCardIdx=0;
+if(!dueCards.length){
+// Show all cards from deck
+const fr=await fetch('/api/uni/flashcards');const fd=await fr.json();
+const deck=fd.decks.find(x=>x.id===did);
+if(deck)dueCards=deck.cards.map(c=>({...c,deck_id:did,deck_title:deck.title}));
+}
+showCard();}
+
+function showCard(){
+const div=$('reviewArea');if(!div)return;
+if(curCardIdx>=dueCards.length){div.innerHTML='<div style="text-align:center;padding:20px;font-size:13px;color:var(--gn-d)">&#10024; All done! Great job!</div>';return;}
+const c=dueCards[curCardIdx];
+div.innerHTML=`<div class="fc-card"><div style="font-size:10px;opacity:.6;margin-bottom:8px">${c.deck_title||''} &middot; Card ${curCardIdx+1}/${dueCards.length}</div>
+<div class="q">${c.question}</div>
+<div class="a" id="fcAnswer">${c.answer}</div>
+<div class="fc-actions">
+<button onclick="$('fcAnswer').style.display='block'" style="background:var(--lav-d);color:#fff">Show Answer</button>
+<button onclick="rateCard('${c.deck_id}','${c.id}','hard')" style="background:var(--rd);color:#C62828">Hard</button>
+<button onclick="rateCard('${c.deck_id}','${c.id}','medium')" style="background:var(--yl);color:#C97A2E">Medium</button>
+<button onclick="rateCard('${c.deck_id}','${c.id}','easy')" style="background:var(--gn);color:#3D7A55">Easy</button>
+</div></div>`;}
+
+async function rateCard(did,cid,rating){
+await fetch(`/api/uni/flashcards/${did}/cards/${cid}/review`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({rating})});
+curCardIdx++;showCard();}
+
+// ─── Grades ───
+function rGrades(cd){
+let h='';
+if(cd.cumulative_gpa!==null){
+h+=`<div class="wellness"><div class="ws">${cd.cumulative_gpa}</div><div class="wr">Cumulative GPA (${cd.total_credits} credits)</div></div>`;}
+h+='<div class="cd"><div class="ct">&#128200; Grade Tracker</div>';
+h+='<button class="bp" onclick="om(\'mCourse\')" style="margin-bottom:12px">+ Add Course</button>';
+
+// Group by semester
+const bySem={};
+courses.forEach(c=>{const sem=c.semester||'No Semester';bySem[sem]=bySem[sem]||[];bySem[sem].push(c)});
+const semKeys=Object.keys(bySem).sort().reverse();
+
+semKeys.forEach(sem=>{
+h+=`<div style="font-size:13px;font-weight:700;color:var(--pk-d);margin:12px 0 6px;padding-bottom:4px;border-bottom:2px solid var(--pk-l)">&#128197; ${sem}</div>`;
+bySem[sem].forEach(c=>{
+h+=`<div class="course-card"><div style="display:flex;justify-content:space-between;align-items:center">`;
+h+=`<div><h4>${c.name}</h4><div class="cmeta">${c.credits} credits</div></div>`;
+if(c.grade_pct!==null)h+=`<div style="font-size:18px;font-weight:700;color:var(--pk-d)">${c.letter} (${c.grade_pct}%)</div>`;
+h+='</div>';
+// Assignments
+if(c.assignments&&c.assignments.length){c.assignments.forEach(a=>{
+h+=`<div style="display:flex;align-items:center;gap:6px;padding:4px 0;font-size:11px;border-top:1px solid rgba(248,164,184,.08);margin-top:4px">`;
+h+=`<span style="flex:1">${a.name}</span><span style="font-weight:600">${a.grade}%</span><span style="color:var(--br-l)">(${a.weight}%)</span>`;
+h+=`<button class="bd" onclick="delAssignment('${c.id}','${a.id}')">x</button></div>`;});}
+h+=`<button class="bg" style="font-size:10px;padding:5px;margin-top:4px" onclick="assignCourseId='${c.id}';om('mAssign')">+ Assignment</button>`;
+h+='</div>';});});
+
+if(!courses.length)h+='<p style="font-size:11px;color:var(--br-l)">No courses yet. Add your first one!</p>';
+return h+'</div>';}
+
+// ─── Exams ───
+async function rExams(){
+const r=await fetch('/api/uni/exams');const d=await r.json();
+const today=new Date();
+let h='<div class="cd"><div class="ct">&#9203; Exam Countdown</div>';
+h+='<button class="bp sm" onclick="populateCourseSelect(\'exCourse\');om(\'mExam\')" style="margin-bottom:10px">+ Add Exam</button>';
+const sorted=(d.exams||[]).sort((a,b)=>a.date.localeCompare(b.date));
+sorted.forEach(e=>{
+const examDate=new Date(e.date+'T00:00:00');
+const days=Math.ceil((examDate-today)/(1000*60*60*24));
+const col=days<0?'var(--rd)':days<=3?'var(--rd)':days<=7?'var(--yl)':'var(--gn)';
+const cname=courses.find(c=>c.id===e.course_id)?.name||'';
+h+=`<div class="exam-card"><div class="exam-days" style="color:${col}">${days<0?'!':days}</div><div style="flex:1">`;
+h+=`<div style="font-size:13px;font-weight:600">${e.title}</div>`;
+h+=`<div style="font-size:10px;color:var(--br-l)">${cname} &middot; ${e.date} &middot; ${e.type}</div></div>`;
+h+=`<button class="bd" onclick="delExam('${e.id}')">x</button></div>`;});
+if(!sorted.length)h+='<p style="font-size:11px;color:var(--br-l)">No exams scheduled</p>';
+return h+'</div>';}
+
+// ─── Actions ───
+// ─── Assignments (connected to tasks) ───
+async function rAssignments(){
+const tr=await fetch('/api/tasks');const td=await tr.json();
+// Filter tasks that are uni assignments (category=learning or have course tag)
+const allTasks=td.tasks||[];
+const uniTasks=allTasks.filter(t=>t.category==='uni'||t.category==='assignment');
+const otherTasks=allTasks.filter(t=>t.category!=='uni'&&t.category!=='assignment');
+
+let h='<div class="cd"><div class="ct">&#128221; Assignments</div>';
+h+='<button class="bp" onclick="populateCourseSelect(\'utCourse\');om(\'mUniTask\')" style="margin-bottom:12px">+ Add Assignment</button>';
+
+if(!uniTasks.length){h+='<p style="font-size:11px;color:var(--br-l)">No assignments yet. Add one and it auto-creates a task on the Home page!</p>';}
+
+// Group by status
+const todo=uniTasks.filter(t=>t.status!=='done');
+const done=uniTasks.filter(t=>t.status==='done');
+
+// Sort by deadline
+todo.sort((a,b)=>{
+if(!a.deadline)return 1;if(!b.deadline)return -1;
+return a.deadline.localeCompare(b.deadline);});
+
+if(todo.length){
+h+='<div style="font-size:12px;font-weight:600;color:var(--pk-d);margin-bottom:6px">To Do</div>';
+todo.forEach((t,idx)=>{
+const origIdx=allTasks.indexOf(t);
+const dl=t.deadline;let dlStr='';
+if(dl){const today=new Date().toISOString().split('T')[0];const diff=Math.ceil((new Date(dl)-new Date(today))/(86400000));
+dlStr=diff<0?`<span style="color:var(--rd-d)">${Math.abs(diff)}d overdue</span>`:diff===0?'<span style="color:var(--rd-d)">today</span>':diff===1?'tomorrow':diff+'d left';}
+h+=`<div style="display:flex;align-items:center;gap:8px;padding:10px;background:var(--blush);border-radius:var(--rs);margin-bottom:4px;cursor:pointer" onclick="toggleUniTask(${origIdx})">`;
+h+=`<div style="width:18px;height:18px;border:2px solid var(--pk);border-radius:50%;flex-shrink:0"></div>`;
+h+=`<div style="flex:1;min-width:0"><div style="font-size:12px;font-weight:600">${t.title}</div>`;
+h+=`<div style="font-size:10px;color:var(--br-l)">${t.course_name||''} ${dlStr?'&middot; '+dlStr:''}</div>`;
+if(t.link||t.file_path){h+=`<div style="display:flex;gap:4px;margin-top:3px">`;
+if(t.link)h+=`<a href="${t.link}" target="_blank" onclick="event.stopPropagation()" style="font-size:9px;padding:2px 8px;background:var(--bl);border-radius:5px;color:#4A7CC9;text-decoration:none;font-weight:600">🔗 Link</a>`;
+if(t.file_path)h+=`<a href="/files/uploads/${t.file_path.split('/').pop()}" target="_blank" onclick="event.stopPropagation()" style="font-size:9px;padding:2px 8px;background:var(--lav);border-radius:5px;color:var(--lav-d);text-decoration:none;font-weight:600">📄 File</a>`;
+h+=`</div>`;}
+h+=`</div>`;
+h+=`<span style="font-size:9px;padding:2px 6px;border-radius:6px;background:var(--yl);color:#C97A2E;font-weight:600">${t.energy}</span>`;
+h+=`</div>`;});}
+
+if(done.length){
+h+='<div style="font-size:12px;font-weight:600;color:var(--gn-d);margin:10px 0 6px">Completed</div>';
+done.forEach(t=>{
+const origIdx=allTasks.indexOf(t);
+h+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:linear-gradient(135deg,var(--gn),#D4F5E0);border-radius:var(--rs);margin-bottom:3px;cursor:pointer">`;
+h+=`<div style="width:18px;height:18px;border:2px solid var(--gn-d);border-radius:50%;background:var(--gn-d);display:flex;align-items:center;justify-content:center;flex-shrink:0" onclick="toggleUniTask(${origIdx})"><span style="color:#fff;font-size:10px">&#10003;</span></div>`;
+h+=`<div style="flex:1;min-width:0"><div style="font-size:12px;text-decoration:line-through;color:var(--gn-d)">${t.title}</div>`;
+// Show attached file if exists
+if(t.file_path)h+=`<a href="/files/uploads/${t.file_path.split('/').pop()}" target="_blank" onclick="event.stopPropagation()" style="font-size:9px;padding:2px 8px;background:var(--lav);border-radius:5px;color:var(--lav-d);text-decoration:none;font-weight:600;display:inline-block;margin-top:2px">📄 Submitted</a>`;
+if(t.link)h+=`<a href="${t.link}" target="_blank" onclick="event.stopPropagation()" style="font-size:9px;padding:2px 8px;background:var(--bl);border-radius:5px;color:#4A7CC9;text-decoration:none;font-weight:600;display:inline-block;margin-top:2px;margin-left:3px">🔗 Link</a>`;
+h+=`</div>`;
+// Upload button for completed tasks without a file yet
+if(!t.file_path){h+=`<label style="font-size:9px;padding:3px 10px;background:linear-gradient(135deg,var(--pk),var(--rose));border-radius:6px;color:#fff;font-weight:600;cursor:pointer;white-space:nowrap">📎 Upload<input type="file" accept=".pdf,.doc,.docx,.pptx,.zip" style="display:none" onchange="uploadForTask(${origIdx},this)"></label>`;}
+h+=`</div>`;});}
+
+return h+'</div>';}
+
+async function addUniAssignment(){
+const title=$('utTitle').value;if(!title)return;
+const courseId=$('utCourse').value;
+const courseName=courses.find(c=>c.id===courseId)?.name||'';
+const link=$('utLink').value;
+
+await fetch('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+title:'['+courseName+'] '+title,
+deadline:$('utDeadline').value||'',
+category:'uni',
+energy:$('utEnergy').value,
+impact:parseInt($('utImpact').value)||7,
+status:'pending',
+notes:$('utNotes').value,
+course_id:courseId,
+course_name:courseName,
+link:link,
+})});
+$('utTitle').value='';$('utNotes').value='';$('utLink').value='';
+cm('mUniTask');loadAll();}
+
+async function uploadForTask(idx,input){
+if(!input.files||!input.files.length)return;
+const formData=new FormData();
+formData.append('file',input.files[0]);
+try{const ur=await fetch('/api/upload',{method:'POST',body:formData});
+const ud=await ur.json();
+if(ud.path){await fetch(`/api/tasks/${idx}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({file_path:ud.path})});
+loadAll();}}catch(e){}}
+
+async function toggleUniTask(idx){
+const r=await fetch('/api/tasks');const d=await r.json();
+const t=d.tasks[idx];if(!t)return;
+const newStatus=t.status==='done'?'pending':'done';
+await fetch(`/api/tasks/${idx}`,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({status:newStatus})});
+loadAll();}
+
+// ─── Course Card Toggle ───
+async function toggleCourseCard(cid){
+const panel=$('ccPanel-'+cid);
+const arrow=$('ccArrow-'+cid);
+if(!panel)return;
+
+if(panel.style.display==='none'){
+panel.style.display='block';
+if(arrow)arrow.innerHTML='&#9650;';
+// Load overview data
+loadCourseOverview(cid);
+}else{
+panel.style.display='none';
+if(arrow)arrow.innerHTML='&#9660;';
+}}
+
+async function loadCourseOverview(cid){
+const div=$('ccOverview-'+cid);if(!div)return;
+
+try{
+// Fetch assignments, notes, materials in parallel
+const [tasksR, notesR, matsR] = await Promise.all([
+  fetch('/api/tasks'),
+  fetch('/api/uni/class-notes?course_id='+cid),
+  fetch('/api/uni/materials?course_id='+cid)
+]);
+const tasksD=await tasksR.json();
+const notesD=await notesR.json();
+const matsD=await matsR.json();
+
+let oh='';
+
+// Assignments for this course
+const courseAssignments=(tasksD.tasks||[]).filter(t=>(t.category==='uni')&&t.course_id===cid);
+const pending=courseAssignments.filter(t=>t.status!=='done');
+const done=courseAssignments.filter(t=>t.status==='done');
+
+oh+=`<div style="margin-bottom:8px"><div style="font-size:10px;font-weight:600;color:var(--pk-d);margin-bottom:4px">&#128221; Assignments (${pending.length} pending, ${done.length} done)</div>`;
+if(!courseAssignments.length)oh+=`<div style="font-size:10px;color:var(--br-l)">No assignments yet</div>`;
+pending.forEach(t=>{
+const dl=t.deadline;let dlStr='';
+if(dl){const diff=Math.ceil((new Date(dl)-new Date())/(86400000));
+dlStr=diff<0?'overdue':diff===0?'today':diff+'d';}
+oh+=`<div style="display:flex;align-items:center;gap:4px;padding:3px 0;font-size:10px"><span style="color:var(--yl-d)">&#9679;</span><span style="flex:1">${t.title.replace(/^\[.*?\]\s*/,'')}</span>`;
+if(dlStr)oh+=`<span style="color:var(--br-l)">${dlStr}</span>`;
+if(t.link)oh+=`<a href="${t.link}" target="_blank" onclick="event.stopPropagation()" style="font-size:8px;color:var(--bl-d)">&#128279;</a>`;
+oh+=`</div>`;});
+done.forEach(t=>{
+oh+=`<div style="display:flex;align-items:center;gap:4px;padding:2px 0;font-size:10px;opacity:.5"><span style="color:var(--gn-d)">&#10003;</span><span style="text-decoration:line-through">${t.title.replace(/^\[.*?\]\s*/,'')}</span>`;
+if(t.file_path)oh+=`<a href="/files/uploads/${t.file_path.split('/').pop()}" target="_blank" onclick="event.stopPropagation()" style="font-size:8px;color:var(--lav-d)">&#128196;</a>`;
+oh+=`</div>`;});
+oh+=`</div>`;
+
+// Recent notes
+const notes=notesD.notes||[];
+oh+=`<div style="margin-bottom:8px"><div style="font-size:10px;font-weight:600;color:var(--pk-d);margin-bottom:4px">&#128221; Recent Notes (${notes.length})</div>`;
+if(!notes.length)oh+=`<div style="font-size:10px;color:var(--br-l)">No notes yet</div>`;
+notes.slice(0,3).forEach(n=>{
+oh+=`<div style="padding:3px 0;font-size:10px;border-bottom:1px solid rgba(248,164,184,.05)"><span style="color:var(--br-l)">${n.date}</span> <b>${n.title||''}</b>`;
+if(n.content)oh+=`<div style="font-size:9px;color:var(--br-l);margin-top:1px">${(n.content||'').slice(0,60)}${(n.content||'').length>60?'...':''}</div>`;
+oh+=`</div>`;});
+oh+=`</div>`;
+
+// Materials count
+const mats=matsD.materials||[];
+oh+=`<div style="font-size:10px;font-weight:600;color:var(--pk-d);margin-bottom:4px">&#128194; Materials (${mats.length})</div>`;
+if(!mats.length)oh+=`<div style="font-size:10px;color:var(--br-l)">No materials yet</div>`;
+mats.slice(0,4).forEach(m=>{
+const icon=m.type==='pdf'?'&#128196;':m.type==='slides'?'&#128202;':'&#128279;';
+oh+=`<div style="font-size:10px;padding:2px 0"><span>${icon}</span> <a href="${m.url||m.file_path||'#'}" target="_blank" onclick="event.stopPropagation()" style="color:var(--br);text-decoration:none">${m.title}</a> <span style="color:var(--br-ll)">${m.folder}</span></div>`;});
+
+div.innerHTML=oh;
+}catch(e){div.innerHTML='<p style="font-size:10px;color:var(--rd-d)">Failed to load</p>';}}
+
+// ─── Course CRUD ───
+let assignCourseId='';
+async function addCourse(){
+const n=$('crName').value;if(!n)return;
+const sem=$('crSemCustom').value||$('crSem').value;
+const campus=$('crCampus').value;
+const room=$('crRoom').value;
+const timeStart=$('crTimeStart').value;
+const timeEnd=$('crTimeEnd').value;
+const semStart=$('crSemStart').value;
+const semEnd=$('crSemEnd').value;
+const days=[...document.querySelectorAll('#mCourse .day-btn.sel')].map(b=>parseInt(b.dataset.day));
+
+// Save course with schedule info
+const courseData={
+  name:n, credits:parseInt($('crCred').value)||3, semester:sem,
+  campus:campus, room:room,
+  class_days:days, time_start:timeStart, time_end:timeEnd,
+};
+const cr=await fetch('/api/courses',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(courseData)});
+const cd=await cr.json();
+
+// Auto-generate weekly schedules if days + time + semester dates are set
+if(days.length && timeStart && timeEnd && semStart && semEnd){
+  const start=new Date(semStart+'T00:00:00');
+  const end=new Date(semEnd+'T00:00:00');
+  const cur=new Date(start);
+  const locationLabel=campus?(room?campus+' '+room:campus):'';
+  let count=0;
+  while(cur<=end){
+    // JS getDay: 0=Sun,1=Mon... matches our data-day values
+    if(days.includes(cur.getDay())){
+      const dateStr=cur.toISOString().split('T')[0];
+      await fetch('/api/schedules',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        title:n, date:dateStr, time_start:timeStart, time_end:timeEnd,
+        type:'class', location:locationLabel, course_id:cd.id
+      })});
+      count++;
+    }
+    cur.setDate(cur.getDate()+1);
+  }
+  if(count>0)console.log(`Created ${count} schedule entries for ${n}`);
+}
+
+// Reset form
+$('crName').value='';$('crSemCustom').value='';$('crRoom').value='';
+$('crTimeStart').value='';$('crTimeEnd').value='';
+$('crSemStart').value='';$('crSemEnd').value='';
+document.querySelectorAll('#mCourse .day-btn').forEach(b=>b.classList.remove('sel'));
+cm('mCourse');loadAll();}
+
+async function delCourse(id){if(!confirm('Delete this course and all its data?'))return;
+await fetch(`/api/courses/${id}`,{method:'DELETE'});loadAll();}
+
+async function addAssign(){const n=$('asName').value;if(!n||!assignCourseId)return;
+await fetch(`/api/courses/${assignCourseId}/assignments`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,grade:parseFloat($('asGrade').value)||0,weight:parseFloat($('asWeight').value)||0})});
+$('asName').value='';cm('mAssign');loadAll();}
+
+async function delAssignment(cid,aid){await fetch(`/api/courses/${cid}/assignments/${aid}`,{method:'DELETE'});loadAll();}
+
+// ─── Materials ───
+async function addMaterial(){const t=$('matTitle').value;if(!t)return;
+await fetch('/api/uni/materials',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({course_id:$('matCourse').value,title:t,type:'link',url:$('matUrl').value,folder:$('matFolder').value})});
+$('matTitle').value='';cm('mMat');loadAll();}
+async function delMaterial(id){await fetch(`/api/uni/materials/${id}`,{method:'DELETE'});loadAll();}
+async function createDeck(){const t=$('deckTitle').value;if(!t)return;
+await fetch('/api/uni/flashcards',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:t,course_id:$('deckCourse').value})});
+$('deckTitle').value='';cm('mDeck');loadAll();}
+async function delDeck(id){if(!confirm('Delete deck?'))return;await fetch(`/api/uni/flashcards/${id}`,{method:'DELETE'});loadAll();}
+async function generateCards(){
+const text=$('fcText').value;if(!text)return;
+$('fcStatus').textContent='Generating flashcards... (10-20s)';$('genBtn').disabled=true;
+try{const r=await fetch('/api/uni/flashcards/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,num_cards:parseInt($('fcNum').value)||10})});
+const d=await r.json();
+if(d.cards&&d.cards.length){
+// Create a deck with generated cards
+const title=text.slice(0,30)+'... (auto)';
+await fetch('/api/uni/flashcards',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title,cards:d.cards})});
+$('fcStatus').textContent=`Generated ${d.cards.length} cards!`;
+cm('mGenFC');loadAll();}
+else $('fcStatus').textContent='Failed to generate cards';}
+catch(e){$('fcStatus').textContent='Error: '+e}
+$('genBtn').disabled=false;}
+async function addExam(){const n=$('exName').value;if(!n)return;
+await fetch('/api/uni/exams',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:n,course_id:$('exCourse').value,date:$('exDate').value,type:$('exType').value})});
+$('exName').value='';cm('mExam');loadAll();}
+async function delExam(id){await fetch(`/api/uni/exams/${id}`,{method:'DELETE'});loadAll();}
+async function addClassNote(){const t=$('cnTitle').value;if(!t)return;
+const noteDate=$('cnDate').value||new Date().toISOString().split('T')[0];
+await fetch('/api/uni/class-notes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({course_id:$('cnCourse').value,title:t,content:$('cnContent').value,date:noteDate})});
+$('cnTitle').value='';$('cnContent').value='';cm('mCNote');loadAll();}
+async function delClassNote(id){await fetch(`/api/uni/class-notes/${id}`,{method:'DELETE'});loadAll();}
+
+loadAll();
+</script>
+<style>.fab{position:fixed;bottom:20px;right:20px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#F8A4B8,#F9C5D1);color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 16px rgba(248,164,184,.5);z-index:90;transition:.3s;font-family:inherit}.fab:hover{transform:scale(1.1)}.fab-input{position:fixed;bottom:80px;right:20px;width:300px;background:#fff;border-radius:20px;padding:14px;box-shadow:0 8px 32px rgba(248,164,184,.3);z-index:91;display:none}.fab-input.open{display:block}.fab-input input{width:100%;padding:10px;border:1px solid #FFD1DC;border-radius:10px;font-size:13px;font-family:inherit}.fab-input input:focus{outline:none;border-color:#F8A4B8}.fab-input .hint{font-size:9px;color:#9C7A8A;margin-top:6px}.fab-result{margin-top:6px;padding:6px 10px;border-radius:8px;font-size:11px;display:none}</style>
+<button class="fab" onclick="toggleCapture()">+</button>
+<div class="fab-input" id="fabInput"><input id="fabText" placeholder="Quick capture..." onkeydown="if(event.key==='Enter')doCapture()"><div class="hint">"todo ..." → task | "spent 4500" → expense | else → brain dump</div><div class="fab-result" id="fabResult"></div></div>
+<script>
+function toggleCapture(){document.getElementById('fabInput').classList.toggle('open');document.getElementById('fabText').focus();}
+async function doCapture(){const inp=document.getElementById('fabText');const text=inp.value.trim();if(!text)return;const res=document.getElementById('fabResult');try{const r=await fetch('/api/capture',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});const d=await r.json();res.style.display='block';res.style.background='#FFDBE5';res.textContent={task:'✅ Task',expense:'💰 Expense',reminder:'🔔 Reminder',brain_dump:'🧠 Captured'}[d.type]||'📝 Saved';inp.value='';setTimeout(()=>{res.style.display='none';document.getElementById('fabInput').classList.remove('open');loadAll();},1500);}catch(e){}}
+document.addEventListener('click',e=>{const f=document.getElementById('fabInput');if(f&&f.classList.contains('open')&&!f.contains(e.target)&&e.target!==document.querySelector('.fab'))f.classList.remove('open');
+const sr=document.getElementById('searchResults');const si=document.getElementById('globalSearch');if(sr&&sr.style.display==='block'&&!sr.contains(e.target)&&e.target!==si)sr.style.display='none';});
+let searchTimer=null;function doGlobalSearch(q){clearTimeout(searchTimer);const div=document.getElementById('searchResults');if(!q||q.length<2){div.innerHTML='';div.style.display='none';return;}div.style.display='block';searchTimer=setTimeout(async()=>{try{const r=await fetch(`/api/search?q=${encodeURIComponent(q)}`);const d=await r.json();if(!d.results.length){div.innerHTML='<div style="padding:12px;font-size:11px;color:#9C7A8A">No results</div>';return;}let h=`<div style="padding:4px 8px;font-size:10px;color:#9C7A8A">${d.total} results</div>`;d.results.slice(0,15).forEach(r=>{h+=`<div style="display:flex;align-items:flex-start;gap:8px;padding:8px;border-bottom:1px solid rgba(248,164,184,.06);cursor:pointer" onclick="${r.url?`window.open('${r.url}','_blank')`:''}">${r.icon||'📌'} <div style="flex:1"><div style="font-size:12px;font-weight:600">${r.title}</div><div style="font-size:9px;color:#9C7A8A">${r.source}</div></div></div>`;});div.innerHTML=h;}catch(e){}},300);}
+</script>
+</body>
+</html>
