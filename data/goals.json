@@ -23,6 +23,24 @@
           "\uc4f0\uae30 (Writing)"
         ]
       }
+    },
+    {
+      "id": "hsk",
+      "title": "HSK 1-2 (Mandarin)",
+      "target_date": "",
+      "category": "language",
+      "status": "active",
+      "daily_log": {},
+      "practice_tests": [],
+      "study_plan": {
+        "total_vocab_target": 300,
+        "daily_vocab_target": 5,
+        "sections": [
+          "\u542c\u529b (Listening)",
+          "\u9605\u8bfb (Reading)",
+          "\u4e66\u5199 (Writing)"
+        ]
+      }
     }
   ]
 }

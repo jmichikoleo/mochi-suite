@@ -163,3 +163,38 @@ Focus on high-frequency TOPIK vocabulary. Include a mix of nouns, verbs, adjecti
         return json.loads(result)
     except Exception as e:
         return [{"question": f"Error: {e}", "answer": "Check API key"}]
+
+
+def generate_hsk_flashcards(level: str, category: str, api_key: str,
+                             model: str = "gpt-4o-mini", num_cards: int = 10) -> list:
+    """Generate HSK Mandarin vocabulary flashcards using GPT."""
+    try:
+        from openai import OpenAI
+        client = OpenAI(api_key=api_key)
+
+        prompt = f"""Generate {num_cards} Mandarin Chinese vocabulary flashcards for HSK Level {level} preparation.
+Category: {category}
+
+For each card, provide:
+- question: The Chinese character(s) with pinyin
+- answer: English meaning + example sentence in Chinese with pinyin and translation
+
+Return ONLY valid JSON array:
+[{{"question": "你好 (nǐ hǎo)", "answer": "Hello\\n例: 你好，我叫小明。(Nǐ hǎo, wǒ jiào Xiǎo Míng.) - Hello, my name is Xiao Ming."}}]
+
+Focus on high-frequency HSK {level} vocabulary. Include a mix of nouns, verbs, adjectives, and common phrases."""
+
+        response = client.chat.completions.create(
+            model=model,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.7,
+            max_tokens=2000,
+        )
+        result = response.choices[0].message.content.strip()
+        if result.startswith("```"):
+            result = result.split("\n", 1)[1]
+            if result.endswith("```"):
+                result = result[:-3]
+        return json.loads(result)
+    except Exception as e:
+        return [{"question": f"Error: {e}", "answer": "Check API key"}]

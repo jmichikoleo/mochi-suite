@@ -1378,22 +1378,35 @@ h+=`</div>`;
 h+=`<div style="display:flex;justify-content:flex-end;margin-top:6px"><button class="bp sm" onclick="logGoalStudy('${g.id}')">Log</button></div></div>`;
 
 // Flashcard management
+// Flashcard section — different buttons for TOPIK vs HSK
+const isHSK=g.id==='hsk';
+const langLabel=isHSK?'HSK 中文':'TOPIK 한국어';
+const langFlag=isHSK?'🇨🇳':'🇰🇷';
+const searchTerm=isHSK?'hsk':'topik';
+
 h+=`<div style="border-top:1px solid var(--pk-p);margin:10px 0;padding-top:10px">`;
-h+=`<div style="font-size:12px;font-weight:600;color:var(--pk-d);margin-bottom:8px">&#127183; TOPIK Flashcards</div>`;
+h+=`<div style="font-size:12px;font-weight:600;color:var(--pk-d);margin-bottom:8px">&#127183; ${langFlag} ${langLabel} Flashcards</div>`;
 h+=`<div style="display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap">`;
-h+=`<button class="bp sm" onclick="genTopikCards('${g.id}','general vocabulary')">&#10024; Generate Vocab</button>`;
+if(isHSK){
+h+=`<button class="bp sm" onclick="genHSKCards('${g.id}','basic vocabulary')">&#10024; Basic Vocab</button>`;
+h+=`<button class="bp sm" style="background:var(--lav-d)" onclick="genHSKCards('${g.id}','common phrases')">&#10024; Phrases</button>`;
+h+=`<button class="bp sm" style="background:var(--yl)" onclick="genHSKCards('${g.id}','numbers and time')">&#10024; Numbers</button>`;
+}else{
+h+=`<button class="bp sm" onclick="genTopikCards('${g.id}','general vocabulary')">&#10024; Vocab</button>`;
 h+=`<button class="bp sm" style="background:var(--lav-d)" onclick="genTopikCards('${g.id}','grammar patterns')">&#10024; Grammar</button>`;
+}
 h+=`<button class="bp sm" style="background:var(--gn)" onclick="om('mTopikDeck')">+ New Deck</button>`;
 h+=`</div>`;
-h+=`<div id="topikGenStatus" style="font-size:10px;color:var(--br-l)"></div>`;
-h+=`<div id="topikDecks"><div class="ld">Loading decks...</div></div></div>`;
+h+=`<div id="topikGenStatus-${g.id}" style="font-size:10px;color:var(--br-l)"></div>`;
+h+=`<div id="topikDecks-${g.id}"><div class="ld">Loading decks...</div></div></div>`;
 
-// Load TOPIK decks inline
+// Load language decks inline
 setTimeout(async()=>{
 try{const r=await fetch('/api/uni/flashcards');const d=await r.json();
-const decks=(d.decks||[]).filter(dk=>dk.title.toLowerCase().includes('topik')||dk.title.includes('한국'));
-const div=$('topikDecks');if(!div)return;
-if(!decks.length){div.innerHTML='<p style="font-size:11px;color:var(--br-l)">No TOPIK decks yet. Generate or create one!</p>';return;}
+const keywords=isHSK?['hsk','中文','mandarin','chinese']:['topik','한국','korean'];
+const decks=(d.decks||[]).filter(dk=>keywords.some(k=>dk.title.toLowerCase().includes(k)));
+const div=$('topikDecks-'+g.id);if(!div)return;
+if(!decks.length){div.innerHTML=`<p style="font-size:11px;color:var(--br-l)">No ${langLabel} decks yet. Generate or create one!</p>`;return;}
 let dh='';
 decks.forEach(dk=>{
 const due=dk.cards.filter(c=>c.next_review<=today).length;
@@ -1455,11 +1468,21 @@ await fetch(`/api/goals/${gid}/test`,{method:'POST',headers:{'Content-Type':'app
 load();}
 
 async function genTopikCards(gid,category){
-const st=$('topikGenStatus');if(st)st.textContent='Generating TOPIK cards... (15-20s)';
+const st=$('topikGenStatus-'+gid)||$('topikGenStatus');if(st)st.textContent='Generating TOPIK cards... (15-20s)';
 try{const r=await fetch('/api/goals/topik/flashcards',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({level:'5-6',category,num_cards:15})});
 const d=await r.json();
 if(d.cards&&d.cards.length){
 await fetch('/api/uni/flashcards',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:'TOPIK - '+category,cards:d.cards})});
+if(st)st.textContent=`Generated ${d.cards.length} cards!`;load();}
+else if(st)st.textContent='Failed to generate';
+}catch(e){if(st)st.textContent='Error: '+e;}}
+
+async function genHSKCards(gid,category){
+const st=$('topikGenStatus-'+gid);if(st)st.textContent='Generating HSK cards... (15-20s)';
+try{const r=await fetch('/api/goals/hsk/flashcards',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({level:'1-2',category,num_cards:10})});
+const d=await r.json();
+if(d.cards&&d.cards.length){
+await fetch('/api/uni/flashcards',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:'HSK - '+category,cards:d.cards})});
 if(st)st.textContent=`Generated ${d.cards.length} cards!`;load();}
 else if(st)st.textContent='Failed to generate';
 }catch(e){if(st)st.textContent='Error: '+e;}}

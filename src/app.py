@@ -1061,6 +1061,19 @@ def api_topik_flashcards():
         api_key, model, d.get("num_cards", 15))
     return jsonify({"cards": cards})
 
+@app.route("/api/goals/hsk/flashcards", methods=["POST"])
+def api_hsk_flashcards():
+    config = get_config()
+    api_key = config.get("openai", {}).get("api_key", "")
+    model = config.get("openai", {}).get("model", "gpt-4o-mini")
+    if not api_key or api_key == "YOUR_OPENAI_API_KEY_HERE":
+        return jsonify({"error": "Set OpenAI API key"}), 400
+    d = request.json
+    cards = goals.generate_hsk_flashcards(
+        d.get("level", "1-2"), d.get("category", "basic vocabulary"),
+        api_key, model, d.get("num_cards", 10))
+    return jsonify({"cards": cards})
+
 
 # ─── Nudges API ────────────────────────────────────────────────────
 
