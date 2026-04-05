@@ -30,7 +30,19 @@ app = Flask(__name__, template_folder=str(PROJECT_ROOT / "templates"))
 
 def get_config():
     with open(PROJECT_ROOT / "config" / "settings.yaml") as f:
-        return yaml.safe_load(f)
+        config = yaml.safe_load(f)
+    # Override with environment variables if set (for cloud deployment)
+    import os
+    if os.environ.get("OPENAI_API_KEY"):
+        config.setdefault("openai", {})["api_key"] = os.environ["OPENAI_API_KEY"]
+    if os.environ.get("EMAIL_PASSWORD"):
+        config.setdefault("email", {})["sender_password"] = os.environ["EMAIL_PASSWORD"]
+    if os.environ.get("EMAIL_ADDRESS"):
+        config.setdefault("email", {})["sender_email"] = os.environ["EMAIL_ADDRESS"]
+        config.setdefault("email", {}).setdefault("recipient_email", os.environ["EMAIL_ADDRESS"])
+    if os.environ.get("WEATHER_API_KEY"):
+        config.setdefault("weather", {})["api_key"] = os.environ["WEATHER_API_KEY"]
+    return config
 
 def get_interests():
     with open(PROJECT_ROOT / "config" / "interests.yaml") as f:
