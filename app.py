@@ -18,6 +18,7 @@ from flask import (
     session, jsonify, flash, send_from_directory,
 )
 from dotenv import load_dotenv
+from postgrest.exceptions import APIError
 
 from supabase_client import get_anon_client, get_user_client
 
@@ -32,15 +33,35 @@ app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 # ---------------------------------------------------------------------------
 # Auth helpers
 # ---------------------------------------------------------------------------
+def _bounce_unauthenticated():
+    """Clear the session and send the caller to /login (or 401 for /api)."""
+    session.clear()
+    if request.path.startswith("/api/"):
+        return jsonify({"error": "unauthenticated"}), 401
+    flash("Your session expired — please log in again.", "info")
+    return redirect(url_for("login"))
+
+
 def login_required(view):
-    """Redirect unauthenticated users to /login for HTML routes, 401 for /api."""
+    """Redirect unauthenticated users to /login for HTML routes, 401 for /api.
+
+    Also catches Supabase APIError raised inside the view: if the JWT expired
+    (PostgREST returns 401), we treat it like an unauthenticated request and
+    bounce to /login instead of surfacing a generic 500.
+    """
     @wraps(view)
     def wrapped(*args, **kwargs):
         if "access_token" not in session:
-            if request.path.startswith("/api/"):
-                return jsonify({"error": "unauthenticated"}), 401
-            return redirect(url_for("login"))
-        return view(*args, **kwargs)
+            return _bounce_unauthenticated()
+        try:
+            return view(*args, **kwargs)
+        except APIError as e:
+            # PostgREST signals expired/invalid JWT as 401 / "PGRST301" / "JWT expired".
+            msg = (str(e) or "").lower()
+            code = getattr(e, "code", "") or ""
+            if "jwt" in msg or "401" in msg or code in {"PGRST301", "PGRST302", "401"}:
+                return _bounce_unauthenticated()
+            raise
     return wrapped
 
 
@@ -141,7 +162,8 @@ def dashboard():
     # Filter by class ownership (RLS + FK should guarantee this, but be defensive).
     class_ids = {c["id"] for c in classes}
     today_schedule = [s for s in today_schedule_rows if s.get("class_id") in class_ids]
-    today_schedule.sort(key=lambda s: s["start_time"])
+    # Some rows may have a null start_time; coerce to "" so sort doesn't blow up.
+    today_schedule.sort(key=lambda s: s.get("start_time") or "")
 
     week_end = today + timedelta(days=7)
     upcoming = (
@@ -180,8 +202,11 @@ def classes_page():
 @app.route("/classes/<class_id>")
 @login_required
 def class_detail(class_id):
-    res = sb().table("classes").select("*").eq("id", class_id).single().execute()
-    cls = res.data
+    # Avoid .single() — it raises APIError on zero rows. Fetch as a list and
+    # take the first item so a missing/inaccessible row falls through to the
+    # "not found" branch instead of 500'ing.
+    rows = sb().table("classes").select("*").eq("id", class_id).limit(1).execute().data or []
+    cls = rows[0] if rows else None
     if not cls:
         flash("Class not found.", "error")
         return redirect(url_for("classes_page"))
@@ -236,8 +261,12 @@ def lab_page():
 @app.route("/lab/<folder_id>")
 @login_required
 def lab_folder_detail(folder_id):
-    folder_res = sb().table("lab_folders").select("*").eq("id", folder_id).single().execute()
-    folder = folder_res.data
+    # Same pattern as class_detail: avoid .single() so a missing/RLS-hidden
+    # folder degrades to a flash + redirect instead of an APIError.
+    folder_rows = (
+        sb().table("lab_folders").select("*").eq("id", folder_id).limit(1).execute().data or []
+    )
+    folder = folder_rows[0] if folder_rows else None
     if not folder:
         flash("Folder not found.", "error")
         return redirect(url_for("lab_page"))
