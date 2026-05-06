@@ -33,21 +33,43 @@ app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 # ---------------------------------------------------------------------------
 # Auth helpers
 # ---------------------------------------------------------------------------
+_AUTH_KEYS = ("access_token", "refresh_token", "user_id", "email")
+
+
 def _bounce_unauthenticated():
-    """Clear the session and send the caller to /login (or 401 for /api)."""
-    session.clear()
+    """Clear auth tokens and send the caller to /login (or 401 for /api).
+
+    Only the auth-related session keys are removed — anything else (e.g. flash
+    messages we're about to write) stays intact.
+    """
+    for k in _AUTH_KEYS:
+        session.pop(k, None)
     if request.path.startswith("/api/"):
         return jsonify({"error": "unauthenticated"}), 401
     flash("Your session expired — please log in again.", "info")
     return redirect(url_for("login"))
 
 
+def _is_jwt_error(err: APIError) -> bool:
+    """True only for PostgREST errors that mean 'token is bad/expired'.
+
+    We deliberately avoid matching every 401 — Supabase raises APIError for
+    lots of reasons (RLS denies, missing column, quota, etc.) and we don't
+    want any of those to silently log the user out.
+    """
+    code = (getattr(err, "code", "") or "").upper()
+    if code in {"PGRST301", "PGRST302"}:  # JWT expired / not yet valid
+        return True
+    msg = (str(err) or "").lower()
+    return "jwt expired" in msg or "jwt is invalid" in msg or "invalid jwt" in msg
+
+
 def login_required(view):
     """Redirect unauthenticated users to /login for HTML routes, 401 for /api.
 
-    Also catches Supabase APIError raised inside the view: if the JWT expired
-    (PostgREST returns 401), we treat it like an unauthenticated request and
-    bounce to /login instead of surfacing a generic 500.
+    Also catches Supabase APIError raised inside the view: if it's specifically
+    a JWT-expired error we bounce to /login. Any other APIError re-raises so
+    we get a real traceback instead of a silent logout.
     """
     @wraps(view)
     def wrapped(*args, **kwargs):
@@ -56,11 +78,9 @@ def login_required(view):
         try:
             return view(*args, **kwargs)
         except APIError as e:
-            # PostgREST signals expired/invalid JWT as 401 / "PGRST301" / "JWT expired".
-            msg = (str(e) or "").lower()
-            code = getattr(e, "code", "") or ""
-            if "jwt" in msg or "401" in msg or code in {"PGRST301", "PGRST302", "401"}:
+            if _is_jwt_error(e):
                 return _bounce_unauthenticated()
+            app.logger.exception("APIError in protected view (non-auth): %s", e)
             raise
     return wrapped
 
@@ -82,6 +102,11 @@ def login():
     if request.method == "POST":
         email = request.form.get("email", "").strip()
         password = request.form.get("password", "")
+        # Wipe any stale session keys before attempting a fresh login. If a
+        # previous request set partial state, leaving it around could confuse
+        # protected routes after the redirect to /dashboard.
+        for k in _AUTH_KEYS:
+            session.pop(k, None)
         try:
             client = get_anon_client()
             res = client.auth.sign_in_with_password({"email": email, "password": password})
@@ -91,6 +116,9 @@ def login():
             session["email"] = res.user.email
             return redirect(url_for("dashboard"))
         except Exception as e:
+            # Log the full traceback so we can see what Supabase is actually
+            # complaining about (bad creds, unconfirmed email, quota, etc.).
+            app.logger.exception("Login failed for %s", email)
             flash(f"Login failed: {e}", "error")
             return render_template("login.html")
     return render_template("login.html")
