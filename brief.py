@@ -271,9 +271,14 @@ def chunks(s, n):
 
 
 def post_discord(webhook, content):
+    # Discord (behind Cloudflare) 403s the default Python-urllib UA — send a real one.
+    headers = {
+        "Content-Type": "application/json",
+        "User-Agent": "MochisHubBrief/1.0 (+https://github.com/jmichikoleo/mochishub-brief)",
+    }
     for chunk in chunks(content, 1990):
         payload = json.dumps({"content": chunk}).encode()
-        req = urllib.request.Request(webhook, data=payload, headers={"Content-Type": "application/json"})
+        req = urllib.request.Request(webhook, data=payload, headers=headers)
         with urllib.request.urlopen(req, timeout=30) as r:
             r.read()
 
