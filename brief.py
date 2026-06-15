@@ -289,11 +289,19 @@ def main():
     fact_text = "\n".join(facts)
     content = gpt(SYSTEM, fact_text) or template(name, facts)
 
-    webhook = os.environ.get("DISCORD_WEBHOOK_URL")
+    # Secrets pasted into GitHub often carry a trailing newline / stray spaces,
+    # which makes urllib raise "unknown url type". Strip before using.
+    webhook = (os.environ.get("DISCORD_WEBHOOK_URL") or "").strip()
     if not webhook:
         print("[dry run — set DISCORD_WEBHOOK_URL to actually post]\n")
         print(content)
         return
+    if not webhook.startswith(("http://", "https://")):
+        raise SystemExit(
+            "DISCORD_WEBHOOK_URL is set but is not a valid URL "
+            "(must start with https://). Re-add the secret — it likely "
+            "lost its scheme or has hidden whitespace."
+        )
     post_discord(webhook, content)
     print("Brief posted.")
 
