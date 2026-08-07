@@ -1,0 +1,5 @@
+Flask
+pdfminer.six
+EbookLib
+beautifulsoup4
+gTTS
