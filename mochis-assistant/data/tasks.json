@@ -1,0 +1,1102 @@
+{
+  "tasks": [
+    {
+      "title": "[Deep Learning] Final Project Title Proposal Presentation",
+      "deadline": "2026-04-06",
+      "category": "uni",
+      "energy": "medium",
+      "impact": 6,
+      "status": "done",
+      "notes": "",
+      "course_id": "73e3152f",
+      "course_name": "Deep Learning",
+      "file_path": "/Users/jleo/Desktop/claudecode/mochis-assistant/data/uploads/528e9809_NeuroTrader.pdf"
+    },
+    {
+      "title": "[Smart Logistics Management] Paper Presentation",
+      "deadline": "2026-04-08",
+      "category": "uni",
+      "energy": "high",
+      "impact": 8,
+      "status": "pending",
+      "notes": "",
+      "course_id": "5238f4c7",
+      "course_name": "Smart Logistics Management"
+    },
+    {
+      "title": "[Lab] 2\uc8fc\ub3d9\uc548 \uc77d\uc5c8\ub358 \ub17c\ubb38 \ubc1c\ud45c \uc138\ubbf8\ub098",
+      "deadline": "2026-04-06",
+      "category": "lab",
+      "energy": "medium",
+      "impact": 7,
+      "status": "pending",
+      "notes": "\uc790\ub8cc : 2\uc8fc\ub3d9\uc548 \ubb50\ud588\uae30, \ubb50 \uc77d\uc5c8\ub2e4, \uc5f0\uad6c \uc8fc\uc81c, \ub2e4\uc74c\uc8fc \uacc4\ud68d"
+    },
+    {
+      "title": "\uc0b0\uc5c5\ub370\uc774\ud130\uc560\ub110\ub9ac\ud2f1\uc2a4 \ud1a0\ub860",
+      "deadline": "2026-04-06",
+      "category": "learning",
+      "energy": "medium",
+      "impact": 8,
+      "status": "pending",
+      "notes": ""
+    }
+  ],
+  "reminders": [],
+  "schedules": [
+    {
+      "title": "\uc6b4\uc601\ubaa8\ub378\ub9c1\ubc0f\uc77c\uc815\uacc4\ud68d\ub860",
+      "date": "2026-04-02",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "id": "5258ad83"
+    },
+    {
+      "title": "laboratory",
+      "date": "2026-04-02",
+      "time_start": "10:30",
+      "time_end": "16:30",
+      "type": "work",
+      "id": "f6d3f01e"
+    },
+    {
+      "title": "\uc0b0\uc5c5\ub370\uc774\ud130\uc560\ub110\ub9ac\ud2f1\uc2a4 ",
+      "date": "2026-04-02",
+      "time_start": "19:00",
+      "time_end": "21:50",
+      "type": "class",
+      "id": "20f2ef3a"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-03-08",
+      "id": "cb721a8f"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-03-15",
+      "id": "65449ba7"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-03-22",
+      "id": "0bce3405"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-03-29",
+      "id": "e15d8cf1"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-04-05",
+      "id": "1984f662"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-04-12",
+      "id": "b47ba171"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-04-19",
+      "id": "f8ba89b1"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-04-26",
+      "id": "bf4f83a2"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-05-03",
+      "id": "4210559a"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-05-10",
+      "id": "9f9a2f03"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-05-17",
+      "id": "b84d3271"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-05-24",
+      "id": "3dff1172"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-05-31",
+      "id": "8ae07148"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-06-07",
+      "id": "aeb96aec"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-06-14",
+      "id": "c055b413"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-06-21",
+      "id": "d8e30a4a"
+    },
+    {
+      "title": "Deep Learning",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-06-28",
+      "id": "d1df7935"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-03-08",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "eda35ee9"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-03-15",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "8091e5b9"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-03-22",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "b056ffb2"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-03-29",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "fec14fce"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-04-05",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "9df8360f"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-04-12",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "9b594fb4"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-04-19",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "a1f49b6a"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-04-26",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "1d3cc004"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-05-03",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "d44fad3d"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-05-10",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "3a1854fa"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-05-17",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "5010b3f0"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-05-24",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "a903d842"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-05-31",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "c11f42ee"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-06-07",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "10d81791"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-06-14",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "9e154910"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-06-21",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "957cfd9e"
+    },
+    {
+      "title": "Deep Learning",
+      "date": "2026-06-28",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 705\ud638 (\ube44\ub300\uba74)",
+      "course_id": "73e3152f",
+      "id": "851aec2b"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-03-02",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "fa555560"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-03-04",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "45ecc4b1"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-03-09",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "aee041e9"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-03-11",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "652759ec"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-03-16",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "e670c31b"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-03-18",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "b904a76a"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-03-23",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "7331ecd1"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-03-25",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "5b14c584"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-03-30",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "48de3e39"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-04-01",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "76b260d4"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-04-06",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "9de1862a"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-04-08",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "af469a5e"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-04-13",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "e6537e6a"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-04-15",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "07e9a50a"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-04-20",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "89258301"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-04-22",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "3c54f9f1"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-04-27",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "3b461b18"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-04-29",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "49341599"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-05-04",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "3c023ce1"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-05-06",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "6fc75a71"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-05-11",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "445d9904"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-05-13",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "9744e6fb"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-05-18",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "9cbf9463"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-05-20",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "43fd7b41"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-05-25",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "b45e3a90"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-05-27",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "f9429bca"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-06-01",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "c4364c1d"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-06-03",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "a05c76cd"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-06-08",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "9fe883d0"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-06-10",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "39f94bf4"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-06-15",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "642bfc0e"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-06-17",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "f89fb839"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-06-22",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "96c8c23c"
+    },
+    {
+      "title": "Operations Modeling and Scheduling",
+      "date": "2026-06-24",
+      "time_start": "15:00",
+      "time_end": "16:15",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50 \uac00\uc628\uad00 617",
+      "course_id": "23429203",
+      "id": "741aab6a"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-03-03",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "02e731bb"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-03-10",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "4d7c6345"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-03-17",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "ee02a696"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-03-24",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "4aaf18e3"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-03-31",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "f86d1c71"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-04-07",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "e281a877"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-04-14",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "9c8b0bcf"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-04-21",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "961f8529"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-04-28",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "28f1d8ea"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-05-05",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "2c530929"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-05-12",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "98daa48a"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-05-19",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "06a28032"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-05-26",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "8691a487"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-06-02",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "b9ca22a7"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-06-09",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "7a4ee6a5"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-06-16",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "e836afc8"
+    },
+    {
+      "title": "Smart Logistics Management",
+      "date": "2026-06-23",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "course_id": "5238f4c7",
+      "id": "af2d3a8d"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-03-04",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "c8cf8c3d"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-03-11",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "7d55cc8f"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-03-18",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "c686bba3"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-03-25",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "06f83ed5"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-04-01",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "f403f8ec"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-04-08",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "da7541e6"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-04-15",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "20c8c056"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-04-22",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "e158fb2f"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-04-29",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "0823f7dd"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-05-06",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "8947d2d3"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-05-13",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "07dfa22d"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-05-20",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "55c589a0"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-05-27",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "709213c7"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-06-03",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "b5f442b0"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-06-10",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "47175153"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-06-17",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "6bf71953"
+    },
+    {
+      "title": "Industrial Data Analytics",
+      "date": "2026-06-24",
+      "time_start": "19:00",
+      "time_end": "22:00",
+      "type": "class",
+      "location": "\ubd80\uc0b0\ub300\ud559\uad50",
+      "course_id": "1d264b92",
+      "id": "4772898b"
+    },
+    {
+      "title": "Deep Learning \ubcf4\uac15\uc218\uc5c5",
+      "time_start": "14:00",
+      "time_end": "17:00",
+      "type": "class",
+      "location": "\uad6d\ub9bd\ubd80\uacbd\ub300\ud559\uad50",
+      "date": "2026-04-03",
+      "id": "792f9317"
+    },
+    {
+      "title": "\ub098\uc57c\ub791 \uc0ac\uc9c4 \ucc0d\uae30",
+      "time_start": "11:50",
+      "time_end": "13:30",
+      "type": "class",
+      "location": "",
+      "date": "2026-04-03",
+      "id": "19744333"
+    },
+    {
+      "title": "\ucd9c\uc785\uad6d \uac00\uae30 ",
+      "time_start": "09:00",
+      "time_end": "10:00",
+      "type": "personal",
+      "location": "",
+      "date": "2026-04-08",
+      "id": "3e68ab55"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.DS_Store
+.claude/
+data/uploads/
+data/lab/pdfs/
+data/uni/files/
+
+# Keep secrets out of git — use settings.template.yaml as reference
+config/settings.yaml
+mochis-assistant/

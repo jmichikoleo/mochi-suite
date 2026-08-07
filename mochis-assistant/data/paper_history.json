@@ -1,0 +1,46 @@
+{
+  "read_papers": [],
+  "topics_studied": [
+    "LLM routing",
+    "mixture of experts"
+  ],
+  "connections": [],
+  "last_recommended": [
+    {
+      "arxiv_id": "2604.02330v1",
+      "title": "ActionParty: Multi-Subject Action Binding in Generative Video Games",
+      "authors": [
+        "Alexander Pondaven",
+        "Ziyi Wu",
+        "Igor Gilitschenski"
+      ],
+      "abstract": "Recent advances in video diffusion have enabled the development of \"world models\" capable of simulating interactive environments. However, these models are largely restricted to single-agent settings, failing to control multiple agents simultaneously in a scene. In this work, we tackle a fundamental...",
+      "url": "http://arxiv.org/abs/2604.02330v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.02330v1",
+      "published": "2026-04-02",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "search_query": "AI agent framework"
+    },
+    {
+      "arxiv_id": "2604.02309v1",
+      "title": "go-$m$HC: Direct Parameterization of Manifold-Constrained Hyper-Connections via Generalized Orthostochastic Matrices",
+      "authors": [
+        "Torque Dandachi",
+        "Sophia Diggs-Galligan"
+      ],
+      "abstract": "Doubly stochastic matrices enable learned mixing across residual streams, but parameterizing the set of doubly stochastic matrices (the Birkhoff polytope) exactly and efficiently remains an open challenge. Existing exact methods scale factorially with the number of streams ($d$), while Kronecker-fac...",
+      "url": "http://arxiv.org/abs/2604.02309v1",
+      "pdf_url": "https://arxiv.org/pdf/2604.02309v1",
+      "published": "2026-04-02",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "search_query": "AI agent framework"
+    }
+  ]
+}
