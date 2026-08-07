@@ -1,0 +1,92 @@
+[
+  {
+    "user": "hey mochi! can you remind me that i have a class at 2 pm tomorrow ?",
+    "mochi": "(AI unavailable) Invalid format specifier ' \"task_add\", \"content\": \"<task>\"' for object of type 'str'",
+    "date": "2026-03-10 20:36:36.157421"
+  },
+  {
+    "user": "hey mochi add a task to respond to min \ubc15\uc0ac\ub2d8",
+    "mochi": "(AI unavailable) \n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n",
+    "date": "2026-03-10 20:48:33.403735"
+  },
+  {
+    "user": "hey mochi ! remind me i have a class at 2 pm tomorrow",
+    "mochi": "Added task: you have a class at 2 pm tomorrow",
+    "date": "2026-03-10 20:51:18.961709"
+  },
+  {
+    "user": "hey mochi give me today's daily briefing",
+    "mochi": "The user has two tasks for today. The first task is to decide on this year's paper theme, which hasn't been done yet. The other task is a reminder that they have a class at 2 pm tomorrow, which also hasn't been addressed yet. The user doesn't have any habits or notes for today.",
+    "date": "2026-03-10 20:52:14.243245"
+  },
+  {
+    "user": "hey mochi give me my task list",
+    "mochi": "1. [ ] choose this year's paper theme\n2. [ ] you have a class at 2 pm tomorrow",
+    "date": "2026-03-10 20:55:07.773592"
+  },
+  {
+    "user": "hey mochi erase both of the task today",
+    "mochi": "both of the task today",
+    "date": "2026-03-10 20:55:22.134487"
+  },
+  {
+    "user": "could you give me my task list",
+    "mochi": "1. [ ] choose this year's paper theme\n2. [ ] you have a class at 2 pm tomorrow",
+    "date": "2026-03-10 20:55:36.100463"
+  },
+  {
+    "user": "hey mochi what's my task list",
+    "mochi": "I'm sorry, I can't provide a list of tasks. But you can always check your task list within the app.",
+    "date": "2026-03-10 21:03:02.116228"
+  },
+  {
+    "user": "check task list",
+    "mochi": "Sure, let's check your task list.",
+    "date": "2026-03-10 21:03:11.833052"
+  },
+  {
+    "user": "hey mochi add a reminder for tomorrow that i have a class at 2pm",
+    "mochi": "Added task: reminder for tomorrow that i have a class at 2pm",
+    "date": "2026-03-10 21:04:32.718063"
+  },
+  {
+    "user": "mochi task list please",
+    "mochi": "Sure, let me show you the task list.",
+    "date": "2026-03-10 21:04:46.633114"
+  },
+  {
+    "user": "check task list",
+    "mochi": "Sure, let's check your task list.",
+    "date": "2026-03-10 21:08:42.859683"
+  },
+  {
+    "user": "mochi check task list",
+    "mochi": "1. [ ] choose this year's paper theme\n2. [ ] you have a class at 2 pm tomorrow\n3. [ ] reminder for tomorrow that i have a class at 2pm",
+    "date": "2026-03-10 21:11:27.913417"
+  },
+  {
+    "user": "mochi erase all tasks",
+    "mochi": "Task not found: all",
+    "date": "2026-03-10 21:11:38.035459"
+  },
+  {
+    "user": "mochi erase task \"choose this year's paper theme\"",
+    "mochi": "Removed task: choose this year's paper theme",
+    "date": "2026-03-10 21:11:59.552421"
+  },
+  {
+    "user": "mochi erase task \"you have a class at 2 pm tomorrow \"",
+    "mochi": "Removed task: you have a class at 2 pm tomorrow",
+    "date": "2026-03-10 21:12:13.194644"
+  },
+  {
+    "user": "mochi erase task \"reminder for tomorrow that i have a class at 2pm\"",
+    "mochi": "Removed task: reminder for tomorrow that i have a class at 2pm",
+    "date": "2026-03-10 21:12:31.525606"
+  },
+  {
+    "user": "mochi task list",
+    "mochi": "No tasks yet.",
+    "date": "2026-03-10 21:12:39.956343"
+  }
+]
