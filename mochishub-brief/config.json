@@ -1,0 +1,12 @@
+{
+  "name": "",
+  "timezone": "Asia/Jakarta",
+  "location": { "name": "Jakarta", "latitude": -6.21, "longitude": 106.85 },
+  "stocks": [
+    { "symbol": "^JKSE", "label": "IHSG" }
+  ],
+  "forex": { "base": "KRW", "quote": "IDR" },
+  "substackFeeds": [],
+  "arxivQuery": "all:\"large language model\" OR all:\"retrieval augmented generation\" OR all:RAG",
+  "arxivMax": 4
+}
