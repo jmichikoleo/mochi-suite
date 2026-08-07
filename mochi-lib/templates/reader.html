@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="reader">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h4>📌 Bookmarks</h4>
+        <div id="bookmarkList"></div>
+
+        <hr>
+
+        <h4>📊 Reading Stats</h4>
+        <p id="progressStat"></p>
+        <p id="timeStat"></p>
+    </div>
+
+    <!-- Main Area -->
+    <div class="reader-main">
+
+        <div class="reader-header">
+            <a href="{{ url_for('index') }}">← Library</a>
+
+            <div>
+                <button id="prev">←</button>
+                <span id="page">1</span>
+                <button id="next">→</button>
+
+                <button id="bookmarkBtn">🔖</button>
+
+                <button id="startTimer">▶</button>
+                <button id="stopTimer">■</button>
+                <span id="time">0s</span>
+            </div>
+        </div>
+
+        <canvas id="pdf-render"></canvas>
+
+    </div>
+
+</div>
+
+<script>
+    window.PDF_FILE = "{{ url_for('uploaded_file', filename=filename) }}";
+</script>
+
+{% endblock %}

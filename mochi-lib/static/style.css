@@ -1,0 +1,198 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #fff5f8;
+    color: #333;
+}
+
+/* ===== Header ===== */
+
+h1 {
+    text-align: center;
+    margin-top: 40px;
+    font-weight: 600;
+    color: #ff4fa3;
+}
+
+/* ===== Upload Section ===== */
+
+.upload {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.upload input {
+    padding: 10px;
+}
+
+.upload button {
+    background: #ff4fa3;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.upload button:hover {
+    background: #ff2f92;
+}
+
+/* ===== Spacer ===== */
+
+.spacer {
+    height: 70px;
+}
+
+/* ===== Bookshelf Grid ===== */
+
+.bookshelf {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 80px auto;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 30px;
+}
+
+/* ===== Book Card ===== */
+
+.book {
+    background: white;
+    border-radius: 18px;
+    padding: 15px;
+
+    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 35px rgba(255, 105, 180, 0.18);
+}
+
+/* ===== Thumbnail ===== */
+
+.book canvas {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+/* ===== Book Title ===== */
+
+.book p {
+    font-size: 14px;
+    text-align: center;
+    margin: 8px 0;
+    word-break: break-word;
+}
+
+/* ===== Read Button ===== */
+
+.book a {
+    margin-top: auto;
+    background: #ff4fa3;
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+.book a:hover {
+    background: #ff2f92;
+}
+
+/* =========================
+   Reader Layout
+========================= */
+
+.reader {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+
+.sidebar {
+    width: 260px;
+    background: white;
+    border-right: 1px solid #f1d4e2;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.sidebar h4 {
+    margin-top: 0;
+    color: #ff4fa3;
+}
+
+/* Bookmark Items */
+
+.bookmark-item {
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.bookmark-item:hover {
+    background: #ffe3f1;
+}
+
+/* Reader Main */
+
+.reader-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Reader Header */
+
+.reader-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: white;
+    border-bottom: 1px solid #f1d4e2;
+}
+
+.reader-header button {
+    background: #ff4fa3;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+.reader-header button:hover {
+    background: #ff2f92;
+}
+
+/* Canvas */
+
+canvas {
+    margin: auto;
+    max-height: 85vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    transition: opacity 0.25s ease;
+}
+
+.canvas-fade {
+    opacity: 0;
+}

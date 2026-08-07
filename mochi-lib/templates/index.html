@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="main">
+
+    <h1>🍡 Mochi-Lib</h1>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data" class="upload">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- 🔥 EXTRA SPACE -->
+    <div class="spacer"></div>
+
+    <div class="bookshelf">
+        {% for book in books %}
+        <div class="book">
+    
+            <canvas id="thumb-{{ loop.index }}"></canvas>
+    
+            <p>{{ book }}</p>
+            <a href="{{ url_for('read', filename=book) }}">Read</a>
+    
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const url = "{{ url_for('uploaded_file', filename=book) }}";
+                    const canvas = document.getElementById("thumb-{{ loop.index }}");
+    
+                    pdfjsLib.getDocument(url).promise.then(pdf => {
+                        pdf.getPage(1).then(page => {
+                            const viewport = page.getViewport({ scale: 0.3 });
+                            const ctx = canvas.getContext("2d");
+    
+                            canvas.height = viewport.height;
+                            canvas.width = viewport.width;
+    
+                            page.render({
+                                canvasContext: ctx,
+                                viewport: viewport
+                            });
+                        });
+                    });
+                });
+            </script>
+    
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
